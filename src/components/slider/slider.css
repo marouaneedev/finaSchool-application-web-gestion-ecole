@@ -1,0 +1,27 @@
+.sliderSection {
+    padding: 60px 0;
+}
+
+.sliderSection h1{
+    text-align: center;
+    margin-bottom: 20px !important;
+}
+
+.sliderSection Slider{
+    margin: 20px 0;
+}
+
+.sliderSection div{
+    padding:0;
+    background-color: red;
+    width: 100%;
+    height: auto;
+    background-position: cover;
+}
+
+
+
+.sliderSection div img{
+    width: 100%;
+    
+}

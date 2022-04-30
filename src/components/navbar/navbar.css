@@ -1,0 +1,36 @@
+.navbarHome .navbar {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: none;
+    border: 1px solid #eaf5ef;
+}
+
+.navbarHome nav .logo {
+    font-weight: bold;
+    font-size: 28px;
+    color: #313a3b !important;
+}
+
+.navbarHome nav ul li {
+    margin: 0 10px;
+    display:inline-block;
+}
+
+.navbarHome nav ul li a {
+    color: #313a3b !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    letter-spacing: 0.235px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.navbarHome nav ul li a:hover,
+.navbarHome nav ul li a:focus {
+    font-weight: 500;
+    letter-spacing: 0
+}
+
+.navbarHome .dropdown-item:hover{
+    background: none !important;
+}

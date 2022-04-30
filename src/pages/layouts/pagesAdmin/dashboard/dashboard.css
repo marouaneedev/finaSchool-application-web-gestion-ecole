@@ -1,0 +1,53 @@
+
+.dachboradContent .boxes .card{
+    text-align: center;
+    background-color: #444;
+    color: #dbdcde;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.dachboradContent .boxes .card .icon{
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.dachboradContent .boxes .one{
+    background-color : #D1E9FC;
+    color: #061B64;
+}
+.dachboradContent .boxes .two {
+    background-color: #D0F2FF;
+    color: #04297A;
+}
+.dachboradContent .boxes .three {
+    background-color: #FFF7CD;
+    color: #7A4F01;
+}
+.dachboradContent .boxes .four {
+    background-color: #FFE7D9;
+    color: #7A0C2E;
+}
+
+.dachboradContent .boxes .box .headerr,
+.dachboradContent .boxes .box .footerr{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+
+.charts{ 
+    margin-top: 20px; 
+}
+
+.charts .PieChart{
+    background-color: #e9e8e8;
+    border-radius: 10px;
+}
+
+.charts .chart2 {
+    background-color: #e9e8e8;
+    border-radius: 10px;
+}

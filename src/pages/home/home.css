@@ -1,0 +1,238 @@
+/* ------------------------------- */
+/* ------------global------------ */
+/* ------------------------------- */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* ------------end global------------ */
+
+
+/* ------------------------------- */
+/* ------------header------------ */
+/* ------------------------------- */
+header {
+    width: 100%;
+    height: auto;
+    background: url("../../../public/images/slide0.png");
+    background-size: cover;
+    background-position: center;
+    padding: 10px;
+    position: relative;
+}
+
+header .content_s {
+    display: flex;
+    align-items: center;
+    padding: 60px 0 10px 0;
+}
+
+header .content_s .left_s {
+    padding: 10px;
+}
+
+.bttn{
+    padding: 5px 30px;
+    background: none;
+    border: 2px solid #28838f;
+    border-radius: 5px;
+    color: #28838f;
+    font-weight: 500;
+}
+
+header .bttn:active{
+    color: #1e6069;
+    border: 2px solid #1e6069;
+}
+
+header .content_s .right_s {
+    overflow: hidden;
+    padding: 10px;
+}
+
+header .content_s .right_s img {
+    max-width: 100%;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+}
+
+header .arrowDiv{
+    width: 100%;
+    text-align: center;
+}
+
+header .arrowImg{
+    width: 50px;
+    cursor: pointer;
+}
+header .arrowImg:hover{
+    transform: scale(1.2);
+}
+/* ------------ end header ------------ */
+
+/* --------------------------------------------- */
+/* ------------ start school section------------ */
+/* --------------------------------------------- */
+.schoolSection {
+    padding: 60px 0;
+}
+
+.schoolSection .contentTop {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.schoolSection .contentBottom {
+    display: flex;
+    align-items: center;
+    background-color:#EBF5EF;
+    border-radius:10px;
+    padding: 0 15px;
+}
+
+.schoolSection .contentBottom .left_ {
+    overflow: hidden;
+    padding: 10px;
+}
+
+.schoolSection .contentBottom .left_ img {
+    max-width: 100%;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.schoolSection .contentBottom .right_{
+    padding: 30px
+}
+/* ------------ end school section------------ */
+
+
+
+/* ------------------------------------------------- */
+/* ------------ start formation section ------------ */
+/* ------------------------------------------------- */
+.formationSection {
+    padding: 40px 0;
+}
+
+.cardd {
+    background-color: red;
+}
+/* ------------ end formation section ------------ */
+
+/* ------------------------------------------------- */
+/* ------------ start slider section ------------ */
+/* ------------------------------------------------- */
+.sliderSection{
+    padding: 40px 0;
+}
+/* ------------ end slider section ------------ */
+
+
+/* ------------------------------------------------- */
+/* ------------start inscription section------------ */
+/* ------------------------------------------------- */
+.inscriptionSection {
+    padding: 50px 0;
+    background: url("../../../public/images/inscrBack.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.inputtt{
+    outline: none !important;
+    padding: 8px 10px;
+    border: 1px solid #273238;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 5px;
+    background: #fcf8f2
+}
+
+.inscriptionSection form input:focus{
+    box-shadow:none;
+}
+/* ------------end inscription section------------ */
+
+
+
+/* ------------------------------------------------- */
+/* ------------start contact section------------ */
+/* ------------------------------------------------- */
+.contactSection {
+    padding: 50px 0;
+}
+
+.contactSection form input{
+    background: #ffff;
+}
+
+.contactSection form .textarea {
+    background: #ffff;
+    width: 100%;
+    height: 90px;
+    outline: none !important;
+    padding: 8px 10px;
+    border: 1px solid #273238;
+    box-shadow: none;
+    border-radius: 5px;
+}
+
+.contactSection form input:focus {
+    box-shadow: none;
+}
+
+/* ------------end contact section------------ */
+
+
+/* -------------------------------------------- */
+/* ------------start footer Section------------ */
+/* -------------------------------------------- */
+.footerSection {
+    padding: 50px 0 10px 0;
+    color: #fff;
+    background: url("../../../public/images/footerBg.png");
+    background-size: cover;
+    /* background-position:center; */
+    /* height: 100%; */
+    position: relative;
+}
+
+.footerSection ul {
+    padding: 0 !important;
+    margin: 0;
+}
+
+.footerSection ul li {
+    list-style: none;
+    margin: 6px 0 !important;
+}
+
+.footerSection ul li a {
+    text-decoration: none;
+    color: #273238;
+}
+
+.footerSection ul li a:hover {
+    text-decoration: underline;
+}
+
+.footerSection .copyright p{ 
+    color: #46625e;
+}
+
+.footerSection .arrowUp {
+    width: 60px;
+    position: absolute;
+    right: 30px;
+    bottom: 60px;
+    cursor: pointer;
+}
+.footerSection .arrowUp:hover{
+    transform: scale(1.2);
+}
+/* ------------end footer Section------------ */
