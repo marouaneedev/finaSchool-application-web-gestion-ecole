@@ -4,24 +4,40 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 import { GiConfirmed } from "react-icons/gi";
 import { AiOutlineMessage } from "react-icons/ai";
-// import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 class Dashboard extends Component {
   render() {
     /* start chart 1 */
-    //  const data = [{ name: "Boys", value: 400 }, { name: "Girls", value: 300 }];
-    //  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+    const data = [{ name: "Boys", value: 400 }, { name: "Girls", value: 300 }];
+    const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-    //  const RADIAN = Math.PI / 180;
-    //  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    //    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    //    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    //    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    const RADIAN = Math.PI / 180;
+    const renderCustomizedLabel = ({
+      cx,
+      cy,
+      midAngle,
+      innerRadius,
+      outerRadius,
+      percent,
+      index
+    }) => {
+      const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+      const x = cx + radius * Math.cos(-midAngle * RADIAN);
+      const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    //    return <text x={x} y={y} fill="white" textAnchor={x > cx ? "start" : "end"} dominantBaseline="central">
-    //        {`${(percent * 100).toFixed(0)}%`}
-    //      </text>;
-    //  };
+      return (
+        <text
+          x={x}
+          y={y}
+          fill="white"
+          textAnchor={x > cx ? "start" : "end"}
+          dominantBaseline="central"
+        >
+          {`${(percent * 100).toFixed(0)}%`}
+        </text>
+      );
+    };
     /* end chart 1 */
     return (
       <div className="allContent">
@@ -110,7 +126,7 @@ class Dashboard extends Component {
             <div className="row">
               {/* ----------start charts 1----------- */}
               <div className="col-lg-6 chart1">
-                {/* <div width="100%" height="100%">
+                <div width="100%" height="100%">
                   <PieChart className="PieChart" width={300} height={300}>
                     <Pie
                       data={data}
@@ -130,7 +146,7 @@ class Dashboard extends Component {
                       )}
                     </Pie>
                   </PieChart>
-                </div> */}
+                </div>
               </div>
               {/* ----------end charts 1----------- */}
 
