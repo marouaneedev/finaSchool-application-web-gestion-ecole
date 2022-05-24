@@ -1,0 +1,24 @@
+/* ------------------------------------------------- */
+/* ------------start inscription section------------ */
+/* ------------------------------------------------- */
+.inscriptionSection {
+    padding: 50px 0;
+    background: url("../../../public/images/inscrBack.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.inputtt{
+    outline: none !important;
+    padding: 8px 10px;
+    border: 1px solid #273238;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 5px;
+    background: #fcf8f2
+}
+
+.inscriptionSection form input:focus{
+    box-shadow:none;
+}
+/* ------------end inscription section------------ */

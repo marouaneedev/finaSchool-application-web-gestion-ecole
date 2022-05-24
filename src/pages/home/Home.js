@@ -1,5 +1,9 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar.js";
+import Contact from "../../components/contact/Contact.js";
+import Preinscreption from "../../components/pre_inscreption/Preinscreption.js";
+
+
 import "./home.css";
 import { Link } from "react-scroll";
 import { Flip, Bounce } from "react-reveal";
@@ -260,128 +264,11 @@ function Home() {
       {/* end slider section */}
 
       {/* start inscription section */}
-      <section className="inscriptionSection" id="inscriptionSection">
-        <div className="container">
-          <div className="contentTop text-center">
-            <h1 className="my-5">Pré Insciption</h1>
-            <hr className="lineHr" />
-          </div>
-
-          <div className="grid">
-            <div className="col-12 md:col-6 lg:col-6 sm:flex-nowrap p-3">
-              <h2>Pré-inscription</h2>
-              <h3>en ligne à eWA</h3>
-              <hr />
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                rerum fuga fugit illum at atque placeat ipsum nesciunt, eligendi
-                quibusdam?
-              </p>
-            </div>
-            <div className="col-12 md:col-6 lg:col-6 p-3">
-              <form>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    className="inputtt"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Email address"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="inputtt"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="inputtt"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Last Name"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="inputtt"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="City"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="inputtt"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Phone Number"
-                  />
-                </div>
-
-                <button type="submit" className="bttn">
-                  Send
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Preinscreption/>
       {/* end inscription section */}
 
       {/* start contact section */}
-      <section className="contactSection" id="contactSection">
-        <div className="container">
-          <div className="contentTop text-center">
-            <h1>Contact Us</h1>
-            <hr className="lineHr mb-5" />
-          </div>
-
-          <div className="grid">
-            <div className="col-12 md:col-6 lg:col-6 sm:flex-nowrap p-3">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-                rerum fuga fugit illum at atque placeat ipsum nesciunt, eligendi
-                quibusdam?
-              </p>
-              <p>+212643527228</p>
-              <p>265 Avenue Hassan II 80020 agadir</p>
-            </div>
-            <div className="col-12 md:col-6 lg:col-6 p-3">
-              <form>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    className="inputtt"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Email address"
-                  />
-                </div>
-                <div className="form-floating mb-3">
-                  <input
-                    type="textarea"
-                    className="textarea"
-                    id="exampleInputEmail1"
-                    placeholder="Your Message :"
-                  />
-                  {/* <label className="opacity-50 mt-0">Your Message :</label> */}
-                </div>
-                <button type="submit" className="bttn">
-                  Send
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Contact />
       {/* end contact section */}
 
       {/* start footer section */}
