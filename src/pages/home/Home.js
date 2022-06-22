@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar.js";
+import Formation from "../../components/formation/Formation.js";
 import Contact from "../../components/contact/Contact.js";
 import Preinscreption from "../../components/pre_inscreption/Preinscreption.js";
 
@@ -95,97 +96,11 @@ function Home() {
       {/* end school section */}
 
       {/* start formation section */}
-      <section className="formationSection" id="formationSection">
-        <div className="container">
-          <div className="contentTop text-center">
-            <h1>Formation</h1>
-            <hr className="lineHr" />
-          </div>
-
-          <div className="grid cards">
-            <div className="col-12 md:col-6 lg:col-3 sm:flex-nowrap">
-              <div className="card">
-                <img
-                  src="/images/card.jpg"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="www.google.com" className="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 md:col-6 lg:col-3">
-              <div className="card">
-                <img
-                  src="/images/card.jpg"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="www.google.com" className="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 md:col-6 lg:col-3">
-              <div className="card">
-                <img
-                  src="/images/card.jpg"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="www.google.com" className="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 md:col-6 lg:col-3">
-              <div className="card">
-                <img
-                  src="/images/card.jpg"
-                  className="card-img-top"
-                  alt="..."
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="www.google.com" className="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Formation />
       {/* end formation section */}
 
       {/* start slider section */}
-      <div className="container sliderSection">
+      {/* <div className="container sliderSection">
         <div className="contentTop text-center">
           <h1>Gallery</h1>
           <hr className="lineHr" />
@@ -260,7 +175,7 @@ function Home() {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-      </div>
+      </div> */}
       {/* end slider section */}
 
       {/* start inscription section */}

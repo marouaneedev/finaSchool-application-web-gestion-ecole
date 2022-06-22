@@ -1,0 +1,22 @@
+/* ------------------------------------------------- */
+/* ------------ start formation section ------------ */
+/* ------------------------------------------------- */
+.formationSection {
+    padding: 40px 0;
+}
+
+.cardd {
+    background-color: red;
+}
+
+.details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.iconReact{
+    font-size: 30px;
+    margin-right: 7px;
+}
+/* ------------ end formation section ------------ */
