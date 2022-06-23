@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
-export class StudentsPayment extends Component {
+export class SalariesList extends Component {
   render() {
     return (
       <div className="allContent">
         <div className="settingContent">
           {/* -------------start breadcrumb-------------- */}
-          <h1 className="mt-4">Students Payment</h1>
+          <h1 className="mt-4">Salaries List</h1>
           <ol className="breadcrumb mb-4">
-            <li className="breadcrumb-item active">Students Payment</li>
+            <li className="breadcrumb-item active">Salaries List</li>
           </ol>
           {/* -------------end breadcrumb-------------- */}
         </div>
@@ -17,4 +17,4 @@ export class StudentsPayment extends Component {
   }
 }
 
-export default StudentsPayment;
+export default SalariesList

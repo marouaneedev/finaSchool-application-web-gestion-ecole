@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-class EmployeesPayment extends Component {
+class Revenu extends Component {
   render() {
     return (
       <div className="allContent">
         {/* -------------start breadcrumb-------------- */}
-        <h1 className="mt-4">Employees Payment</h1>
+        <h1 className="mt-4">Revenu</h1>
         <ol className="breadcrumb mb-4">
-          <li className="breadcrumb-item active">Employees Payment</li>
+          <li className="breadcrumb-item active">Revenu</li>
         </ol>
         {/* -------------end breadcrumb-------------- */}
       </div>
@@ -15,4 +15,4 @@ class EmployeesPayment extends Component {
   }
 }
 
-export default EmployeesPayment;
+export default Revenu;

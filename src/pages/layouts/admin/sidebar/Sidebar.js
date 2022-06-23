@@ -18,42 +18,21 @@ function Sidebar() {
               </div>
               Dashboard
             </Link>
-            <div className="sb-sidenav-menu-heading">Interface</div>
-            <Link
-              className="nav-link collapsed"
-              to="#"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseLayouts"
-              aria-expanded="false"
-              aria-controls="collapseLayouts"
-            >
+
+            <Link className="nav-link" to="studentsList">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-columns" />
-                {/* <i className="fa-solid fa-screen-users" /> */}
+                <i className="fas fa-tachometer-alt" />
               </div>
-              Students
-              <div className="sb-sidenav-collapse-arrow">
-                <i className="fas fa-angle-down" />
-              </div>
+              Etudiants list
             </Link>
-            <div
-              className="collapse"
-              id="collapseLayouts"
-              aria-labelledby="headingOne"
-              data-bs-parent="#sidenavAccordion"
-            >
-              <nav className="sb-sidenav-menu-nested nav">
-                <Link className="nav-link" to="studentsList">
-                  Students List
-                </Link>
-                <Link className="nav-link" to="studentsPayment">
-                  Students Payment
-                </Link>
-                <Link className="nav-link" to="insciption">
-                  Pré Insciption
-                </Link>
-              </nav>
-            </div>
+
+            <Link className="nav-link" to="salariesList">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-tachometer-alt" />
+              </div>
+              Salariés list
+            </Link>
+
             <Link
               className="nav-link collapsed"
               to="#"
@@ -65,7 +44,7 @@ function Sidebar() {
               <div className="sb-nav-link-icon">
                 <i className="fas fa-book-open" />
               </div>
-              Employees
+              Finance
               <div className="sb-sidenav-collapse-arrow">
                 <i className="fas fa-angle-down" />
               </div>
@@ -77,20 +56,36 @@ function Sidebar() {
               data-bs-parent="#sidenavAccordion"
             >
               <nav className="sb-sidenav-menu-nested nav">
-                <Link className="nav-link" to="employeesList">
-                  Employees List
+                <Link className="nav-link" to="revenu">
+                  Revenu
                 </Link>
-                <Link className="nav-link" to="employeesPayment">
-                  Employees Payment
+                <Link className="nav-link" to="depense">
+                  Dépense
                 </Link>
               </nav>
             </div>
+
+            <Link className="nav-link" to="insciption">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-tachometer-alt" />
+              </div>
+              Pré Insciption
+            </Link>
+
             <Link className="nav-link" to="messages">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-tachometer-alt" />
               </div>
               Messages
             </Link>
+
+            <Link className="nav-link" to="formation">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-tachometer-alt" />
+              </div>
+              Formation
+            </Link>
+
             {/* <div className="sb-sidenav-menu-heading">Addons</div>
             <Link className="nav-link" to="charts.html">
               <div className="sb-nav-link-icon">
