@@ -23,14 +23,22 @@ function Sidebar() {
               <div className="sb-nav-link-icon">
                 <i className="fas fa-tachometer-alt" />
               </div>
-              Etudiants list
+              Etudiant 
             </Link>
 
             <Link className="nav-link" to="salariesList">
               <div className="sb-nav-link-icon">
                 <i className="fas fa-tachometer-alt" />
               </div>
-              Salariés list
+              Salarié 
+            </Link>
+
+
+            <Link className="nav-link" to="formation">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-tachometer-alt" />
+              </div>
+              Formation
             </Link>
 
             <Link
@@ -79,12 +87,7 @@ function Sidebar() {
               Messages
             </Link>
 
-            <Link className="nav-link" to="formation">
-              <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
-              </div>
-              Formation
-            </Link>
+
 
             {/* <div className="sb-sidenav-menu-heading">Addons</div>
             <Link className="nav-link" to="charts.html">
