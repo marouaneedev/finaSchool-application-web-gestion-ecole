@@ -9,8 +9,24 @@ import "./home.css";
 import { Link } from "react-scroll";
 import { Flip, Bounce } from "react-reveal";
 import { Fade } from "react-awesome-reveal";
+import AppUrl from "../../AppUrl/AppUrl.js";
+import ResetApi from "../../AppUrl/RestApi.js";
 
 function Home() {
+
+// constructor(){
+//   super();
+//   this.state={
+//     Title:"",
+//     Description:"",
+//     Button:""
+
+    
+//   }
+// }
+
+
+
   return (
     <div>
       {/* start header */}
