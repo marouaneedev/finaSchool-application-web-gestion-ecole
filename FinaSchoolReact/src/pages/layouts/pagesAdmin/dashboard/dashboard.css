@@ -1,4 +1,6 @@
-
+.dachboradContent .boxes{
+    margin-bottom: 10px;
+}
 .dachboradContent .boxes .card{
     text-align: center;
     background-color: #444;
@@ -30,6 +32,29 @@
     color: #7A0C2E;
 }
 
+.dachboradContent .boxes .box .link{
+    text-decoration: none;
+}
+
+.dachboradContent .boxes .box .link:hover{
+    text-decoration:underline;
+}
+
+.dachboradContent .boxes .box .oneLink{
+    color: #061B64;
+}
+.dachboradContent .boxes .box .twoLink{
+    color: #04297A;
+}
+
+.dachboradContent .boxes .box .threeLink{
+    color: #7A4F01;
+}
+
+.dachboradContent .boxes .box .fourLink{
+    color: #7A0C2E;
+}
+
 .dachboradContent .boxes .box .headerr,
 .dachboradContent .boxes .box .footerr{
     display:flex;
@@ -37,8 +62,34 @@
     align-items:center;
 }
 
+.charts .card{
+    background-color: #e9e8e8;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: none;
+    
+}
 
-.charts{ 
+.charts .chart1 .statiqueInfoChart {
+    padding: 0 30px;
+}
+
+.charts .chart1 .statiqueInfoChart .girls .femme {
+    width: 20px;
+    height: 20px;
+    background-color: #0088FE;
+    border-radius: 50%;
+}
+
+.charts .chart1 .statiqueInfoChart .boys .homme {
+    width: 20px;
+    height: 20px;
+    background-color: #00C49F;
+    border-radius: 50%;
+}
+
+
+/* .charts{ 
     margin-top: 20px; 
 }
 
@@ -50,4 +101,13 @@
 .charts .chart2 {
     background-color: #e9e8e8;
     border-radius: 10px;
+} */
+
+/* .chart1{
+    background-color: #e9e8e8;
 }
+
+
+.chart2{
+    background-color: #de6c6c;
+} */

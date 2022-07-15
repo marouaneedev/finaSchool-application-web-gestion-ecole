@@ -1,44 +1,51 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./sidebar.css";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import GroupIcon from '@mui/icons-material/Group';
+import GroupsIcon from '@mui/icons-material/Groups';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import MessageIcon from '@mui/icons-material/Message';
+import SendIcon from '@mui/icons-material/Send';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 function Sidebar() {
   return (
     <div className="sidebarr">
+      <br/>
       <nav
         className="sb-sidenav accordion sb-sidenav-dark"
         id="sidenavAccordion"
       >
         <div className="sb-sidenav-menu">
           <div className="nav">
-            <div className="sb-sidenav-menu-heading">Core</div>
             <Link className="nav-link" to="dashboard">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
+                <DashboardIcon/>
               </div>
               Dashboard
             </Link>
 
             <Link className="nav-link" to="studentsList">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
+                <GroupsIcon/>
               </div>
-              Etudiant 
+              Étudiants 
             </Link>
 
             <Link className="nav-link" to="salariesList">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
+                <GroupIcon/>
               </div>
-              Salarié 
+              Salariés 
             </Link>
 
 
             <Link className="nav-link" to="formation">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
+                <AddCircleOutlineIcon />
               </div>
-              Formation
+              Widget
             </Link>
 
             <Link
@@ -50,7 +57,7 @@ function Sidebar() {
               aria-controls="collapsePages"
             >
               <div className="sb-nav-link-icon">
-                <i className="fas fa-book-open" />
+                <MonetizationOnIcon />
               </div>
               Finance
               <div className="sb-sidenav-collapse-arrow">
@@ -75,14 +82,14 @@ function Sidebar() {
 
             <Link className="nav-link" to="insciption">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
+                <SendIcon />
               </div>
               Pré Insciption
             </Link>
 
             <Link className="nav-link" to="messages">
               <div className="sb-nav-link-icon">
-                <i className="fas fa-tachometer-alt" />
+                <MessageIcon/>
               </div>
               Messages
             </Link>

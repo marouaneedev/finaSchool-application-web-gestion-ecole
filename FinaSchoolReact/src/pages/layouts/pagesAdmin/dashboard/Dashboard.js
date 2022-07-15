@@ -1,183 +1,214 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import "./dashboard.css";
-import { BsFillPeopleFill } from "react-icons/bs";
-import { IoPeopleCircleOutline } from "react-icons/io5";
-import { GiConfirmed } from "react-icons/gi";
-import { AiOutlineMessage } from "react-icons/ai";
-import { PieChart, Pie, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Link } from "react-router-dom";
+import { PieChart, Pie, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import GroupsIcon from '@mui/icons-material/Groups';
+import GroupIcon from '@mui/icons-material/Group';
+import SendIcon from '@mui/icons-material/Send';
+import MessageIcon from '@mui/icons-material/Message';
 
 
-class Dashboard extends PureComponent {
-  static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
-  render() {
-    /* start chart 1 */
-    const data = [{ name: "Boys", value: 400 }, { name: "Girls", value: 300 }];
-    const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-    const RADIAN = Math.PI / 180;
-    const renderCustomizedLabel = ({
-      cx,
-      cy,
-      midAngle,
-      innerRadius,
-      outerRadius,
-      percent,
-      index
-    }) => {
-      const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-      const x = cx + radius * Math.cos(-midAngle * RADIAN);
-      const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-      return (
-        <text
-          x={x}
-          y={y}
-          fill="white"
-          textAnchor={x > cx ? "start" : "end"}
-          dominantBaseline="central"
-        >
-          {`${(percent * 100).toFixed(0)}%`}
-        </text>
-      );
-    };
-    /* end chart 1 */
-    /* start chart 2 */
-    const data2 = [
-      {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-      },
-      {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-      },
-      {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-      },
-      {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-      },
-      {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-      },
-      {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-      },
-      {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-      },
-    ];
-    /* end chart 2 */
+/* start chart 1 */
+const dataa = [{ name: "Boys", value: 400 }, { name: "Girls", value: 300 }];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    return (
-      <div className="allContent">
-        <div className="dachboradContent">
-          {/* -------------start breadcrumb-------------- */}
-          <h1 className="mt-4">Dashboard</h1>
-          <ol className="breadcrumb mb-4">
-            <li className="breadcrumb-item active">Dashboard</li>
-          </ol>
-          {/* -------------end breadcrumb-------------- */}
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+/* end chart 1 */
 
-          {/* -------------start boxes-------------- */}
-          <div className="row boxes">
-            <div className="col-xl-3 col-md-6 box">
-              <div className="card one">
-                <div className="card-body">
-                  <div className="headerr">
-                    <h3>
-                      <BsFillPeopleFill className="icon" />
-                    </h3>
-                    <h3 className="name">Students</h3>
-                  </div>
-                  <div className="footerr">
-                    <h3 className="num">45</h3>
-                    <p className="card-text">View Details</p>
-                  </div>
+/* start chart 2 */
+const data = [
+  {
+    name: "Janvier",
+    Dépense: 2780,
+    Revenu: 3908,
+    amt: 9000
+  },
+  {
+    name: "Février",
+    Dépense: 1890,
+    Revenu: 4800,
+    amt: 2181
+  },
+  {
+    name: "Mars",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Avril",
+    Dépense: 3490,
+    Revenu: 4300,
+    amt: 2100
+  },
+  {
+    name: "Mai",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Juin",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Juillet",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Août",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Septembre",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Octobre",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Novembre",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+  {
+    name: "Décembre",
+    Dépense: 2390,
+    Revenu: 3800,
+    amt: 2500
+  },
+];
+/* end chart 2 */
+
+
+
+export default function Dashboard() {
+  return (
+    <div className="allContent">
+      <div className="dachboradContent">
+        {/* -------------start breadcrumb-------------- */}
+        <h3 className="mt-2 mb-3">Dashboard : </h3>
+        {/* -------------end breadcrumb-------------- */}
+
+        {/* -------------start boxes-------------- */}
+        <div className="row boxes">
+          <div className="col-xl-3 col-md-6 box">
+            <div className="card one">
+              <div className="card-body">
+                <div className="headerr">
+                  <h3>
+                    <GroupsIcon className="icon" />
+                  </h3>
+                  <h3 className="name">Étudiants</h3>
                 </div>
-              </div>
-            </div>
-
-            <div className="col-xl-3 col-md-6 box">
-              <div className="card two">
-                <div className="card-body">
-                  <div className="headerr">
-                    <h3>
-                      <IoPeopleCircleOutline className="icon" />
-                    </h3>
-                    <h3 className="name">Teachers</h3>
-                  </div>
-                  <div className="footerr">
-                    <h3 className="num">76</h3>
-                    <p className="card-text">View Details</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-xl-3 col-md-6 box">
-              <div className="card three">
-                <div className="card-body">
-                  <div className="headerr">
-                    <h3>
-                      <GiConfirmed className="icon" />
-                    </h3>
-                    <h3 className="name">Insciption</h3>
-                  </div>
-                  <div className="footerr">
-                    <h3 className="num">33</h3>
-                    <p className="card-text">View Details</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-xl-3 col-md-6 box">
-              <div className="card four">
-                <div className="card-body">
-                  <div className="headerr">
-                    <h3>
-                      <AiOutlineMessage className="icon" />
-                    </h3>
-                    <h3 className="name">Messages</h3>
-                  </div>
-                  <div className="footerr">
-                    <h3 className="num">56</h3>
-                    <p className="card-text">View Details</p>
-                  </div>
+                <div className="footerr">
+                  <h3 className="num">45</h3>
+                  <p className="card-text"><Link to="/studentsList" className="link oneLink">  View Details </Link></p>
                 </div>
               </div>
             </div>
           </div>
-          {/* -------------end boxes-------------- */}
 
-          {/* ----------start charts ----------- */}
-          <div className="charts">
-            <div className="row">
-              {/* ----------start charts 1----------- */}
-              <div className="col-lg-3 chart1">
+          <div className="col-xl-3 col-md-6 box">
+            <div className="card two">
+              <div className="card-body">
+                <div className="headerr">
+                  <h3>
+                    <GroupIcon className="icon" />
+                  </h3>
+                  <h3 className="name">Salariés</h3>
+                </div>
+                <div className="footerr">
+                  <h3 className="num">76</h3>
+                  <p className="card-text"><Link to="/studentsList" className="link twoLink"> View Details </Link></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-3 col-md-6 box">
+            <div className="card three">
+              <div className="card-body">
+                <div className="headerr">
+                  <h3>
+                    <SendIcon className="icon" />
+                  </h3>
+                  <h3 className="name">Inscription</h3>
+                </div>
+                <div className="footerr">
+                  <h3 className="num">33</h3>
+                  <p className="card-text"><Link to="/studentsList" className="link threeLink"> View Details </Link></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-xl-3 col-md-6 box">
+            <div className="card four">
+              <div className="card-body">
+                <div className="headerr">
+                  <h3>
+                    <MessageIcon className="icon" />
+                  </h3>
+                  <h3 className="name">Messages</h3>
+                </div>
+                <div className="footerr">
+                  <h3 className="num">56</h3>
+                  <p className="card-text"><Link to="/studentsList" className="link fourLink"> View Details </Link></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* -------------end boxes-------------- */}
+
+        {/* ----------start charts ----------- */}
+        <div className="charts">
+          <div className="row">
+            {/* ----------start charts 1----------- */}
+            <div className="col-lg-4 chart1">
+              <div className="card">
                 <div width="100%" height="100%">
                   <PieChart className="PieChart" width={300} height={300}>
                     <Pie
-                      data={data}
+                      data={dataa}
                       cx="50%"
                       cy="50%"
                       labelLine={false}
@@ -194,44 +225,50 @@ class Dashboard extends PureComponent {
                       )}
                     </Pie>
                   </PieChart>
+                  <div className="statiqueInfoChart d-flex justify-content-between">
+                    <div className="girls d-flex">
+                      <div className="femme mr-2"></div> <p>Femme</p>
+                    </div>
+                    <div className="boys d-flex ">
+                      <span className="homme mr-2"></span> <p>Homme</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              {/* ----------end charts 1----------- */}
-
-              {/* ----------start charts 2----------- */}
-              <div className="col-lg-9 chart2">
-                <div className="card-body">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart
-                      width={500}
-                      height={300}
-                      data={data2}
-                      margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                      }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="pv" fill="#8884d8" />
-                      <Bar dataKey="uv" fill="#82ca9d" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-              {/* ----------end charts 2----------- */}
             </div>
-          </div>
-          {/* ----------end charts box----------- */}
-        </div>
-      </div>
-    );
-  }
-}
+            {/* ----------end charts 1----------- */}
 
-export default Dashboard;
+            {/* ----------start charts 2----------- */}
+            <div className="col-lg-8 chart2">
+              <div className="card">
+                <div className="card-body">
+                  <BarChart
+                    width={600}
+                    height={300}
+                    data={data}
+                    margin={{
+                      top: 5,
+                      right: 10,
+                      left: 10,
+                      bottom: 5
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Revenu" fill="#8884d8" />
+                    <Bar dataKey="Dépense" fill="#82ca9d" />
+                  </BarChart>
+                </div>
+              </div>
+            </div>
+            {/* ----------end charts 2----------- */}
+          </div>
+        </div>
+        {/* ----------end charts box----------- */}
+      </div>
+    </div>
+  )
+}

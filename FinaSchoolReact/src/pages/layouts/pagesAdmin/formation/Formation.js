@@ -16,3 +16,4 @@ export class Formation extends Component {
 }
 
 export default Formation
+
