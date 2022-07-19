@@ -1,39 +1,73 @@
 import React from "react";
+import { useEffect, useState } from "react"
+import axios from 'axios'
 // import { TableContainer, TablePagination, Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ReplyIcon from '@mui/icons-material/Reply';
 
-const columns = [
-  { field: 'EmailAdress', headerName: 'Email Adress', width: 200 },
-  { field: 'firstName', headerName: 'First Name', width: 200 },
-  { field: 'lastName', headerName: 'Last Name', width: 200 },
-  { field: 'city', headerName: 'City', width: 200 },
-  { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
-];
+const endPoint = 'http://localhost:8000/api'
 
-const rows = [
-  { id: 1, EmailAdress: 'Jon@gmail.com', firstName: 'lolo',lastName: 'snow', city: "agadir", phoneNumber: "0643526622" },
-  { id: 1, EmailAdress: 'Jon@gmail.com', firstName: 'lolo',lastName: 'snow', city: "agadir", phoneNumber: "0643526622" },
-  { id: 1, EmailAdress: 'Jon@gmail.com', firstName: 'lolo',lastName: 'snow', city: "agadir", phoneNumber: "0643526622" },
-  { id: 1, EmailAdress: 'Jon@gmail.com', firstName: 'lolo',lastName: 'snow', city: "agadir", phoneNumber: "0643526622" },
-  { id: 1, EmailAdress: 'Jon@gmail.com', firstName: 'lolo',lastName: 'snow', city: "agadir", phoneNumber: "0643526622" },
-  { id: 1, EmailAdress: 'Jon@gmail.com', firstName: 'lolo',lastName: 'snow', city: "agadir", phoneNumber: "0643526622" },
-
-];
 
 export default function InsciptionPage() {
+
+  const columns = [
+    { field: 'email', headerName: 'Email Adress', width: 250 },
+    { field: 'firstName', headerName: 'First Name', width: 150 },
+    { field: 'lastName', headerName: 'Last Name', width: 150 },
+    { field: 'city', headerName: 'City', width: 100 },
+    { field: 'phoneNumber', headerName: 'Phone Number', width: 200 },
+    {
+      field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
+        return [
+          <IconButton aria-label="answer" onClick={() => sendEmail(params.row.id)}> <ReplyIcon /> </IconButton>,
+          <IconButton aria-label="delete" onClick={() => deletEmployee(params.row.id)}> <DeleteIcon /> </IconButton>
+  
+        ]
+      }
+    },
+  ];
+
+  /* get data */
+  let [filtredInscreptions, setFiltredInscreptions] = useState([])
+  let [inscreptions, setInscreptions] = useState([])
+
+  useEffect(() => {
+    getAllInscreptions()
+  }, [])
+
+  const getAllInscreptions = async () => {
+    const response = await axios.get(`${endPoint}/inscreptions`)
+    setInscreptions(response.data)
+    setFiltredInscreptions(response.data)
+  }
+  /* end get data */
+
+  /* delet row inscreption */
+const deletEmployee = async (id) => {
+  await axios.delete(`${endPoint}/employee/${id}`).then((response) => {
+    if (response.status === 200) {
+      setFiltredInscreptions(inscreptions.filter(inscr => inscr.id !== id))
+    }
+  })
+}
+/* end delet row inscreption */
+
+/* send email */
+const sendEmail = async (id) => {}
+/* end send email */
+
   return (
     <div className="allContent">
       {/* -------------start breadcrumb-------------- */}
-      <h1 className="mt-4">Pré Insciption</h1>
-      <ol className="breadcrumb mb-4">
-        <li className="breadcrumb-item active">Pré Insciption</li>
-      </ol>
-      {/* -------------end breadcrumb-------------- */}
+      <h3 className="mt-2 mb-3">Inscription : </h3>
+        {/* -------------end breadcrumb-------------- */}
 
       {/* -------------start table-------------- */}
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={rows}
+          rows={filtredInscreptions}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}

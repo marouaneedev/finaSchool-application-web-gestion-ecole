@@ -1,0 +1,14 @@
+.wdg{
+    border: 1px solid #444;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.wdg label{
+    width: 100px;
+}
+
+.inpuut{
+    margin: 10px 0;
+}

@@ -8,7 +8,6 @@ import SendIcon from '@mui/icons-material/Send';
 import MessageIcon from '@mui/icons-material/Message';
 
 
-
 /* start chart 1 */
 const dataa = [{ name: "Boys", value: 400 }, { name: "Girls", value: 300 }];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -140,7 +139,7 @@ export default function Dashboard() {
                 </div>
                 <div className="footerr">
                   <h3 className="num">45</h3>
-                  <p className="card-text"><Link to="/studentsList" className="link oneLink">  View Details </Link></p>
+                  <p className="card-text"><Link to="/students" className="link oneLink"> View Details </Link></p>
                 </div>
               </div>
             </div>
@@ -157,7 +156,7 @@ export default function Dashboard() {
                 </div>
                 <div className="footerr">
                   <h3 className="num">76</h3>
-                  <p className="card-text"><Link to="/studentsList" className="link twoLink"> View Details </Link></p>
+                  <p className="card-text"><Link to="/salaries" className="link twoLink"> View Details </Link></p>
                 </div>
               </div>
             </div>
@@ -174,7 +173,7 @@ export default function Dashboard() {
                 </div>
                 <div className="footerr">
                   <h3 className="num">33</h3>
-                  <p className="card-text"><Link to="/studentsList" className="link threeLink"> View Details </Link></p>
+                  <p className="card-text"><Link to="/inscription" className="link threeLink"> View Details </Link></p>
                 </div>
               </div>
             </div>
@@ -191,7 +190,7 @@ export default function Dashboard() {
                 </div>
                 <div className="footerr">
                   <h3 className="num">56</h3>
-                  <p className="card-text"><Link to="/studentsList" className="link fourLink"> View Details </Link></p>
+                  <p className="card-text"><Link to="/messages" className="link fourLink"> View Details </Link></p>
                 </div>
               </div>
             </div>

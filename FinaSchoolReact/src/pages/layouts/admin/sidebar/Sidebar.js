@@ -26,14 +26,14 @@ function Sidebar() {
               Dashboard
             </Link>
 
-            <Link className="nav-link" to="studentsList">
+            <Link className="nav-link" to="students">
               <div className="sb-nav-link-icon">
                 <GroupsIcon/>
               </div>
               Étudiants 
             </Link>
 
-            <Link className="nav-link" to="salariesList">
+            <Link className="nav-link" to="salaries">
               <div className="sb-nav-link-icon">
                 <GroupIcon/>
               </div>
@@ -41,7 +41,7 @@ function Sidebar() {
             </Link>
 
 
-            <Link className="nav-link" to="formation">
+            <Link className="nav-link" to="widget">
               <div className="sb-nav-link-icon">
                 <AddCircleOutlineIcon />
               </div>
@@ -80,7 +80,7 @@ function Sidebar() {
               </nav>
             </div>
 
-            <Link className="nav-link" to="insciption">
+            <Link className="nav-link" to="inscription">
               <div className="sb-nav-link-icon">
                 <SendIcon />
               </div>

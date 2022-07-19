@@ -118,7 +118,7 @@ export default function SalariesList() {
     <div className="allContent">
       <div className="settingContent">
         {/* -------------start breadcrumb-------------- */}
-        <h3 className="mt-2 mb-3">Liste des Salaries</h3>
+        <h3 className="mt-2 mb-3">Liste des Salaries :</h3>
         {/* -------------end breadcrumb-------------- */}
         {/* -------------start barFiltrage-------------- */}
         <div className="bare d-flex justify-content-between">

@@ -10,7 +10,7 @@ import SettingPage from "./pages/layouts/pagesAdmin/settingPage/SettingPage";
 import MessagesPage from "./pages/layouts/pagesAdmin/messagesPage/MessagesPage";
 import InsciptionPage from "./pages/layouts/pagesAdmin/insciptionPage/InsciptionPage";
 import Revenu from "./pages/layouts/pagesAdmin/revenu/Revenu";
-import Formation from "./pages/layouts/pagesAdmin/formation/Formation";
+import Widget from "./pages/layouts/pagesAdmin/widget/Widget";
 import Depense from "./pages/layouts/pagesAdmin/depense/Depense";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -22,15 +22,15 @@ export class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="/admin" element={<Login />} />
-            <Route path="/admin/hhh" element={<Masterlayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Masterlayout />}>
               <Route path="dashboard" exact element={<Dashboard />} />
-              <Route path="studentsList" element={<StudentsList />} />
-              <Route path="salariesList" element={<SalariesList />} />
+              <Route path="students" element={<StudentsList />} />
+              <Route path="salaries" element={<SalariesList />} />
               <Route path="setting" element={<SettingPage />} />
-              <Route path="formation" element={<Formation />} />
+              <Route path="widget" element={<Widget />} />
               <Route path="messages" element={<MessagesPage />} />
-              <Route path="insciption" element={<InsciptionPage />} />
+              <Route path="inscription" element={<InsciptionPage />} />
               <Route path="revenu" element={<Revenu />} />
               <Route path="depense" element={<Depense />} />
             </Route>

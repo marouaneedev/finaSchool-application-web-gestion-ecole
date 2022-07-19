@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\InscreptionController;
+use App\Http\Controllers\MessageController;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,8 +20,8 @@ Route::controller(StudentController::class)->group(function(){
     Route::get('/student/{id}', 'show');
     Route::put('/student/{id}', 'update');
     Route::delete('/student/{id}', 'destroy');
-
 });
+
 
 Route::controller(EmployeeController::class)->group(function(){
     Route::get('/employees', 'index');
@@ -27,5 +29,22 @@ Route::controller(EmployeeController::class)->group(function(){
     Route::get('/employee/{id}', 'show');
     Route::put('/employee/{id}', 'update');
     Route::delete('/employee/{id}', 'destroy');
+});
 
+
+Route::controller(InscreptionController::class)->group(function(){
+    Route::get('/inscreptions', 'index');
+    Route::post('/inscreption', 'store');
+    Route::get('/inscreption/{id}', 'show');
+    Route::put('/inscreption/{id}', 'update');
+    Route::delete('/inscreption/{id}', 'destroy');
+});
+
+
+Route::controller(MessageController::class)->group(function(){
+    Route::get('/messages', 'index');
+    Route::post('/message', 'store');
+    Route::get('/message/{id}', 'show');
+    Route::put('/message/{id}', 'update');
+    Route::delete('/message/{id}', 'destroy');
 });

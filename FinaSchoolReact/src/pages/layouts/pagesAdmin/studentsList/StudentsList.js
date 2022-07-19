@@ -120,7 +120,7 @@ export default function StudentsList() {
     <div className="allContent">
       <div className="settingContent">
         {/* -------------start breadcrumb-------------- */}
-        <h3 className="mt-2 mb-3">Liste des étudiants</h3>
+        <h3 className="mt-2 mb-3">Liste des étudiants :</h3>
         {/* -------------end breadcrumb-------------- */}
         {/* -------------start barFiltrage-------------- */}
         <div className="bare d-flex justify-content-between">
@@ -135,6 +135,7 @@ export default function StudentsList() {
                   label="Année"
                   onChange={selectedYear}
                 >
+                  <MenuItem value="tout">Tout</MenuItem>
                   <MenuItem value="1 année">1annee</MenuItem>
                   <MenuItem value="2 année">2annee</MenuItem>
                 </Select>
@@ -151,6 +152,7 @@ export default function StudentsList() {
                   label="formation"
                   onChange={selectedFormation}
                 >
+                  <MenuItem value='tout'>Tout</MenuItem>
                   <MenuItem value='Dev'>Dev</MenuItem>
                   <MenuItem value='Design'>Design</MenuItem>
                 </Select>

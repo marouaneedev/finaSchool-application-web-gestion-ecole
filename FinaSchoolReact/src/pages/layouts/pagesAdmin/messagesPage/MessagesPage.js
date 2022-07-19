@@ -1,54 +1,75 @@
-import React, { Component } from "react";
+import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios'
+import { useEffect, useState } from "react"
 
-const columns = [
-  
-  { field: 'Email', headerName: 'Email', width: 250 },
-  { field: 'Message', headerName: 'Message', width: 600 },
-  {
-    field: 'Edit',
-    headerName: 'Edit',
-    width: 150,
-  },
-];
 
-const rows = [
-  { id: 1,Email: 'bllw@gmail.com', Message: 'Snow dkkdkeldeldmelmdlemdmeldmlemdmeld'},
-  { id: 2, Email: 'Lannister@', Message: 'Cersei' },
-  { id: 3, Email: 'Lannister@', Message: 'Jaime' },
-  { id: 4, Email: 'Stark@', Message: 'Arya'},
-  { id: 5, Email: 'Targaryen@', Message: 'Daenerys' },
-  { id: 6, Email: 'Melisandre@', Message: 'nulfrl' },
-  { id: 7, Email: 'Clifford@', Message: 'Ferrara'},
-  { id: 8, Email: 'Frances@', Message: 'Rossini' },
-  { id: 9, Email: 'Roxie@', Message: 'Harvey' },
-];
+const endPoint = 'http://localhost:8000/api'
 
-class MessagesPage extends Component {
-  render() {
-    return (
-      <div className="allContent">
-        {/* -------------start breadcrumb-------------- */}
-        <h1 className="mt-4">Messages</h1>
-        <ol className="breadcrumb mb-4">
-          <li className="breadcrumb-item active">Messages</li>
-        </ol>
-        {/* -------------end breadcrumb-------------- */}
 
-        {/* -------------start table-------------- */}
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+function MessagesPage() {
 
-          />
-        </div>
-        {/* -------------end table-------------- */}
-      </div>
-    );
+  const columns = [
+
+    { field: 'email', headerName: 'Email', width: 150 },
+    { field: 'message', headerName: 'Message', width: 720 },
+    {
+      field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
+        return [
+          <IconButton aria-label="delete" onClick={() => deletMessage(params.row.id)}> <DeleteIcon /> </IconButton>
+        ]
+      }
+    },
+  ];
+
+  /* get data */
+  let [filtredMessages, setFiltredMessages] = useState([])
+  let [messages, setMessages] = useState([])
+
+  useEffect(() => {
+    getAllMessages()
+  }, [])
+
+  const getAllMessages = async () => {
+    const response = await axios.get(`${endPoint}/messages`)
+    setMessages(response.data)
+    setFiltredMessages(response.data)
   }
+  /* end get data */
+
+  /* delet row messages */
+  const deletMessage = async (id) => {
+    await axios.delete(`${endPoint}/message/${id}`).then((response) => {
+      if (response.status === 200) {
+        setFiltredMessages(messages.filter(student => student.id !== id))
+      }
+    })
+  }
+  /* end delet row messages */
+
+
+
+  return (
+    <div className="allContent">
+      {/* -------------start breadcrumb-------------- */}
+      <h3 className="mt-2 mb-3">Messages : </h3>
+      {/* -------------end breadcrumb-------------- */}
+
+      {/* -------------start table-------------- */}
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={filtredMessages}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+
+        />
+      </div>
+      {/* -------------end table-------------- */}
+    </div>
+  )
 }
 
-export default MessagesPage;
+export default MessagesPage
