@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './preInscreption.css'
 import axios from 'axios'
-// import { useState } from "react"
+import Box from '@mui/material/Box';
+import Input from '@mui/material/Input';
 
 
 const endPoint = 'http://localhost:8000/api/inscreption'
@@ -26,10 +27,9 @@ export class Preinscreption extends Component {
 
     saveInscreption = async (e) => {
         e.preventDefault();
-        console.log(this.state)
         await axios.post(endPoint, this.state).then((res) => {
-            console.log(res.data)
             if (res.data.status === 200) {
+                console.log("good")
                 this.setState({
                     email: '',
                     firstName: '',
@@ -57,7 +57,7 @@ export class Preinscreption extends Component {
                         <div className="grid" >
                             <div className="col-12 md:col-6 lg:col-6 sm:flex-nowrap p-3">
                                 <h2>Pré-inscription</h2>
-                                <h3>en ligne à eWA</h3>
+                                <h3>en ligne à FinaSchool</h3>
                                 <hr />
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
@@ -67,63 +67,101 @@ export class Preinscreption extends Component {
                             </div>
                             <div className="col-12 md:col-6 lg:col-6 p-3">
                                 <form onSubmit={this.saveInscreption}>
+
                                     <div className="mb-3">
-                                        <input
-                                            type="email"
-                                            className="inputtt"
-                                            id="exampleInputEmail1"
-                                            aria-describedby="emailHelp"
-                                            name="email"
-                                            placeholder="Email address"
-                                            onChange={this.handleInput}
-                                            value={this.state.email}
-                                        />
+                                        <Box
+                                            component="form"
+                                            sx={{
+                                                '& > :not(style)': { m: 1 },
+                                            }}
+                                            noValidate
+                                            autoComplete="off"
+                                        >
+                                            <Input
+                                                type="email"
+                                                className="inputtt"
+                                                name="email"
+                                                placeholder="Email address"
+                                                onChange={this.handleInput}
+                                                value={this.state.email}
+                                            />
+                                        </Box>
                                     </div>
                                     <div className="mb-3">
-                                        <input
-                                            type="text"
-                                            className="inputtt"
-                                            id="exampleInputEmail1"
-                                            aria-describedby="emailHelp"
-                                            name="firstName"
-                                            placeholder="First Name"
-                                            onChange={this.handleInput}
-                                            value={this.state.firstName}
-                                        />
+                                        <Box
+                                            component="form"
+                                            sx={{
+                                                '& > :not(style)': { m: 1 },
+                                            }}
+                                            noValidate
+                                            autoComplete="off"
+                                        >
+                                            <Input
+                                                type="text"
+                                                className="inputtt"
+                                                name="firstName"
+                                                placeholder="First Name"
+                                                onChange={this.handleInput}
+                                                value={this.state.firstName}
+                                            />
+                                        </Box>
                                     </div>
                                     <div className="mb-3">
-                                        <input
-                                            type="text"
-                                            className="inputtt"
-                                            id="exampleInputEmail1"
-                                            aria-describedby="emailHelp"
-                                            name="LastName"
-                                            placeholder="Last Name"
-                                            onChange={this.handleInput}
-                                            value={this.state.LastName}
-                                        />
+                                        <Box
+                                            component="form"
+                                            sx={{
+                                                '& > :not(style)': { m: 1 },
+                                            }}
+                                            noValidate
+                                            autoComplete="off"
+                                        >
+                                            <Input
+                                                type="text"
+                                                className="inputtt"
+                                                name="LastName"
+                                                placeholder="Last Name"
+                                                onChange={this.handleInput}
+                                                value={this.state.LastName}
+                                            />
+                                        </Box>
                                     </div>
                                     <div className="mb-3">
-                                        <input
-                                            type="text"
-                                            className="inputtt"
-                                            id="exampleInputEmail1"
-                                            aria-describedby="emailHelp"
-                                            name="city"
-                                            placeholder="City"
-                                            onChange={this.handleInput}
-                                            value={this.state.city}
-                                        />
+                                        <Box
+                                            component="form"
+                                            sx={{
+                                                '& > :not(style)': { m: 1 },
+                                            }}
+                                            noValidate
+                                            autoComplete="off"
+                                        >
+                                            <Input
+                                                type="text"
+                                                className="inputtt"
+                                                name="city"
+                                                placeholder="City"
+                                                onChange={this.handleInput}
+                                                value={this.state.city}
+                                            />
+                                        </Box>
                                     </div>
                                     <div className="mb-3">
-                                        <input
-                                            type="text"
-                                            className="inputtt"
-                                            name="phoneNumber"
-                                            placeholder="Phone Number"
-                                            onChange={this.handleInput}
-                                            value={this.state.phoneNumber}
-                                        />
+                                        <Box
+                                            component="form"
+                                            sx={{
+                                                '& > :not(style)': { m: 1 },
+                                            }}
+                                            noValidate
+                                            autoComplete="off"
+                                        >
+                                            <Input
+                                                type="number"
+                                                className="inputtt"
+                                                name="phoneNumber"
+                                                placeholder="Phone Number"
+                                                onChange={this.handleInput}
+                                                value={this.state.phoneNumber}
+                                            />
+                                        </Box>
                                     </div>
 
                                     <button type="submit" className="bttn" >

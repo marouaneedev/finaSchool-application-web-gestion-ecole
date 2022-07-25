@@ -29,8 +29,8 @@ class MessageController extends Controller
 
         $msg-> save();
 
-        response()->json([
-            'status' => 200,
+        return response()->json([
+            'status' => 201,
             'message' => 'Inscreption Envoyer',
         ]);
 

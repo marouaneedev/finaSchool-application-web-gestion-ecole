@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../../../assets/admin/js/scripts";
+import './NavbarAdmin.css'
 
 class NavbarAdmin extends Component {
   render() {
@@ -9,7 +10,7 @@ class NavbarAdmin extends Component {
       <div>
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
           <Link className="navbar-brand ps-3" to="dashboard">
-            FinaSchool
+            <img src="/images/logo.png" className="logoImgg" alt="img" />
           </Link>
 
           <button

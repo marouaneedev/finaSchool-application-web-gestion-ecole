@@ -5,6 +5,10 @@
     border: 1px solid #eaf5ef;
 }
 
+.logoIiimg{
+    width: 200px;
+}
+
 .navbarHome nav .logo {
     font-weight: bold;
     font-size: 28px;

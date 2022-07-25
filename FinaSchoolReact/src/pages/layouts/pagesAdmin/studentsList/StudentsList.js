@@ -59,7 +59,7 @@ export default function StudentsList() {
       }
     })
   }
-    /* end delet row Employee */
+  /* end delet row Employee */
 
 
 
@@ -104,14 +104,34 @@ export default function StudentsList() {
 
   const filterTable = (formation, year) => {
     if (formation !== '' && year === '') {
-      let newStud = students.filter(student => student.formation === formation)
-      setFiltredStudents(newStud)
+      if (formation === 'Tout') {
+        setFiltredStudents(students)
+      } else {
+        let newStud = students.filter(student => student.formation === formation)
+        setFiltredStudents(newStud)
+      }
     } else if (formation === '' && year !== '') {
-      let newStud = students.filter(student => student.yearOfFormation === year)
-      setFiltredStudents(newStud)
+      if (year === 'Tout') {
+        setFiltredStudents(students)
+      } else {
+        let newStud = students.filter(student => student.yearOfFormation === year)
+        setFiltredStudents(newStud)
+      }
     } else if (formation !== '' && year !== '') {
-      let newStud = students.filter(student => student.yearOfFormation === year && student.formation === formation)
-      setFiltredStudents(newStud)
+      if (year === 'Tout' && formation === 'Tout') {
+        setFiltredStudents(students)
+      }
+      else if (year === 'Tout' && formation !== 'Tout') {
+        let newStud = students.filter(student => student.formation === formation)
+        setFiltredStudents(newStud)
+      }
+      else if (year !== 'Tout' && formation === 'Tout') {
+        let newStud = students.filter(student => student.yearOfFormation === year)
+        setFiltredStudents(newStud)
+      } else {
+        let newStud = students.filter(student => student.yearOfFormation === year && student.formation === formation)
+        setFiltredStudents(newStud)
+      }
     }
   }
   /* --------- end Filtrage --------- */
@@ -135,7 +155,7 @@ export default function StudentsList() {
                   label="Année"
                   onChange={selectedYear}
                 >
-                  <MenuItem value="tout">Tout</MenuItem>
+                  <MenuItem value="Tout">Tout</MenuItem>
                   <MenuItem value="1 année">1annee</MenuItem>
                   <MenuItem value="2 année">2annee</MenuItem>
                 </Select>
@@ -152,7 +172,7 @@ export default function StudentsList() {
                   label="formation"
                   onChange={selectedFormation}
                 >
-                  <MenuItem value='tout'>Tout</MenuItem>
+                  <MenuItem value='Tout'>Tout</MenuItem>
                   <MenuItem value='Dev'>Dev</MenuItem>
                   <MenuItem value='Design'>Design</MenuItem>
                 </Select>

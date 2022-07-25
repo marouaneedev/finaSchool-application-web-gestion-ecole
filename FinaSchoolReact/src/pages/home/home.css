@@ -35,15 +35,17 @@ header .content_s .left_s {
 .bttn{
     padding: 5px 30px;
     background: none;
-    border: 2px solid #28838f;
+    border: 2px solid #157cb0;
     border-radius: 5px;
-    color: #28838f;
+    color: #157cb0;
     font-weight: 500;
 }
 
-header .bttn:active{
-    color: #1e6069;
-    border: 2px solid #1e6069;
+.bttn:active{
+    color: #ffff;
+    border: 2px solid #157cb0;
+    background-color: #157cb0;
+
 }
 
 header .content_s .right_s {
@@ -88,7 +90,7 @@ header .arrowImg:hover{
 .schoolSection .contentBottom {
     display: flex;
     align-items: center;
-    background-color:#EBF5EF;
+    background-color:#D7EEF2;
     border-radius:10px;
     padding: 0 15px;
 }

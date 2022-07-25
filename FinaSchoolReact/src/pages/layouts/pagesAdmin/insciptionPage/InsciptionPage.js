@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ReplyIcon from '@mui/icons-material/Reply';
 
+
 const endPoint = 'http://localhost:8000/api'
 
 
@@ -22,7 +23,7 @@ export default function InsciptionPage() {
       field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
         return [
           <IconButton aria-label="answer" onClick={() => sendEmail(params.row.id)}> <ReplyIcon /> </IconButton>,
-          <IconButton aria-label="delete" onClick={() => deletEmployee(params.row.id)}> <DeleteIcon /> </IconButton>
+          <IconButton aria-label="delete" onClick={() => deletInscreption(params.row.id)}> <DeleteIcon /> </IconButton>
   
         ]
       }
@@ -45,8 +46,8 @@ export default function InsciptionPage() {
   /* end get data */
 
   /* delet row inscreption */
-const deletEmployee = async (id) => {
-  await axios.delete(`${endPoint}/employee/${id}`).then((response) => {
+const deletInscreption = async (id) => {
+  await axios.delete(`${endPoint}/inscreption/${id}`).then((response) => {
     if (response.status === 200) {
       setFiltredInscreptions(inscreptions.filter(inscr => inscr.id !== id))
     }

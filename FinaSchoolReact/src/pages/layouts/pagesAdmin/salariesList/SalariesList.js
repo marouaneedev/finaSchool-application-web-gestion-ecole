@@ -14,6 +14,7 @@ import Select from '@mui/material/Select';
 import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import './salariesList.css'
 
 
 const endPoint = 'http://localhost:8000/api'
@@ -49,19 +50,19 @@ export default function SalariesList() {
   /*----- table header -----*/
   const columns = [
     { field: 'fullName', headerName: 'Nom et Prénom', width: 150 },
-    { field: 'gender', headerName: 'Sexe', width: 100 },
-    { field: 'dateOfBirthday', headerName: "Date De Naissance", width: 150 },
+    { field: 'gender', headerName: 'Sexe', width: 80 },
+    { field: 'dateOfBirthday', headerName: "Date De Naissance", width: 140 },
     { field: 'cin', headerName: 'CIN', width: 100 },
     { field: 'address', headerName: 'Adresse', width: 150 },
-    { field: 'phoneNumber', headerName: 'Téléphone', width: 150 },
+    { field: 'phoneNumber', headerName: 'Téléphone', width: 105 },
     { field: 'email', headerName: 'Email', width: 150 },
-    { field: 'typeEmployee', headerName: 'Type de Salarier', width: 100 },
+    { field: 'typeEmployee', headerName: 'Type de Salarier', width: 130 },
     { field: 'typeWork', headerName: 'Type de Travail', width: 150 },
     {
       field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
         return [
-          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon /> </IconButton>,
-          <IconButton aria-label="delete" onClick={() => deletEmployee(params.row.id)}> <DeleteIcon /> </IconButton>
+          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon className="color_icon"/> </IconButton>,
+          <IconButton aria-label="delete" onClick={() => deletEmployee(params.row.id)}> <DeleteIcon className="color_icon"/> </IconButton>
         ]
       }
     },
@@ -86,10 +87,10 @@ export default function SalariesList() {
   };
 
   const updatedEmployee = (employee) => {
-    let updateStudent = [...employees]
+    let updateEmployee = [...employees]
     const index = employees.findIndex(data => data.id === employee.id)
-    updateStudent[index] = employee;
-    setFiltredEmployees(updateStudent);
+    updateEmployee[index] = employee;
+    setFiltredEmployees(updateEmployee);
   };
    /* --------- end Dialog --------- */
 
@@ -102,11 +103,10 @@ export default function SalariesList() {
   };
 
   const filterTable = (type) => {
-    if(type !== '') {
-      let newEmpl = employees.filter(employee =>  employee.typeEmployee === type)
-      setFiltredEmployees(newEmpl)
-    } else if(type !== ''){
-      let newEmpl = employees.filter(employee => employee.typeEmployee === typeEmployee)
+    if(type === 'Tout') {
+      setFiltredEmployees(employees)
+    } else {
+      let newEmpl = employees.filter(employee => employee.typeEmployee === type)
       setFiltredEmployees(newEmpl)
     }
   }
@@ -135,8 +135,8 @@ export default function SalariesList() {
                 >
                   <MenuItem value="Tout">Tout</MenuItem>
                   <MenuItem value="Formateur">Formateur</MenuItem>
-                  <MenuItem value="Sercritira">Sercritira</MenuItem>
-                  <MenuItem value="Auter">Auter</MenuItem>
+                  <MenuItem value="Secrétaire">Secrétaire</MenuItem>
+                  <MenuItem value="Autre">Autre</MenuItem>
 
                 </Select>
               </FormControl>
@@ -150,7 +150,7 @@ export default function SalariesList() {
         {/* -------------end barFiltrage-------------- */}
         <br />
         {/* -------------start table-------------- */}
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: '100%', background: "#E3F0FC" }}>
           <DataGrid
             rows={filtredEmployees}
             columns={columns}

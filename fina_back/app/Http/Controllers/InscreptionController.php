@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\inscreption;
+use App\Models\Inscreption;
 use Illuminate\Http\Request;
 
-class inscreptionController extends Controller
+class InscreptionController extends Controller
 {
 
     public function index()
     {
-        $inscr = inscreption::all();
+        $inscr = Inscreption::all();
         return $inscr;
     }
 
@@ -21,9 +21,9 @@ class inscreptionController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        $inscr = new inscreption();
+    public function store(Request $request) {
+
+        $inscr = new Inscreption();
         $inscr-> email = $request-> email;
         $inscr-> firstName = $request-> firstName;
         $inscr-> lastName = $request-> lastName;
@@ -32,22 +32,23 @@ class inscreptionController extends Controller
 
         $inscr-> save();
 
-        // response()->json([
-        //     'status' => 200,
-        //     'message' => 'Inscreption Envoyer',
-        // ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Inscreption Envoyer',
+        ]);
+
         return $inscr;
     }
 
 
     public function show($id)
     {
-        $inscr = inscreption::find($id);
+        $inscr = Inscreption::find($id);
         return $inscr;
     }
 
 
-    public function edit(inscreption $inscreption)
+    public function edit(Inscreption $inscreption)
     {
         //
     }
@@ -55,7 +56,7 @@ class inscreptionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $inscr = inscreption::findOrFail($request-> id);
+        $inscr = Inscreption::findOrFail($request-> id);
         $inscr-> email = $request-> email;
         $inscr-> firstName = $request-> firstName;
         $inscr-> lastName = $request-> lastName;
@@ -69,7 +70,7 @@ class inscreptionController extends Controller
 
     public function destroy($id)
     {
-        $inscr = inscreption::destroy($id);
+        $inscr = Inscreption::destroy($id);
         return $inscr;
     }
 }

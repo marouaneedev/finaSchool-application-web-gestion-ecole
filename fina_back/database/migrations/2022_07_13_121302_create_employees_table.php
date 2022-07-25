@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('dateOfBirthday');
             $table->string('cin');
             $table->text('address');
-            $table->integer('phoneNumber');
+            $table->text('phoneNumber');
             $table->string('email');
             $table->string('typeEmployee');
             $table->text('typeWork');

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from "react-scroll";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 export class Footer extends Component {
     render() {
@@ -8,7 +11,7 @@ export class Footer extends Component {
                 <div className="container">
                     <div className="grid">
                         <div className="col-12 md:col-12 lg:col-4 sm:flex-nowrap">
-                            <h1>EWA ECOLE DU DIGITAL</h1>
+                            <h1>FINASCHOOL ECOLE DU DIGITAL</h1>
                         </div>
                         <div className="col-12 md:col-6 lg:col-3">
                             <label>A PROPOS</label>
@@ -51,10 +54,13 @@ export class Footer extends Component {
                             <hr />
                             <ul>
                                 <li>
-                                    <a href="www.google.com">facebook</a>
+                                    <a href="www.google.com"> <FacebookIcon/> <span>Facebook</span> </a> 
                                 </li>
                                 <li>
-                                    <a href="www.google.com">instagram</a>
+                                    <a href="www.google.com"> <InstagramIcon/> Instagram</a>
+                                </li>
+                                <li>
+                                    <a href="www.google.com"> <TwitterIcon/> Twitter</a>
                                 </li>
                             </ul>
                         </div>

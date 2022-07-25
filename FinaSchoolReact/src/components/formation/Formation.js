@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import "./formation.css"
-import { GiDuration } from "react-icons/gi"  
-import { RiMoneyDollarCircleFill } from "react-icons/ri"
-import { IoPeopleCircleSharp } from "react-icons/io5"  
-
+import TimelapseIcon from '@mui/icons-material/Timelapse';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'; 
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 
 
@@ -22,7 +21,7 @@ export class Formation extends Component {
             <div className="col-12 md:col-6 lg:col-3 sm:flex-nowrap">
             <div className="card">
                 <img
-                  src="/images/card.jpg"
+                  src="/images/card1.jpg"
                   className="card-img-top"
                   alt="..."
                 />
@@ -34,17 +33,17 @@ export class Formation extends Component {
                   </p>
                   <hr/>
                   <div class="details">
-                    <div> <GiDuration className="iconReact"/>  <span>Duration</span>  </div>
-                    <div>6 months</div>
+                    <div> <TimelapseIcon className='icons'/>  <span>Duration :</span>  </div>
+                    <div>6 mois</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <RiMoneyDollarCircleFill className="iconReact"/>  <span>Fees</span>  </div>
+                    <div> <MonetizationOnIcon className='icons'/>  <span>Prix :</span>  </div>
                     <div>2000$</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <IoPeopleCircleSharp className="iconReact"/>  <span>Students</span>  </div>
+                    <div> <PeopleAltIcon className='icons'/>  <span>Students :</span>  </div>
                     <div>+45</div>
                   </div>
                  
@@ -55,7 +54,7 @@ export class Formation extends Component {
             <div className="col-12 md:col-6 lg:col-3">
             <div className="card">
                 <img
-                  src="/images/card.jpg"
+                  src="/images/card2.jpg"
                   className="card-img-top"
                   alt="..."
                 />
@@ -67,17 +66,17 @@ export class Formation extends Component {
                   </p>
                   <hr/>
                   <div class="details">
-                    <div> <GiDuration className="iconReact"/>  <span>Duration</span>  </div>
-                    <div>6 months</div>
+                    <div> <TimelapseIcon className='icons'/>  <span>Duration :</span>  </div>
+                    <div>6 mois</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <RiMoneyDollarCircleFill className="iconReact"/>  <span>Fees</span>  </div>
+                    <div> <MonetizationOnIcon className='icons'/>  <span>Prix :</span>  </div>
                     <div>2000$</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <IoPeopleCircleSharp className="iconReact"/>  <span>Students</span>  </div>
+                    <div> <PeopleAltIcon className='icons'/>  <span>Students :</span>  </div>
                     <div>+45</div>
                   </div>
                  
@@ -88,7 +87,7 @@ export class Formation extends Component {
             <div className="col-12 md:col-6 lg:col-3">
             <div className="card">
                 <img
-                  src="/images/card.jpg"
+                  src="/images/card3.jpg"
                   className="card-img-top"
                   alt="..."
                 />
@@ -100,17 +99,17 @@ export class Formation extends Component {
                   </p>
                   <hr/>
                   <div class="details">
-                    <div> <GiDuration className="iconReact"/>  <span>Duration</span>  </div>
-                    <div>6 months</div>
+                    <div> <TimelapseIcon className='icons'/>  <span>Duration :</span>  </div>
+                    <div>6 mois</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <RiMoneyDollarCircleFill className="iconReact"/>  <span>Fees</span>  </div>
+                    <div> <MonetizationOnIcon className='icons'/>  <span>Prix :</span>  </div>
                     <div>2000$</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <IoPeopleCircleSharp className="iconReact"/>  <span>Students</span>  </div>
+                    <div> <PeopleAltIcon className='icons'/>  <span>Students :</span>  </div>
                     <div>+45</div>
                   </div>
                  
@@ -121,7 +120,7 @@ export class Formation extends Component {
             <div className="col-12 md:col-6 lg:col-3">
             <div className="card">
                 <img
-                  src="/images/card.jpg"
+                  src="/images/card4.jpg"
                   className="card-img-top"
                   alt="..."
                 />
@@ -133,17 +132,17 @@ export class Formation extends Component {
                   </p>
                   <hr/>
                   <div class="details">
-                    <div> <GiDuration className="iconReact"/>  <span>Duration</span>  </div>
-                    <div>6 months</div>
+                    <div> <TimelapseIcon className='icons'/>  <span>Duration :</span>  </div>
+                    <div>6 mois</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <RiMoneyDollarCircleFill className="iconReact"/>  <span>Fees</span>  </div>
+                    <div> <MonetizationOnIcon className='icons'/>  <span>Prix :</span>  </div>
                     <div>2000$</div>
                   </div>
                   <hr/>
                   <div class="details">
-                    <div> <IoPeopleCircleSharp className="iconReact"/>  <span>Students</span>  </div>
+                    <div> <PeopleAltIcon className='icons'/>  <span>Students :</span>  </div>
                     <div>+45</div>
                   </div>
                  

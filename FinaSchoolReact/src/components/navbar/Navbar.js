@@ -8,7 +8,7 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container">
           <Link to="/" className="navbar-brand logo">
-            FinaSchool
+            <img src="/images/logo.png" className="logoIiimg" alt="img" />
           </Link>
           <button
             className="navbar-toggler"

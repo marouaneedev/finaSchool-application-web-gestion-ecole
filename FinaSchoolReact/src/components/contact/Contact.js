@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Box from '@mui/material/Box';
+import Input from '@mui/material/Input';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import("./contact.css")
+
 
 
 const endPoint = 'http://localhost:8000/api/message'
@@ -23,8 +27,7 @@ export class Contact extends Component {
   saveMessage = async (e) => {
     e.preventDefault();
     await axios.post(endPoint, this.state).then((res) => {
-      console.log(res.data)
-      if (res.data.status === 200) {
+      if (res.data.status === 201) {
         this.setState({
           email: '',
           message: '',
@@ -57,24 +60,30 @@ export class Contact extends Component {
               <div className="col-12 md:col-6 lg:col-6 p-3">
                 <form onSubmit={this.saveMessage}>
                   <div className="mb-3">
-                    <input
-                      type="email"
-                      className="inputtt"
-                      id="exampleInputEmail1"
-                      name="email"
-                      onChange={this.handleInput}
-                      value={this.state.email}
-                      aria-describedby="emailHelp"
-                      placeholder="Email address"
-
-                    />
+                    <Box
+                      component="form"
+                      sx={{
+                        '& > :not(style)': { m: 1 },
+                      }}
+                      noValidate
+                      autoComplete="off"
+                    >
+                      <Input
+                        type="email"
+                        className="inputtt"
+                        name="email"
+                        placeholder="Email address"
+                        onChange={this.handleInput}
+                        value={this.state.email}
+                      />
+                    </Box>
                   </div>
                   <div className="form-floating mb-3">
-                    <input
-                      type="textarea"
-                      className="textarea"
-                      id="exampleInputEmail1"
+                    <TextareaAutosize
+                      maxRows={4}
+                      aria-label="maximum height"
                       name="message"
+                      className='textarea'
                       onChange={this.handleInput}
                       value={this.state.message}
                       placeholder="Your Message :"

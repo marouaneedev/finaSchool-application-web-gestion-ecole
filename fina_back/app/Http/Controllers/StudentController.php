@@ -10,7 +10,7 @@ class StudentController extends Controller
 
     public function index()
     {
-        $student = Student::all();
+        $student = Student::with('revenus')->withSum('revenus as payrollAmount2','montantPaye')->get();
         return $student;
     }
 
@@ -41,6 +41,20 @@ class StudentController extends Controller
         return $student;
     }
 
+
+
+    public function storeWithRevenus(Request $request)
+    {
+        $student = new Student();
+        $student-> fullName = $request-> fullName;
+
+        $student-> totatAmount = $request-> totatAmount;
+        $student-> payrollAmount = $request-> payrollAmount;
+        $student-> typePayment = $request-> typePayment;
+
+        $student-> save();
+        return $student;
+    }
 
     public function show($id)
     {

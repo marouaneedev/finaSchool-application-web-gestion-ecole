@@ -10,4 +10,10 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = ['fullName', 'gender', 'dateOfBirthday', 'cin', 'address', 'phoneNumber', 'email', 'formation', 'yearOfFormation', 'totatAmount', 'payrollAmount', 'typePayment'];
+
+    public function revenus()
+    {
+        return $this->hasMany(Revenu::class);
+    }
+
 }

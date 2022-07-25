@@ -4,6 +4,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\InscreptionController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RevenuController;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,12 @@ Route::controller(MessageController::class)->group(function(){
     Route::get('/message/{id}', 'show');
     Route::put('/message/{id}', 'update');
     Route::delete('/message/{id}', 'destroy');
+});
+
+Route::controller(RevenuController::class)->group(function(){
+    Route::get('/revenus', 'index');
+    Route::post('/revenu', 'store');
+    Route::get('/revenu/{id}', 'show');
+    Route::put('/revenu/{id}', 'update');
+    Route::delete('/revenu/{id}', 'destroy');
 });

@@ -1,5 +1,9 @@
 import React from "react";
 import Button from '@mui/material/Button';
+import AddDialogRevenu from './addDialogRevenu/AddDialogRevenu'
+import { useState, useEffect } from "react"
+import axios from 'axios'
+
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -28,36 +32,31 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TablePagination from '@mui/material/TablePagination';
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
+import { red } from '@mui/material/colors';
+import './revenu.css'
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
-/* ------- table ------- */
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
-}
+const endPoint = 'http://localhost:8000/api'
 
+
+
+
+/* ------- table ------- */
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+
+  /*  delet revenu row  */
+  const deletRevenu = async (id) => {
+    console.log("delete revenue")
+    await axios.delete(`${endPoint}/revenu/${id}`).then((response) => {
+      this.getAllStudents()
+    })
+  }
+  /*  end delet revenu row  */
+
 
   return (
     <React.Fragment>
@@ -71,13 +70,11 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
-        </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell component="th" scope="row"> {row.fullName} </TableCell>
+        <TableCell align="right">{row.totatAmount}</TableCell>
+        <TableCell align="right">{row.payrollAmount2 ? row.payrollAmount2 : 0}</TableCell>
+        <TableCell align="right">{row.totatAmount - row.payrollAmount2}</TableCell>
+        <TableCell align="right">{row.totatAmount - row.payrollAmount2 === 0 ? <PriceCheckIcon fontSize="large" color="success" /> : <PriceCheckIcon fontSize="large" sx={{ color: red['A700'] }} />} </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -87,29 +84,27 @@ function Row(props) {
                 History
               </Typography>
               <Table size="small" aria-label="purchases">
-                <TableHead>
+                <TableHead className="bg_table_head">
                   <TableRow>
                     <TableCell>Date</TableCell>
-                    <TableCell>Montant</TableCell>
-                    <TableCell align="right">Année Scolaire</TableCell>
+                    <TableCell>Année Scolaire</TableCell>
+                    <TableCell align="right">Montant</TableCell>
                     <TableCell align="right">Type Paiment</TableCell>
                     <TableCell align="right" >Action</TableCell>
-
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
+
+                <TableBody className="bg_table_body">
+                  {row.revenus.map((historyRow) => (
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {historyRow.created_at}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
+                      <TableCell>{historyRow.anneeScolaire}</TableCell>
+                      <TableCell align="right">{historyRow.montantPaye}</TableCell>
+                      <TableCell align="right">{historyRow.typePaiment}</TableCell>
                       <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                      <TableCell>
-                         <DeleteIcon />
+                        <IconButton aria-label="delete" onClick={() => deletRevenu(historyRow.id)} > <DeleteIcon /> </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -125,37 +120,53 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
+    fullName: PropTypes.number.isRequired,
+    totatAmount: PropTypes.number.isRequired,
+    payrollAmount: PropTypes.number.isRequired,
+    revenus: PropTypes.arrayOf(
       PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        montantPaye: PropTypes.number.isRequired,
+        studentId: PropTypes.string.isRequired,
+        typePaiment: PropTypes.string.isRequired,
+        anneeScolaire: PropTypes.string.isRequired,
       }),
     ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
+    // name: PropTypes.string.isRequired,
+    // price: PropTypes.number.isRequired,
+    // protein: PropTypes.number.isRequired,
   }).isRequired,
 };
-
-const rows = [
-  createData('said', 159, 6.0, 24, 4.0, 3.99),
-  createData('samir', 237, 9.0, 37, 4.3, 4.99),
-  createData('leila', 262, 16.0, 24, 6.0, 3.79),
-  createData('farid', 305, 3.7, 67, 4.3, 2.5),
-  createData('lamia', 356, 16.0, 49, 3.9, 1.5),
-  createData('khadija', 356, 16.0, 49, 3.9, 1.5),
-  createData('samira', 356, 16.0, 49, 3.9, 1.5),
-  createData('farida', 356, 16.0, 49, 3.9, 1.5),
-];
 /* ------- table ------- */
 
-function Revenu() {
-  const [value, setValue] = React.useState([null, null]);
 
+/* ------------------------------------------- Function ------------------------------------------ */
+/* ------------------------------------------- Function ------------------------------------------ */
+function Revenu() {
+  /* ------------------------------------------- Function ------------------------------------------ */
+  /* ------------------------------------------- Function ------------------------------------------ */
+
+
+  let [students, setStudents] = useState([])
+  let [filtredStudents, setFiltredStudents] = useState([])
+  let [selectedAnnee, setSelectedAnnee] = useState('')
+  let [selectedStudentId, setSelectedStudentId] = useState('')
+
+  useEffect(() => {
+    getAllStudents()
+  }, [])
+
+  const getAllStudents = async () => {
+    const response = await axios.get(`${endPoint}/students`)
+    setStudents(response.data)
+    setFiltredStudents(response.data)
+    console.log(response.data)
+    // setValue([...rows, createData('said', 159, 6.0, 24, 4.0, 3.99)])
+  }
+
+
+
+
+  const [value, setValue] = React.useState([null, null]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const handleChangePage = (event, newPage) => {
@@ -166,6 +177,88 @@ function Revenu() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  /* --------- Dialog --------- */
+  let [, setFiltredRevenu] = useState([])
+  let [revenus,] = useState([])
+
+  const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
+  const [revenuId, setRevenuId] = React.useState(null);
+
+
+  const openAddDialog = (revenuId) => {
+    setAddDialogIsOpen(true);
+    setRevenuId(revenuId)
+  };
+
+  const closeAddDialog = () => {
+    setAddDialogIsOpen(false);
+  };
+
+  const newEmployee = (employee) => {
+    setFiltredRevenu([...revenus, employee]);
+  };
+
+  const updatedEmployee = (employee) => {
+    let updateStudent = [...revenus]
+    const index = revenus.findIndex(data => data.id === employee.id)
+    updateStudent[index] = employee;
+    setFiltredRevenu(updateStudent);
+  };
+
+
+  /* --------- end Dialog --------- */
+
+  /* --------- start Filtrage ----------- */
+  const selectedStudent = (event) => {
+    setSelectedStudentId(event.target.value);
+    filterTable(event.target.value, selectedAnnee)
+  };
+
+  const selectedAnne = (event) => {
+    setSelectedAnnee(event.target.value);
+    filterTable(selectedStudentId ,event.target.value)
+  };
+
+  const filterTable = (studentId, year) => {
+    if (studentId !== '' && year === '') {
+      if (studentId === 'Tout') {
+        setFiltredStudents(students)
+      } else {
+        let newStud = students.filter(student => student.id === studentId)
+        setFiltredStudents(newStud)
+      }
+    } else if (studentId === '' && year !== '') {
+      if (year === 'Tout') {
+        setFiltredStudents(students)
+      } else {
+        let newStud = students.map(student => {
+          student.revenus = student.revenus.filter(revenu => revenu.anneeScolaire === year)
+          return student;
+        })
+        setFiltredStudents(newStud)
+      }
+    } else if (studentId !== '' && year !== '') {
+      if (year === 'Tout' && studentId === 'Tout') {
+        setFiltredStudents(students)
+      }
+      else if (year === 'Tout' && studentId !== 'Tout') {
+        let newStud = students.filter(student => student.id === studentId)
+        setFiltredStudents(newStud)
+      }
+      else if (year !== 'Tout' && studentId === 'Tout') {
+        let newStud = students.filter(student => student.yearOfFormation === year)
+        setFiltredStudents(newStud)
+      } else {
+        let newStud = students.filter(student => student.yearOfFormation === year && student.id === studentId)
+        setFiltredStudents(newStud)
+      }
+    }
+  }
+  /* --------- end Filtrage ----------- */
+
+
+
 
   return (
     <div>
@@ -184,13 +277,13 @@ function Revenu() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"yearOfFormation"}
-                  label="Année"
-                  onChange={"selectedYear"}
+                  value={selectedStudentId}
+                  onChange={selectedStudent}
                 >
-                  <MenuItem value="tout">Tout</MenuItem>
-                  <MenuItem value="1 année">1annee</MenuItem>
-                  <MenuItem value="2 année">2annee</MenuItem>
+                  <MenuItem value='Tout'>Tout</MenuItem>
+                  {students.map(function (student, i) {
+                    return <MenuItem key={i} value={student.id}>{student.fullName}</MenuItem>
+                  })}
                 </Select>
               </FormControl>
             </Box>
@@ -202,18 +295,19 @@ function Revenu() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={"formation"}
-                  label="formation"
-                  onChange={"selectedFormation"}
+                  value={selectedAnnee}
+                  label="Année"
+                  onChange={selectedAnne}
                 >
-                  <MenuItem value='tout'>Tout</MenuItem>
-                  <MenuItem value='Dev'>1 année</MenuItem>
-                  <MenuItem value='Design'>2 année</MenuItem>
+                  <MenuItem value='Tout'>Tout</MenuItem>
+                  <MenuItem value='1 année'>1 année</MenuItem>
+                  <MenuItem value='2 année'>2 année</MenuItem>
                 </Select>
               </FormControl>
             </Box>
-
-            {/* date */}
+          </div>
+          {/* date */}
+          <div className="datee">
             <Stack spacing={3}>
               <LocalizationProvider
                 dateAdapter={AdapterDateFns}
@@ -242,7 +336,7 @@ function Revenu() {
           </div>
           {/* button */}
           <div className="add">
-            <Button variant="outlined" /* onClick={() => openAddDialog(null)} */ >ajouter un Revenu</Button>
+            <Button variant="outlined" onClick={() => openAddDialog(null)} >ajouter un Revenu</Button>
           </div>
         </div>
         {/* -------------end barFiltrage-------------- */}
@@ -261,7 +355,7 @@ function Revenu() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {filtredStudents
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <Row key={row.name} row={row} />
@@ -272,13 +366,17 @@ function Revenu() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
-          count={rows.length}
+          count={filtredStudents.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
         {/* -------------end table-------------- */}
+
+        {/* -------------start dialog-------------- */}
+        <AddDialogRevenu employeeId={revenuId} open={addDialogIsOpen} onClose={closeAddDialog} newStudent={newEmployee} updatedStudent={updatedEmployee} />
+        {/* -------------start dialog-------------- */}
 
       </div>
     </div >

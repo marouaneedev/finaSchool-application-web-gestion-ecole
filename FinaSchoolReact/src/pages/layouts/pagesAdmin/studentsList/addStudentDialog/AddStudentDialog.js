@@ -12,6 +12,9 @@ import Button from '@mui/material/Button';
 import axios from 'axios'
 import "./AddStudentDialog"
 
+// import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
+
 
 
 
@@ -19,6 +22,9 @@ const endPoint = 'http://localhost:8000/api/student'
 
 const BootstrapDialogTitle = (props) => {
     const { children, onClose, ...other } = props;
+
+
+
 
     return (
         <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -83,8 +89,8 @@ export default function AddStudentDialog(props) {
     }
 
     const store = async () => {
-        await axios.post(endPoint, {fullName:fullName, gender:gender, dateOfBirthday:dateOfBirthday, cin:cin, address:address, phoneNumber:phoneNumber, email:email, formation:formation, yearOfFormation:yearOfFormation, totatAmount:totatAmount, payrollAmount:payrollAmount, typePayment:typePayment}).then((response) => {
-            if(response.status === 201){
+        await axios.post(endPoint, { fullName: fullName, gender: gender, dateOfBirthday: dateOfBirthday, cin: cin, address: address, phoneNumber: phoneNumber, email: email, formation: formation, yearOfFormation: yearOfFormation, totatAmount: totatAmount, payrollAmount: payrollAmount, typePayment: typePayment }).then((response) => {
+            if (response.status === 201) {
                 newStudent(response.data);
                 closeDialog();
                 clearFrom();
@@ -93,8 +99,8 @@ export default function AddStudentDialog(props) {
     }
 
     const update = async () => {
-        await axios.put(`${endPoint}/${studentId}`, {fullName:fullName, gender:gender, dateOfBirthday:dateOfBirthday, cin:cin, address:address, phoneNumber:phoneNumber, email:email, formation:formation, yearOfFormation:yearOfFormation, totatAmount:totatAmount, payrollAmount:payrollAmount, typePayment:typePayment}).then((response) => {
-            if(response.status === 200){
+        await axios.put(`${endPoint}/${studentId}`, { fullName: fullName, gender: gender, dateOfBirthday: dateOfBirthday, cin: cin, address: address, phoneNumber: phoneNumber, email: email, formation: formation, yearOfFormation: yearOfFormation, totatAmount: totatAmount, payrollAmount: payrollAmount, typePayment: typePayment }).then((response) => {
+            if (response.status === 200) {
                 updatedStudent(response.data)
                 closeDialog();
                 clearFrom();
@@ -121,24 +127,39 @@ export default function AddStudentDialog(props) {
     }
 
     /** Update */
-    React.useEffect(()=>{
-        if(open && studentId){
+    React.useEffect(() => {
+        if (open && studentId) {
             getStudentById(studentId);
         }
-    },[open, studentId])
+    }, [open, studentId])
 
     return (
         <Dialog
+            fullWidth
+            maxWidth="sm"
             open={open}
             onClose={onClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
             <BootstrapDialogTitle id="customized-dialog-title" onClose={closeDialog}>
-                XXXXXXXX
+                Ajouter un Etudiant :
             </BootstrapDialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
+                    {/* <div className="mb-3">
+                        <Box
+                            component="form"
+                            sx={{
+                                '& > :not(style)': { m: 1, width: "100%" },
+                            }}
+                            noValidate
+                            autoComplete="off"
+                            onChange={(e) => setfullName(e.target.value)}
+                        >
+                            <TextField value={fullName}  type='text' id="outlined-basic" label="Nom et Prenom" variant="outlined" />
+                        </Box>
+                    </div> */}
                     <div className="mb-3">
                         <label className="form-label">Nom et Prenom</label>
                         <input value={fullName} onChange={(e) => setfullName(e.target.value)} type='text' className="form-control" />
@@ -202,10 +223,10 @@ export default function AddStudentDialog(props) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-            {!studentId
-                ?<Button onClick={store} type="submit" className="btn btn-primary"> Ajouter </Button>
-                :<Button onClick={update} type="submit" className="btn btn-primary"> Modifier </Button>
-            }
+                {!studentId
+                    ? <Button onClick={store} type="submit" className="btn btn-primary"> Ajouter </Button>
+                    : <Button onClick={update} type="submit" className="btn btn-primary"> Modifier </Button>
+                }
             </DialogActions>
         </Dialog>
     )
