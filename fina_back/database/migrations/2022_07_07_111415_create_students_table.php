@@ -20,13 +20,11 @@ return new class extends Migration
             $table->date('dateOfBirthday');
             $table->string('cin');
             $table->text('address');
-            $table->integer('phoneNumber');
+            $table->text('phoneNumber');
             $table->string('email');
             $table->string('formation');
             $table->string('yearOfFormation');
             $table->integer('totatAmount');
-            $table->integer('payrollAmount');
-            $table->string('typePayment');
             $table->timestamps();
         });
     }

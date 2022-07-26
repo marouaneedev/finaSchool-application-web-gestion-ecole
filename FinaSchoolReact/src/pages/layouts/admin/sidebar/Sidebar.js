@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./sidebar.css";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupIcon from '@mui/icons-material/Group';
@@ -14,42 +14,42 @@ function Sidebar() {
     <div className="sidebarr">
       <br/>
       <nav
-        className="sb-sidenav accordion sb-sidenav-dark"
+        className="sb-sidenav accordion sb-sidenav-light"
         id="sidenavAccordion"
       >
         <div className="sb-sidenav-menu">
           <div className="nav">
-            <Link className="nav-link" to="dashboard">
+            <NavLink className="nav-link" to="dashboard">
               <div className="sb-nav-link-icon">
-                <DashboardIcon/>
+                <DashboardIcon className="iconn"/>
               </div>
-              Dashboard
-            </Link>
+              <span className="linkk">Dashboard</span>
+            </NavLink>
 
-            <Link className="nav-link" to="students">
+            <NavLink className="nav-link" to="students">
               <div className="sb-nav-link-icon">
-                <GroupsIcon/>
+                <GroupsIcon className="iconn"/>
               </div>
-              Étudiants 
-            </Link>
+              <span className="linkk">Étudiants </span>
+            </NavLink>
 
-            <Link className="nav-link" to="salaries">
+            <NavLink className="nav-link" to="salaries">
               <div className="sb-nav-link-icon">
-                <GroupIcon/>
+                <GroupIcon className="iconn"/>
               </div>
-              Salariés 
-            </Link>
+              <span className="linkk">Salariés </span>
+            </NavLink>
 
 
-            <Link className="nav-link" to="widget">
+            <NavLink className="nav-link" to="widget">
               <div className="sb-nav-link-icon">
-                <AddCircleOutlineIcon />
+                <AddCircleOutlineIcon  className="iconn"/>
               </div>
-              Widget
-            </Link>
+              <span className="linkk">Widget</span>
+            </NavLink>
 
-            <Link
-              className="nav-link collapsed"
+            <NavLink
+              className="nav-link collapsed kkkk"
               to="#"
               data-bs-toggle="collapse"
               data-bs-target="#collapsePages"
@@ -57,13 +57,13 @@ function Sidebar() {
               aria-controls="collapsePages"
             >
               <div className="sb-nav-link-icon">
-                <MonetizationOnIcon />
+                <MonetizationOnIcon  className="iconn"/>
               </div>
-              Finance
+              <span className="linkk">Finance</span>
               <div className="sb-sidenav-collapse-arrow">
                 <i className="fas fa-angle-down" />
               </div>
-            </Link>
+            </NavLink>
             <div
               className="collapse"
               id="collapsePages"
@@ -71,44 +71,28 @@ function Sidebar() {
               data-bs-parent="#sidenavAccordion"
             >
               <nav className="sb-sidenav-menu-nested nav">
-                <Link className="nav-link" to="revenu">
-                  Revenu
-                </Link>
-                <Link className="nav-link" to="depense">
-                  Dépense
-                </Link>
+                <NavLink className="nav-link" to="revenu">
+                <span className="linkk">Revenu</span>
+                </NavLink>
+                <NavLink className="nav-link" to="depense">
+                <span className="linkk">Dépense</span>
+                </NavLink>
               </nav>
             </div>
 
-            <Link className="nav-link" to="inscription">
+            <NavLink className="nav-link" to="inscription">
               <div className="sb-nav-link-icon">
-                <SendIcon />
+                <SendIcon className="iconn"/>
               </div>
-              Pré Insciption
-            </Link>
+              <span className="linkk">Pré Insciption</span>
+            </NavLink>
 
-            <Link className="nav-link" to="messages">
+            <NavLink className="nav-link jj" to="messages">
               <div className="sb-nav-link-icon">
-                <MessageIcon/>
+                <MessageIcon className="iconn"/>
               </div>
-              Messages
-            </Link>
-
-
-
-            {/* <div className="sb-sidenav-menu-heading">Addons</div>
-            <Link className="nav-link" to="charts.html">
-              <div className="sb-nav-link-icon">
-                <i className="fas fa-chart-area" />
-              </div>
-              Charts
-            </Link>
-            <Link className="nav-link" to="tables.html">
-              <div className="sb-nav-link-icon">
-                <i className="fas fa-table" />
-              </div>
-              Tables
-            </Link> */}
+              <span className="linkk">Messages</span>
+            </NavLink>
           </div>
         </div>
       </nav>

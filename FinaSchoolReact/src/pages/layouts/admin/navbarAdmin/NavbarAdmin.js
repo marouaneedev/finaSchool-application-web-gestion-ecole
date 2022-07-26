@@ -8,7 +8,7 @@ class NavbarAdmin extends Component {
   render() {
     return (
       <div>
-        <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav className="sb-topnav navbar navbar-expand navbar-dark navv_bg">
           <Link className="navbar-brand ps-3" to="dashboard">
             <img src="/images/logo.png" className="logoImgg" alt="img" />
           </Link>

@@ -34,8 +34,6 @@ class StudentController extends Controller
         $student-> formation = $request-> formation;
         $student-> yearOfFormation = $request-> yearOfFormation;
         $student-> totatAmount = $request-> totatAmount;
-        $student-> payrollAmount = $request-> payrollAmount;
-        $student-> typePayment = $request-> typePayment;
 
         $student-> save();
         return $student;
@@ -47,10 +45,9 @@ class StudentController extends Controller
     {
         $student = new Student();
         $student-> fullName = $request-> fullName;
-
         $student-> totatAmount = $request-> totatAmount;
-        $student-> payrollAmount = $request-> payrollAmount;
-        $student-> typePayment = $request-> typePayment;
+        // $student-> payrollAmount = $request-> payrollAmount;
+        // $student-> typePayment = $request-> typePayment;
 
         $student-> save();
         return $student;
@@ -82,8 +79,6 @@ class StudentController extends Controller
         $student-> formation = $request-> formation;
         $student-> yearOfFormation = $request-> yearOfFormation;
         $student-> totatAmount = $request-> totatAmount;
-        $student-> payrollAmount = $request-> payrollAmount;
-        $student-> typePayment = $request-> typePayment;
 
         $student-> save();
         return $student;

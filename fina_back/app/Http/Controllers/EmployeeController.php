@@ -9,7 +9,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employee = Employee::all();
+        $employee = Employee::with('depenses')->withSum('depenses as payrollAmount','montantPaye')->get();
         return $employee;
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\InscreptionController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RevenuController;
+use App\Http\Controllers\DepenseController;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -56,4 +57,13 @@ Route::controller(RevenuController::class)->group(function(){
     Route::get('/revenu/{id}', 'show');
     Route::put('/revenu/{id}', 'update');
     Route::delete('/revenu/{id}', 'destroy');
+});
+
+
+Route::controller(DepenseController::class)->group(function(){
+    Route::get('/depenses', 'index');
+    Route::post('/depense', 'store');
+    Route::get('/depense/{id}', 'show');
+    Route::put('/depense/{id}', 'update');
+    Route::delete('/depense/{id}', 'destroy');
 });

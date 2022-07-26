@@ -10,7 +10,19 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react"
 import Button from '@mui/material/Button';
 import axios from 'axios'
+import * as moment from 'moment'
 import "./AddStudentDialog"
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 // import Box from '@mui/material/Box';
 // import TextField from '@mui/material/TextField';
@@ -89,7 +101,7 @@ export default function AddStudentDialog(props) {
     }
 
     const store = async () => {
-        await axios.post(endPoint, { fullName: fullName, gender: gender, dateOfBirthday: dateOfBirthday, cin: cin, address: address, phoneNumber: phoneNumber, email: email, formation: formation, yearOfFormation: yearOfFormation, totatAmount: totatAmount, payrollAmount: payrollAmount, typePayment: typePayment }).then((response) => {
+        await axios.post(endPoint, { fullName: fullName, gender: gender, dateOfBirthday: moment(dateOfBirthday).format('YYYY-MM-DD'), cin: cin, address: address, phoneNumber: phoneNumber, email: email, formation: formation, yearOfFormation: yearOfFormation, totatAmount: totatAmount, payrollAmount: payrollAmount, typePayment: typePayment }).then((response) => {
             if (response.status === 201) {
                 newStudent(response.data);
                 closeDialog();
@@ -99,7 +111,7 @@ export default function AddStudentDialog(props) {
     }
 
     const update = async () => {
-        await axios.put(`${endPoint}/${studentId}`, { fullName: fullName, gender: gender, dateOfBirthday: dateOfBirthday, cin: cin, address: address, phoneNumber: phoneNumber, email: email, formation: formation, yearOfFormation: yearOfFormation, totatAmount: totatAmount, payrollAmount: payrollAmount, typePayment: typePayment }).then((response) => {
+        await axios.put(`${endPoint}/${studentId}`, { fullName: fullName, gender: gender, dateOfBirthday: moment(dateOfBirthday).format('YYYY-MM-DD'), cin: cin, address: address, phoneNumber: phoneNumber, email: email, formation: formation, yearOfFormation: yearOfFormation, totatAmount: totatAmount, payrollAmount: payrollAmount, typePayment: typePayment }).then((response) => {
             if (response.status === 200) {
                 updatedStudent(response.data)
                 closeDialog();
@@ -143,89 +155,145 @@ export default function AddStudentDialog(props) {
             aria-describedby="alert-dialog-description"
         >
             <BootstrapDialogTitle id="customized-dialog-title" onClose={closeDialog}>
-                Ajouter un Etudiant :
+                Inscription :
             </BootstrapDialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    {/* <div className="mb-3">
+                    <div className="mb-3">
                         <Box
                             component="form"
-                            sx={{
-                                '& > :not(style)': { m: 1, width: "100%" },
-                            }}
+                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}
                             noValidate
                             autoComplete="off"
                             onChange={(e) => setfullName(e.target.value)}
                         >
-                            <TextField value={fullName}  type='text' id="outlined-basic" label="Nom et Prenom" variant="outlined" />
+                            <TextField value={fullName} id="outlined-basic" type='text' label="Nom et Prenom :" variant="outlined" />
                         </Box>
-                    </div> */}
-                    <div className="mb-3">
-                        <label className="form-label">Nom et Prenom</label>
-                        <input value={fullName} onChange={(e) => setfullName(e.target.value)} type='text' className="form-control" />
                     </div>
                     <div className="mb-3">
-                        <select value={gender} onChange={(e) => setGender(e.target.value)}>
-                            <option>Sexe</option>
-                            <option value="man">man</option>
-                            <option value="woman">woman</option>
-                        </select>
+                        <Box sx={{ '& > :not(style)': { m: 1, width: '100%' } }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Sexe :</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={gender}
+                                    label="Sexe"
+                                    onChange={(e) => setGender(e.target.value)}
+                                >
+                                    <MenuItem value="Homme">Homme</MenuItem>
+                                    <MenuItem value="Femme">Femme</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </div>
+                    <div className="mb-3 pad-date">
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                inputFormat="yyyy-MM-dd"
+                                label="Date Of Nissance :"
+                                value={dateOfBirthday}
+                                onChange={(e) => setDateOfBirthday(e)}
+                                renderInput={(params) => <TextField {...params} sx={{ width: '100%' }} />}
+                            />
+                        </LocalizationProvider>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Date Of Nissance</label>
-                        <input value={dateOfBirthday} onChange={(e) => setDateOfBirthday(e.target.value)} type='date' className="form-control" />
+                        <Box
+                            component="form"
+                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}
+                            noValidate
+                            autoComplete="off"
+                            onChange={(e) => setCin(e.target.value)}
+                        >
+                            <TextField value={cin} id="outlined-basic" type='text' label="CIN :" variant="outlined" />
+                        </Box>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">CIN</label>
-                        <input value={cin} onChange={(e) => setCin(e.target.value)} type='text' className="form-control" />
+                        <Box
+                            component="form"
+                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}
+                            noValidate
+                            autoComplete="off"
+                            onChange={(e) => setAddress(e.target.value)}
+                        >
+                            <TextField value={address} id="outlined-basic" type='text' label="Address :" variant="outlined" />
+                        </Box>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Address</label>
-                        <input value={address} onChange={(e) => setAddress(e.target.value)} type='text' className="form-control" />
+                        <Box
+                            component="form"
+                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}
+                            noValidate
+                            autoComplete="off"
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                        >
+                            <TextField value={phoneNumber} id="outlined-basic" type='text' label="Télephone :" variant="outlined" />
+                        </Box>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Télephone</label>
-                        <input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type='number' className="form-control" />
+                        <Box
+                            component="form"
+                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}
+                            noValidate
+                            autoComplete="off"
+                            onChange={(e) => setEmail(e.target.value)}
+                        >
+                            <TextField value={email} id="outlined-basic" type='email' label="Email :" variant="outlined" />
+                        </Box>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Email</label>
-                        <input value={email} onChange={(e) => setEmail(e.target.value)} type='email' className="form-control" />
+                        <Box sx={{ '& > :not(style)': { m: 1, width: '100%' } }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Formation :</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={formation}
+                                    label="Formation :"
+                                    onChange={(e) => setFormation(e.target.value)}
+                                >
+                                    <MenuItem value="Dev">Dev</MenuItem>
+                                    <MenuItem value="Design">Design</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
                     </div>
                     <div className="mb-3">
-                        <select value={formation} onChange={(e) => setFormation(e.target.value)}>
-                            <option>Formation</option>
-                            <option value="Dev">Dev</option>
-                            <option value="Design">Design</option>
-                        </select>
+                        <Box sx={{ '& > :not(style)': { m: 1, width: '100%' } }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Année Scolaire :</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={yearOfFormation}
+                                    label="Année Scolaire :"
+                                    onChange={(e) => setYearOfFormation(e.target.value)}
+                                >
+                                    <MenuItem value="1 année">1 année</MenuItem>
+                                    <MenuItem value="2 année">2 année</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
                     </div>
                     <div className="mb-3">
-                        <select value={yearOfFormation} onChange={(e) => setYearOfFormation(e.target.value)}>
-                            <option>Year Of Formation</option>
-                            <option value="1 année">1 année</option>
-                            <option value="2 année">2 année</option>
-                        </select>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">totat Amount</label>
-                        <input value={totatAmount} onChange={(e) => setTotatAmount(e.target.value)} type='number' className="form-control" />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Payroll Amount</label>
-                        <input value={payrollAmount} onChange={(e) => setPayrollAmount(e.target.value)} type='number' className="form-control" />
-                    </div>
-                    <div className="mb-3">
-                        <select value={typePayment} onChange={(e) => setTypePayment(e.target.value)}>
-                            <option>Type Payment</option>
-                            <option value="espace">espace</option>
-                            <option value="chéque">chéque</option>
-                        </select>
+                        <Box
+                            component="form"
+                            sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}
+                            noValidate
+                            label="Prix Total :"
+                            autoComplete="off"
+                            onChange={(e) => setTotatAmount(e.target.value)}
+                        >
+                            <TextField value={totatAmount} id="outlined-basic" type='text' label="Prix Total :" variant="outlined" />
+                        </Box>
                     </div>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 {!studentId
-                    ? <Button onClick={store} type="submit" className="btn btn-primary"> Ajouter </Button>
-                    : <Button onClick={update} type="submit" className="btn btn-primary"> Modifier </Button>
+                    ? <Button onClick={store} type="submit" variant="outlined"> Ajouter </Button>
+                    : <Button onClick={update} type="submit" variant="outlined"> Modifier </Button>
                 }
             </DialogActions>
         </Dialog>

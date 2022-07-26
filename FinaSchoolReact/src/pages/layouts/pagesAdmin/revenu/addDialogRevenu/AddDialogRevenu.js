@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from "react"
 import Button from '@mui/material/Button';
 import axios from 'axios'
-import "./AddDialogRevenu"
+import "./addDialogRevenu.css"
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -59,7 +59,7 @@ BootstrapDialogTitle.propTypes = {
 };
 /* -------------------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------------------- */
-export default function AjouterSalarieDialog(props) {
+export default function AddDialogRevenu(props) {
 
     /* get data student */
     let [students, setStudents] = useState([])
@@ -78,7 +78,7 @@ export default function AjouterSalarieDialog(props) {
     }
     /* get data student */
 
-    const { employeeId, open, onClose, /* updatedStudent */ } = props
+    const { employeeId, open, onClose, onUpdate } = props
 
     const closeDialog = () => {
         clearFrom();
@@ -95,7 +95,7 @@ export default function AjouterSalarieDialog(props) {
         
         await axios.post(endPointRevenu, { montantPaye: montantPaye, typePaiment: methodPaymment, anneeScolaire: selectedStudent.yearOfFormation, student_id:  selectedStudent.id}).then((response) => {
             if (response.status === 201) {
-                // newStudent(response.data);
+                onUpdate();
                 closeDialog();
                 clearFrom();
             }
@@ -128,12 +128,12 @@ export default function AjouterSalarieDialog(props) {
                 <DialogContentText id="alert-dialog-description">
                     <div className="mb-3">
                         <br />
-                        {/* <label className="form-label">Etudiant :</label> */}
                         <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }} className="mr-3">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Etudiants</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Etudiants :</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
+                                    label="Etudiants :"
                                     id="demo-simple-select"
                                     value={selectedStudent}
                                     onChange={event =>setSelectedStudent(event.target.value)}
@@ -146,42 +146,33 @@ export default function AjouterSalarieDialog(props) {
                                 </Select>
                             </FormControl>
                         </Box>
-                        {/* <input value={fullName} onChange={(e) => setfullName(e.target.value)} type='text' className="form-control" /> */}
                     </div>
-                    <div className="mb-3">
-                        {/* <label className="form-label">Sexe</label>
-                        <input value={gender} onChange={(e) => setGender(e.target.value)} type='text' className="form-control" /> */}
+
+                    <div className="mb-3 inpuuuut">
                         <label className="form-label">Année Scolaire :</label>
                         <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }}>
                             <TextField
                                 disabled
+                                label="           "
                                 id="outlined-disabled"
                                 value={selectedStudent.yearOfFormation}
                             />
                         </Box>
-                        {/* <select value={gender} onChange={(e) => setGender(e.target.value)}>
-                            <option>Sexe</option>
-                            <option value="man">man</option>
-                            <option value="woman">woman</option>
-                        </select> */}
                     </div>
-                    <div className="mb-3">
-                        {/* <label className="form-label">Date Of Nissance</label>
-                        <input value={dateOfBirthday} onChange={(e) => setDateOfBirthday(e.target.value)} type='date' className="form-control" /> */}
-                        {/* <label className="form-label">Montant Total :</label> */}
+                    <div className="mb-3 inpuuuut">
+                        <label className="form-label">Montant Total :</label>
                         <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }}>
                             <TextField
                                 disabled
+                                label="     "
                                 id="outlined-disabled"
                                 value={selectedStudent.totatAmount}
                             />
                         </Box>
 
                     </div>
-                    <div className="mb-3">
-                        {/* <label className="form-label">Date Of Nissance</label>
-                        <input value={dateOfBirthday} onChange={(e) => setDateOfBirthday(e.target.value)} type='date' className="form-control" /> */}
-                        {/* <label className="form-label">Montant Payé :</label> */}
+
+                    <div className="mb-3 inpuuuut">
                         <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }}>
                             <TextField
                                 required
@@ -192,14 +183,15 @@ export default function AjouterSalarieDialog(props) {
                             />
                         </Box>
                     </div>
+
                     <div className="mb-3">
-                        {/* <label className="form-label">Type Paiment :</label> */}
                         <Box sx={{ minWidth: 300 }} className="mr-3">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Type Paymment</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Type de Paiement :</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
+                                    label="Type de Paiement :"
                                     onChange={event => setMethodPaymment(event.target.value)}
                                 >
                                     <MenuItem value="espace">espace</MenuItem>
@@ -213,8 +205,8 @@ export default function AjouterSalarieDialog(props) {
             </DialogContent>
             <DialogActions>
                 {!employeeId
-                    ? <Button onClick={store} type="submit" className="btn btn-primary"> Ajouter </Button>
-                    : <Button onClick={update} type="submit" className="btn btn-primary"> Modifier </Button>
+                    ? <Button onClick={store} type="submit" variant="outlined"> Ajouter </Button>
+                    : <Button onClick={update} type="submit" variant="outlined"> Modifier </Button>
                 }
             </DialogActions>
         </Dialog>

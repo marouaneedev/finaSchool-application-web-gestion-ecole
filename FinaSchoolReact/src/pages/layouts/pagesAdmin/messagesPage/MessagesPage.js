@@ -58,7 +58,7 @@ function MessagesPage() {
       {/* -------------end breadcrumb-------------- */}
 
       {/* -------------start table-------------- */}
-      <div style={{ height: 400, width: '100%' }}>
+      <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
         <DataGrid
           rows={filtredMessages}
           columns={columns}

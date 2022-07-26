@@ -45,18 +45,18 @@ const endPoint = 'http://localhost:8000/api'
 
 /* ------- table ------- */
 function Row(props) {
-  const { row } = props;
+  const { row, onUpdate } = props;
   const [open, setOpen] = React.useState(false);
-
+  // 
   /*  delet revenu row  */
   const deletRevenu = async (id) => {
-    console.log("delete revenue")
     await axios.delete(`${endPoint}/revenu/${id}`).then((response) => {
-      this.getAllStudents()
+      if (response.status === 200) {
+        onUpdate()
+      }
     })
   }
   /*  end delet revenu row  */
-
 
   return (
     <React.Fragment>
@@ -71,9 +71,9 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row"> {row.fullName} </TableCell>
-        <TableCell align="right">{row.totatAmount}</TableCell>
-        <TableCell align="right">{row.payrollAmount2 ? row.payrollAmount2 : 0}</TableCell>
-        <TableCell align="right">{row.totatAmount - row.payrollAmount2}</TableCell>
+        <TableCell align="right">{row.totatAmount.toFixed(2)} DH</TableCell>
+        <TableCell align="right">{row.payrollAmount2 ? row.payrollAmount2.toFixed(2) : 0} DH</TableCell>
+        <TableCell align="right">{row.totatAmount - row.payrollAmount2} DH</TableCell>
         <TableCell align="right">{row.totatAmount - row.payrollAmount2 === 0 ? <PriceCheckIcon fontSize="large" color="success" /> : <PriceCheckIcon fontSize="large" sx={{ color: red['A700'] }} />} </TableCell>
       </TableRow>
       <TableRow>
@@ -101,7 +101,7 @@ function Row(props) {
                         {historyRow.created_at}
                       </TableCell>
                       <TableCell>{historyRow.anneeScolaire}</TableCell>
-                      <TableCell align="right">{historyRow.montantPaye}</TableCell>
+                      <TableCell align="right">{historyRow.montantPaye.toFixed(2)} DH</TableCell>
                       <TableCell align="right">{historyRow.typePaiment}</TableCell>
                       <TableCell align="right">
                         <IconButton aria-label="delete" onClick={() => deletRevenu(historyRow.id)} > <DeleteIcon /> </IconButton>
@@ -150,6 +150,8 @@ function Revenu() {
   let [filtredStudents, setFiltredStudents] = useState([])
   let [selectedAnnee, setSelectedAnnee] = useState('')
   let [selectedStudentId, setSelectedStudentId] = useState('')
+  const invoiceTotal = getTotal(filtredStudents)
+  const invoiceTotalPaye = getTotalPaye(filtredStudents)
 
   useEffect(() => {
     getAllStudents()
@@ -159,11 +161,7 @@ function Revenu() {
     const response = await axios.get(`${endPoint}/students`)
     setStudents(response.data)
     setFiltredStudents(response.data)
-    console.log(response.data)
-    // setValue([...rows, createData('said', 159, 6.0, 24, 4.0, 3.99)])
   }
-
-
 
 
   const [value, setValue] = React.useState([null, null]);
@@ -179,8 +177,6 @@ function Revenu() {
   };
 
   /* --------- Dialog --------- */
-  let [, setFiltredRevenu] = useState([])
-  let [revenus,] = useState([])
 
   const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
   const [revenuId, setRevenuId] = React.useState(null);
@@ -194,20 +190,17 @@ function Revenu() {
   const closeAddDialog = () => {
     setAddDialogIsOpen(false);
   };
-
-  const newEmployee = (employee) => {
-    setFiltredRevenu([...revenus, employee]);
-  };
-
-  const updatedEmployee = (employee) => {
-    let updateStudent = [...revenus]
-    const index = revenus.findIndex(data => data.id === employee.id)
-    updateStudent[index] = employee;
-    setFiltredRevenu(updateStudent);
-  };
-
-
   /* --------- end Dialog --------- */
+
+  function getTotal(items) {
+    return items.map(({ totatAmount }) => totatAmount).reduce((sum, i) => sum + i, 0);
+  }
+
+  function getTotalPaye(items) {
+    return items.map(({ payrollAmount2 }) => payrollAmount2).reduce((sum, i) => sum + i, 0);
+  }
+
+  
 
   /* --------- start Filtrage ----------- */
   const selectedStudent = (event) => {
@@ -217,7 +210,7 @@ function Revenu() {
 
   const selectedAnne = (event) => {
     setSelectedAnnee(event.target.value);
-    filterTable(selectedStudentId ,event.target.value)
+    filterTable(selectedStudentId, event.target.value)
   };
 
   const filterTable = (studentId, year) => {
@@ -271,11 +264,12 @@ function Revenu() {
         <div className="bare d-flex justify-content-between">
           <div className="filter d-flex">
             {/* select */}
-            <Box sx={{ minWidth: 120 }} className="mr-3">
+            <Box sx={{ minWidth: 200 }} className="mr-3">
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Etudiants</InputLabel>
+                <InputLabel id="demo-simple-select-label">Etudiants :</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
+                  label="Etudiants :"
                   id="demo-simple-select"
                   value={selectedStudentId}
                   onChange={selectedStudent}
@@ -291,12 +285,12 @@ function Revenu() {
             {/* select */}
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Année</InputLabel>
+                <InputLabel id="demo-simple-select-label">Année :</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
+                  label="Année :"
                   id="demo-simple-select"
                   value={selectedAnnee}
-                  label="Année"
                   onChange={selectedAnne}
                 >
                   <MenuItem value='Tout'>Tout</MenuItem>
@@ -345,7 +339,7 @@ function Revenu() {
         <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
             <TableHead>
-              <TableRow>
+              <TableRow className="bg_revenuheader">
                 <TableCell />
                 <TableCell>Nom et Prenom</TableCell>
                 <TableCell align="right">Prix Total</TableCell>
@@ -358,8 +352,20 @@ function Revenu() {
               {filtredStudents
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
-                  <Row key={row.name} row={row} />
+                  <Row key={row.name} row={row} onUpdate={getAllStudents} />
                 ))}
+              <TableRow className="bg_revenufooter">
+                <TableCell rowSpan={2} />
+                <TableCell rowSpan={2} />
+                <TableCell rowSpan={2} />
+                <TableCell colSpan={2}>Total</TableCell>
+                <TableCell align="right">{invoiceTotal > 0 ? invoiceTotal.toFixed(2) : 0} DH</TableCell>
+              </TableRow>
+              <TableRow className="bg_revenufooter">
+                <TableCell>Total Payé</TableCell>
+                <TableCell align="right">{`${((invoiceTotalPaye * 100) / invoiceTotal).toFixed(2)} %`}</TableCell>
+                <TableCell align="right">{invoiceTotalPaye > 0 ? invoiceTotalPaye.toFixed(2) : 0} DH</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -375,7 +381,7 @@ function Revenu() {
         {/* -------------end table-------------- */}
 
         {/* -------------start dialog-------------- */}
-        <AddDialogRevenu employeeId={revenuId} open={addDialogIsOpen} onClose={closeAddDialog} newStudent={newEmployee} updatedStudent={updatedEmployee} />
+        <AddDialogRevenu employeeId={revenuId} open={addDialogIsOpen} onClose={closeAddDialog} onUpdate={getAllStudents} />
         {/* -------------start dialog-------------- */}
 
       </div>

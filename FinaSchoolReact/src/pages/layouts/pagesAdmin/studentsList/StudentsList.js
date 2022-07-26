@@ -31,8 +31,8 @@ export default function StudentsList() {
     {
       field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
         return [
-          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon /> </IconButton>,
-          <IconButton aria-label="delete" onClick={() => deletStudents(params.row.id)}> <DeleteIcon /> </IconButton>
+          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon className="color_icon"/> </IconButton>,
+          <IconButton aria-label="delete" onClick={() => deletStudents(params.row.id)}> <DeleteIcon className="color_icon"/> </IconButton>
         ]
       }
     },
@@ -147,12 +147,12 @@ export default function StudentsList() {
           <div className="filter d-flex">
             <Box sx={{ minWidth: 120 }} className="mr-3">
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Année</InputLabel>
+                <InputLabel id="demo-simple-select-label">Année :</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={yearOfFormation}
-                  label="Année"
+                  label="Année :"
                   onChange={selectedYear}
                 >
                   <MenuItem value="Tout">Tout</MenuItem>
@@ -162,14 +162,14 @@ export default function StudentsList() {
               </FormControl>
             </Box>
 
-            <Box sx={{ minWidth: 120 }}>
+            <Box sx={{ minWidth: 130 }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Formation</InputLabel>
+                <InputLabel id="demo-simple-select-label">Formation :</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={formation}
-                  label="formation"
+                  label="formation :"
                   onChange={selectedFormation}
                 >
                   <MenuItem value='Tout'>Tout</MenuItem>
@@ -187,7 +187,7 @@ export default function StudentsList() {
         {/* -------------end barFiltrage-------------- */}
         <br />
         {/* -------------start table-------------- */}
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
           <DataGrid
             rows={filtredStudents}
             columns={columns}

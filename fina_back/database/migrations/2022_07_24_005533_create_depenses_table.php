@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('depenses', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->double('montantPaye');
+            $table->string('typePaiment');
+            $table->bigInteger('employee_id')->unsigned()->index()->nullable();
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->timestamps();
         });
     }

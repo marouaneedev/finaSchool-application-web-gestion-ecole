@@ -7,7 +7,7 @@
 }
 
 .loginn {
-    background: #6AC9DC;
+    background: #4a79cf;
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -47,7 +47,7 @@
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #6AC9DC;
+    background: #4a79cf;
     width: 100%;
     border: 0;
     padding: 15px;
@@ -61,17 +61,17 @@
 .loginn .form button:hover,
 .loginn .form button:active,
 .loginn .form button:focus {
-    background: #3ca8bd;
+    background: #2c61c5;
 }
 
 .loginn .form .message {
     margin: 15px 0 0;
-    color: #b3b3b3;
+    color: #2c61c5;
     font-size: 12px;
 }
 
 .loginn .form .message a {
-    color: #3ca8bd;
+    color: #3b63ac;
     text-decoration: none;
 }
 

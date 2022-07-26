@@ -14,7 +14,8 @@ class DepenseController extends Controller
      */
     public function index()
     {
-        //
+        $depense = Depense::all();
+        return $depense;
     }
 
     /**
@@ -35,7 +36,13 @@ class DepenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $depense = new Depense();
+        $depense-> montantPaye = $request-> montantPaye;
+        $depense-> typePaiment = $request-> typePaiment;
+        $depense-> employee_id = $request-> employee_id;
+
+        $depense-> save();
+        return $depense;
     }
 
     /**
@@ -44,9 +51,10 @@ class DepenseController extends Controller
      * @param  \App\Models\Depense  $depense
      * @return \Illuminate\Http\Response
      */
-    public function show(Depense $depense)
+    public function show($id)
     {
-        //
+        $depense = Depense::find($id);
+        return $depense;
     }
 
     /**
@@ -67,9 +75,14 @@ class DepenseController extends Controller
      * @param  \App\Models\Depense  $depense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Depense $depense)
+    public function update(Request $request, $id)
     {
-        //
+        $depense = Depense::findOrFail($request-> id);
+        $depense-> montantPaye = $request-> montantPaye;
+        $depense-> typePaiment = $request-> typePaiment;
+
+        $depense-> save();
+        return $depense;
     }
 
     /**
@@ -78,8 +91,9 @@ class DepenseController extends Controller
      * @param  \App\Models\Depense  $depense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Depense $depense)
+    public function destroy($id)
     {
-        //
+        $depense = Depense::destroy($id);
+        return $depense;
     }
 }

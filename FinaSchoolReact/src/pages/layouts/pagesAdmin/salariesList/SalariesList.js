@@ -125,12 +125,12 @@ export default function SalariesList() {
           <div className="filter d-flex">
             <Box sx={{ minWidth: 160 }} className="mr-3">
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Type de Salarié</InputLabel>
+                <InputLabel id="demo-simple-select-label">Type de Salarié :</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
+                  label="Type de Salarié :"
                   id="demo-simple-select"
                   value={typeEmployee}
-                  label="TypeSalarie"
                   onChange={selectedTypeEmployee}
                 >
                   <MenuItem value="Tout">Tout</MenuItem>
@@ -150,7 +150,7 @@ export default function SalariesList() {
         {/* -------------end barFiltrage-------------- */}
         <br />
         {/* -------------start table-------------- */}
-        <div style={{ height: 400, width: '100%', background: "#E3F0FC" }}>
+        <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
           <DataGrid
             rows={filtredEmployees}
             columns={columns}

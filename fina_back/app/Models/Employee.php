@@ -11,4 +11,8 @@ class Employee extends Model
 
     protected $fillable = ['fullName', 'gender', 'dateOfBirthday', 'cin', 'address', 'phoneNumber', 'email', 'typeEmployee', 'typeWork'];
 
+    public function depenses()
+    {
+        return $this->hasMany(Depense::class);
+    }
 }

@@ -14,7 +14,7 @@ class Login extends Component {
               <input type="password" placeholder="password" />
               <button>login</button>
               <p className="message">
-                Not registered? <a href="fdf">Forget My Password?</a>
+                <a href="fdf">Forget My Password?</a>
               </p>
             </form>
           </div>

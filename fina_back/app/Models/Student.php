@@ -9,7 +9,7 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fullName', 'gender', 'dateOfBirthday', 'cin', 'address', 'phoneNumber', 'email', 'formation', 'yearOfFormation', 'totatAmount', 'payrollAmount', 'typePayment'];
+    protected $fillable = ['fullName', 'gender', 'dateOfBirthday', 'cin', 'address', 'phoneNumber', 'email', 'formation', 'yearOfFormation', 'totatAmount'];
 
     public function revenus()
     {

@@ -1,12 +1,24 @@
 .sidebarr {
     height: 100vh;
-    background-color: blue;
 }
 
-/* .sb-color {
-    background-color: #0088FE;
-}
-
-.link-color{
+.sidebarr .iconn{
     color: #fff !important;
-} */
+} 
+
+.sidebarr .sb-sidenav-light{
+    background-color: #0F153B !important;
+}
+
+.sidebarr .linkk{
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebarr a.active{
+    background-color: #4A79CF;
+}
+
+.sidebarr .kkkk{
+    background-color: #0F153B !important;
+}
