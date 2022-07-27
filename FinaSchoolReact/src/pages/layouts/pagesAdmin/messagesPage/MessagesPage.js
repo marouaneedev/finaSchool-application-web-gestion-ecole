@@ -12,6 +12,8 @@ const endPoint = 'http://localhost:8000/api'
 
 function MessagesPage() {
 
+  const [pageSize, setPageSize] = React.useState(5);
+
   const columns = [
 
     { field: 'email', headerName: 'Email', width: 150 },
@@ -65,10 +67,13 @@ function MessagesPage() {
       {/* -------------start table-------------- */}
       <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
         <DataGrid
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[5, 10, 25]}
           rows={filtredMessages}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pagination
+          {...filtredMessages}
 
         />
       </div>

@@ -46,6 +46,7 @@ export default function SalariesList() {
   }
   /* end delet row Employee */
 
+  const [pageSize, setPageSize] = React.useState(5);
 
   /*----- table header -----*/
   const columns = [
@@ -61,28 +62,28 @@ export default function SalariesList() {
     {
       field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
         return [
-          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon className="color_icon"/> </IconButton>,
-          <IconButton aria-label="delete" onClick={() => deletEmployee(params.row.id)}> <DeleteIcon className="color_icon"/> </IconButton>
+          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon className="color_icon" /> </IconButton>,
+          <IconButton aria-label="delete" onClick={() => deletEmployee(params.row.id)}> <DeleteIcon className="color_icon" /> </IconButton>
         ]
       }
     },
   ];
   /*----- end table header -----*/
 
-   /* --------- Dialog --------- */
-   const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
-   const [employeeId, setEmployeeId] = React.useState(null);
- 
-   const openAddDialog = (studentId) => {
-     setAddDialogIsOpen(true);
-     setEmployeeId(studentId)
-   };
- 
-   const closeAddDialog = () => {
-     setAddDialogIsOpen(false);
-   };
+  /* --------- Dialog --------- */
+  const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
+  const [employeeId, setEmployeeId] = React.useState(null);
 
-   const newEmployee = (employee) => {
+  const openAddDialog = (studentId) => {
+    setAddDialogIsOpen(true);
+    setEmployeeId(studentId)
+  };
+
+  const closeAddDialog = () => {
+    setAddDialogIsOpen(false);
+  };
+
+  const newEmployee = (employee) => {
     setFiltredEmployees([...employees, employee]);
   };
 
@@ -92,25 +93,25 @@ export default function SalariesList() {
     updateEmployee[index] = employee;
     setFiltredEmployees(updateEmployee);
   };
-   /* --------- end Dialog --------- */
+  /* --------- end Dialog --------- */
 
-   /* --------- Filtrage --------- */
+  /* --------- Filtrage --------- */
   const [typeEmployee, setTypeEmployee] = useState('')
 
-   const selectedTypeEmployee = (event) => {
+  const selectedTypeEmployee = (event) => {
     setTypeEmployee(event.target.value);
     filterTable(event.target.value)
   };
 
   const filterTable = (type) => {
-    if(type === 'Tout') {
+    if (type === 'Tout') {
       setFiltredEmployees(employees)
     } else {
       let newEmpl = employees.filter(employee => employee.typeEmployee === type)
       setFiltredEmployees(newEmpl)
     }
   }
-   /* --------- End Filtrage --------- */
+  /* --------- End Filtrage --------- */
 
 
 
@@ -152,10 +153,13 @@ export default function SalariesList() {
         {/* -------------start table-------------- */}
         <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
           <DataGrid
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[5, 10, 25]}
             rows={filtredEmployees}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            pagination
+            {...filtredEmployees}
           />
         </div>
         {/* -------------start table-------------- */}

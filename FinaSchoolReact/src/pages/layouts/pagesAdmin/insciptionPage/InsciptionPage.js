@@ -11,6 +11,8 @@ const endPoint = 'http://localhost:8000/api'
 
 export default function InsciptionPage() {
 
+  const [pageSize, setPageSize] = React.useState(5);
+
   const columns = [
     { field: 'email', headerName: 'Email Adress', width: 250 },
     { field: 'firstName', headerName: 'First Name', width: 150 },
@@ -62,10 +64,13 @@ const deletInscreption = async (id) => {
       {/* -------------start table-------------- */}
       <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
         <DataGrid
+          pageSize={pageSize}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[5, 10, 25]}
           rows={filtredInscreptions}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pagination
+          {...filtredInscreptions}
         />
       </div>
       {/* -------------end table-------------- */}

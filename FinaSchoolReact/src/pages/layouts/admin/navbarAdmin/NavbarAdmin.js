@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../../../assets/admin/js/scripts";
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 import './NavbarAdmin.css'
 
 class NavbarAdmin extends Component {
@@ -58,12 +60,7 @@ class NavbarAdmin extends Component {
               >
                 <li>
                   <Link className="dropdown-item" to="setting">
-                    Settings
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="">
-                    Activity Log
+                    <SettingsIcon/> Settings
                   </Link>
                 </li>
                 <li>
@@ -71,7 +68,7 @@ class NavbarAdmin extends Component {
                 </li>
                 <li>
                   <Link className="dropdown-item" to="">
-                    Logout
+                    <LogoutIcon/> Logout
                   </Link>
                 </li>
               </ul>

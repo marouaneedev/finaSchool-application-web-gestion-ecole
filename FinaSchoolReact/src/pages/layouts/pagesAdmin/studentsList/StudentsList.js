@@ -17,7 +17,9 @@ import Select from '@mui/material/Select';
 const endPoint = 'http://localhost:8000/api'
 
 export default function StudentsList() {
-  /* with laravel */
+
+  const [pageSize, setPageSize] = React.useState(5);
+
   const columns = [
     { field: 'fullName', headerName: 'Nom et Prénom', width: 150 },
     { field: 'gender', headerName: 'Sexe', width: 100 },
@@ -31,8 +33,8 @@ export default function StudentsList() {
     {
       field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
         return [
-          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon className="color_icon"/> </IconButton>,
-          <IconButton aria-label="delete" onClick={() => deletStudents(params.row.id)}> <DeleteIcon className="color_icon"/> </IconButton>
+          <IconButton aria-label="update" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon className="color_icon" /> </IconButton>,
+          <IconButton aria-label="delete" onClick={() => deletStudents(params.row.id)}> <DeleteIcon className="color_icon" /> </IconButton>
         ]
       }
     },
@@ -190,10 +192,13 @@ export default function StudentsList() {
         {/* -------------start table-------------- */}
         <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
           <DataGrid
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[5, 10, 25]}
             rows={filtredStudents}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            pagination
+            {...filtredStudents}
           />
         </div>
         {/* -------------start table-------------- */}

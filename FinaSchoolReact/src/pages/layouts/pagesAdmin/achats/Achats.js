@@ -2,12 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react"
 import axios from 'axios'
 // import { TableContainer, TablePagination, Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import DialogAchat from './dialogAchat/DialogAchat'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import { CustomFooterTotalComponent } from "./CustomFooter"
+
 
 
 const endPoint = 'http://localhost:8000/api'
@@ -15,6 +17,13 @@ const endPoint = 'http://localhost:8000/api'
 
 export default function Achats() {
 
+    const [pageSize, setPageSize] = React.useState(5);
+    let [filtredAchats, setFiltredAchats] = useState([])
+    let [achats,] = useState([])
+    const [total, setTotal] = React.useState(0);
+
+
+    /* ----------columns---------- */
     const columns = [
         { field: 'idArticle', headerName: 'ID Article', width: 120 },
         { field: 'nomArticle', headerName: 'Nom Article', width: 200 },
@@ -31,12 +40,10 @@ export default function Achats() {
             }
         },
     ];
-
-    /* get data */
-    let [filtredAchats, setFiltredAchats] = useState([])
-    let [achats, ] = useState([])
+    /* ----------end columns---------- */
 
 
+    /* ----------get data---------- */
     useEffect(() => {
         getAllPurchases()
     }, [])
@@ -45,7 +52,7 @@ export default function Achats() {
         const response = await axios.get(`${endPoint}/achats`)
         setFiltredAchats(response.data)
     }
-    /* end get data */
+    /* ----------end get data---------- */
 
     /* --------- Dialog --------- */
     const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
@@ -62,7 +69,7 @@ export default function Achats() {
     /* --------- end Dialog --------- */
 
 
-    /* delet row inscreption */
+    /* deletRowPursh */
     const deletRowPursh = async (id) => {
         await axios.delete(`${endPoint}/achat/${id}`).then((response) => {
             if (response.status === 200) {
@@ -70,18 +77,19 @@ export default function Achats() {
             }
         })
     }
-    /* end delet row inscreption */
+    /* deletRowPursh */
 
     const newPurchase = (purch) => {
         setFiltredAchats([...achats, purch]);
-      };
+    };
 
     const updatedPurchase = (purch) => {
         let updatePurchase = [...achats]
         const index = achats.findIndex(data => data.id === purch.id)
         updatePurchase[index] = purch;
         setFiltredAchats(updatePurchase);
-      };
+    };
+
 
 
     return (
@@ -92,25 +100,53 @@ export default function Achats() {
 
             {/* -------------start header-------------- */}
             <div className="add">
-                <Button variant="outlined"   onClick={() => openAddDialog(null)}  >ajouter un Achat</Button>
+                <Button variant="outlined" onClick={() => openAddDialog(null)}  >ajouter un Achat</Button>
             </div>
-            <br/>
+            <br />
             {/* -------------start header-------------- */}
 
 
             {/* -------------start table-------------- */}
             <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
                 <DataGrid
+                    pageSize={pageSize}
+                    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                    rowsPerPageOptions={[5, 10, 25]}
                     rows={filtredAchats}
                     columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    pagination
+                    {...filtredAchats}
+                    components={{
+                        Toolbar: GridToolbar,
+                        Footer: CustomFooterTotalComponent
+                    }}
+                    componentsProps={{
+                        footer: { total }
+                    }}
+                    onStateChange={(state) => {
+                        const visibleRows = state.filter.visibleRowsLookup;
+                        let visibleItems = [];
+                        for (const [id, value] of Object.entries(visibleRows)) {
+                          if (value === true) {
+                            visibleItems.push(id);
+                          }
+                        }
+                        // console.log(visibleItems);
+                        const res = filtredAchats.filter((item) => visibleItems.includes(item.id));
+                        const total = res
+                          .map((item) => item.totalAmount)
+                          .reduce((a, b) => a + b, 0);
+                        console.log(total);
+                        setTotal(total);
+                      }}
+
                 />
+
             </div>
             {/* -------------end table-------------- */}
 
             {/* -------------start dialog-------------- */}
-            <DialogAchat  achatId={achatId}   open={addDialogIsOpen}  onClose={closeAddDialog}    newPurchase={newPurchase} updatedPurchase={updatedPurchase}    />
+            <DialogAchat achatId={achatId} open={addDialogIsOpen} onClose={closeAddDialog} newPurchase={newPurchase} updatedPurchase={updatedPurchase} />
             {/* -------------start dialog-------------- */}
         </div>
     )
