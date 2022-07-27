@@ -6,7 +6,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-// import DialogAchat from './dialogAchat/DialogAchat'
+import DialogAchat from './dialogAchat/DialogAchat'
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 
 const endPoint = 'http://localhost:8000/api'
@@ -19,10 +20,11 @@ export default function Achats() {
         { field: 'nomArticle', headerName: 'Nom Article', width: 200 },
         { field: 'nomFrss', headerName: "Nom de Fournisseur", width: 200 },
         { field: 'teleFrss', headerName: 'Télephon de Fournisseur', width: 200 },
-        { field: 'prixDachat', headerName: "Prix D'achat", width: 200 },
+        { field: 'prixDachat', headerName: "Prix D'achat (DH)", width: 200 },
         {
             field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
                 return [
+                    <IconButton aria-label="delete" onClick={() => openAddDialog(params.row.id)}> <BorderColorIcon /> </IconButton>,
                     <IconButton aria-label="delete" onClick={() => deletRowPursh(params.row.id)}> <DeleteIcon /> </IconButton>
 
                 ]
@@ -31,8 +33,9 @@ export default function Achats() {
     ];
 
     /* get data */
-    /* filtredAchats */
     let [filtredAchats, setFiltredAchats] = useState([])
+    let [achats, ] = useState([])
+
 
     useEffect(() => {
         getAllPurchases()
@@ -42,45 +45,43 @@ export default function Achats() {
         const response = await axios.get(`${endPoint}/achats`)
         setFiltredAchats(response.data)
     }
-
-    console.log(filtredAchats)
     /* end get data */
 
     /* --------- Dialog --------- */
-    // const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
-    // const [employeeId, setEmployeeId] = React.useState(null);
+    const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
+    const [achatId, setAchatId] = React.useState(null);
 
-    // const openAddDialog = (studentId) => {
-    //     setAddDialogIsOpen(true);
-        // setEmployeeId(studentId)
-    // };
+    const openAddDialog = (achatId) => {
+        setAddDialogIsOpen(true);
+        setAchatId(achatId)
+    };
 
-    // const closeAddDialog = () => {
-    //     setAddDialogIsOpen(false);
-    // };
-
-    // const newEmployee = (employee) => {
-    //     setFiltredEmployees([...employees, employee]);
-    // };
-
-    // const updatedEmployee = (employee) => {
-    //     let updateEmployee = [...employees]
-    //     const index = employees.findIndex(data => data.id === employee.id)
-    //     updateEmployee[index] = employee;
-    //     setFiltredEmployees(updateEmployee);
-    // };
+    const closeAddDialog = () => {
+        setAddDialogIsOpen(false);
+    };
     /* --------- end Dialog --------- */
 
 
     /* delet row inscreption */
     const deletRowPursh = async (id) => {
-        // await axios.delete(`${endPoint}/inscreption/${id}`).then((response) => {
-        //     if (response.status === 200) {
-        //         setFiltredInscreptions(inscreptions.filter(inscr => inscr.id !== id))
-        //     }
-        // })
+        await axios.delete(`${endPoint}/achat/${id}`).then((response) => {
+            if (response.status === 200) {
+                setFiltredAchats(achats.filter(inscr => inscr.id !== id))
+            }
+        })
     }
     /* end delet row inscreption */
+
+    const newPurchase = (purch) => {
+        setFiltredAchats([...achats, purch]);
+      };
+
+    const updatedPurchase = (purch) => {
+        let updatePurchase = [...achats]
+        const index = achats.findIndex(data => data.id === purch.id)
+        updatePurchase[index] = purch;
+        setFiltredAchats(updatePurchase);
+      };
 
 
     return (
@@ -91,7 +92,7 @@ export default function Achats() {
 
             {/* -------------start header-------------- */}
             <div className="add">
-                <Button variant="outlined"  /* onClick={() => openAddDialog(null)} */  >ajouter un Achat</Button>
+                <Button variant="outlined"   onClick={() => openAddDialog(null)}  >ajouter un Achat</Button>
             </div>
             <br/>
             {/* -------------start header-------------- */}
@@ -109,7 +110,7 @@ export default function Achats() {
             {/* -------------end table-------------- */}
 
             {/* -------------start dialog-------------- */}
-            {/* <DialogAchat  employeeId={employeeId}   open={addDialogIsOpen}  onClose={closeAddDialog}    newStudent={newEmployee} updatedStudent={updatedEmployee}   /> */}
+            <DialogAchat  achatId={achatId}   open={addDialogIsOpen}  onClose={closeAddDialog}    newPurchase={newPurchase} updatedPurchase={updatedPurchase}    />
             {/* -------------start dialog-------------- */}
         </div>
     )

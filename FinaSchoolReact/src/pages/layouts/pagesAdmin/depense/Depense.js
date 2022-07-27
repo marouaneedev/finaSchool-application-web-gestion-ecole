@@ -175,12 +175,12 @@ function Depense() {
   /* --------- Dialog --------- */
 
   const [addDialogIsOpen, setAddDialogIsOpen] = React.useState(false);
-  const [depenseId, setRevenuId] = React.useState(null);
+  const [depenseId, setDepenseId] = React.useState(null);
 
 
   const openAddDialog = (depenseId) => {
     setAddDialogIsOpen(true);
-    setRevenuId(depenseId)
+    setDepenseId(depenseId)
   };
 
   const closeAddDialog = () => {

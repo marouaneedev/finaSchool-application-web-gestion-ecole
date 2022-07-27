@@ -26,9 +26,6 @@ const endPointApi = 'http://localhost:8000/api'
 
 const BootstrapDialogTitle = (props) => {
     const { children, onClose, ...other } = props;
-
-
-
     return (
         <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
             {children}

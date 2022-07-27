@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios'
 import { useEffect, useState } from "react"
+import ReplyIcon from '@mui/icons-material/Reply';
 
 
 const endPoint = 'http://localhost:8000/api'
@@ -18,6 +19,7 @@ function MessagesPage() {
     {
       field: 'action', headerName: 'Actions', width: 100, renderCell: (params) => {
         return [
+          <IconButton aria-label="answer" onClick={() => sendEmail(params.row.id)}> <ReplyIcon /> </IconButton>,
           <IconButton aria-label="delete" onClick={() => deletMessage(params.row.id)}> <DeleteIcon /> </IconButton>
         ]
       }
@@ -49,6 +51,9 @@ function MessagesPage() {
   }
   /* end delet row messages */
 
+  /* send email */
+  const sendEmail = async (id) => { }
+  /* end send email */
 
 
   return (
