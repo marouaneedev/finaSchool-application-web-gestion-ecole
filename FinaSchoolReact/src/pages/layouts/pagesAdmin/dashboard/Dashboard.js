@@ -1,5 +1,7 @@
 import React from "react";
 import "./dashboard.css";
+import { useEffect, useState } from "react"
+import axios from 'axios'
 import { Link } from "react-router-dom";
 import { PieChart, Pie, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -9,7 +11,7 @@ import MessageIcon from '@mui/icons-material/Message';
 
 
 /* start chart 1 */
-const dataa = [{ name: "Boys", value: 400 }, { name: "Girls", value: 300 }];
+
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -37,88 +39,22 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
-/* end chart 1 */
 
-/* start chart 2 */
-const data = [
-  {
-    name: "Janvier",
-    Dépense: 2780,
-    Revenu: 3908,
-    amt: 9000
-  },
-  {
-    name: "Février",
-    Dépense: 1890,
-    Revenu: 4800,
-    amt: 2181
-  },
-  {
-    name: "Mars",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Avril",
-    Dépense: 3490,
-    Revenu: 4300,
-    amt: 2100
-  },
-  {
-    name: "Mai",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Juin",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Juillet",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Août",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Septembre",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Octobre",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Novembre",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-  {
-    name: "Décembre",
-    Dépense: 2390,
-    Revenu: 3800,
-    amt: 2500
-  },
-];
-/* end chart 2 */
-
-
+const endPoint  = 'http://localhost:8000/api/dashboard'
 
 export default function Dashboard() {
+  let [dashboard, setDashboard] = useState([])
+  const data = [{ name: "Boys", value: dashboard.studentH }, { name: "Girls", value: dashboard.studentF }];
+
+  useEffect(() => {
+    getDashboardInfos()
+  }, [])
+
+  const getDashboardInfos = async () => {
+    const response = await axios.get(`${endPoint}`)
+    setDashboard(response.data)
+  }
+
   return (
     <div className="allContent">
       <div className="dachboradContent">
@@ -138,7 +74,7 @@ export default function Dashboard() {
                   <h3 className="name">Étudiants</h3>
                 </div>
                 <div className="footerr">
-                  <h3 className="num">45</h3>
+                  <h3 className="num">{dashboard.studentH + dashboard.studentF}</h3>
                   <p className="card-text"><Link to="/students" className="link oneLink"> View Details </Link></p>
                 </div>
               </div>
@@ -155,7 +91,7 @@ export default function Dashboard() {
                   <h3 className="name">Salariés</h3>
                 </div>
                 <div className="footerr">
-                  <h3 className="num">76</h3>
+                  <h3 className="num">{dashboard.emplyees}</h3>
                   <p className="card-text"><Link to="/salaries" className="link twoLink"> View Details </Link></p>
                 </div>
               </div>
@@ -172,7 +108,7 @@ export default function Dashboard() {
                   <h3 className="name">Inscription</h3>
                 </div>
                 <div className="footerr">
-                  <h3 className="num">33</h3>
+                  <h3 className="num">{dashboard.inscriptions}</h3>
                   <p className="card-text"><Link to="/inscription" className="link threeLink"> View Details </Link></p>
                 </div>
               </div>
@@ -189,7 +125,7 @@ export default function Dashboard() {
                   <h3 className="name">Messages</h3>
                 </div>
                 <div className="footerr">
-                  <h3 className="num">56</h3>
+                  <h3 className="num">{dashboard.messages}</h3>
                   <p className="card-text"><Link to="/messages" className="link fourLink"> View Details </Link></p>
                 </div>
               </div>
@@ -207,7 +143,7 @@ export default function Dashboard() {
                 <div width="100%" height="100%">
                   <PieChart className="PieChart" width={300} height={300}>
                     <Pie
-                      data={dataa}
+                      data={data}
                       cx="50%"
                       cy="50%"
                       labelLine={false}
@@ -226,10 +162,10 @@ export default function Dashboard() {
                   </PieChart>
                   <div className="statiqueInfoChart d-flex justify-content-between">
                     <div className="girls d-flex">
-                      <div className="femme mr-2"></div> <p>Femme</p>
+                      <div className="femme mr-2"></div> <p>Homme</p>
                     </div>
                     <div className="boys d-flex ">
-                      <span className="homme mr-2"></span> <p>Homme</p>
+                      <span className="homme mr-2"></span> <p>Femme</p>
                     </div>
                   </div>
                 </div>
@@ -244,7 +180,7 @@ export default function Dashboard() {
                   <BarChart
                     width={600}
                     height={300}
-                    data={data}
+                    data={dashboard.chart}
                     margin={{
                       top: 5,
                       right: 10,

@@ -16,7 +16,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers-pro';
 import { AdapterDateFns } from '@mui/x-date-pickers-pro/AdapterDateFns';
 import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePicker';
 import TextField from '@mui/material/TextField';
-
+import * as moment from 'moment'
 
 import PropTypes from 'prop-types';
 import Collapse from '@mui/material/Collapse';
@@ -72,7 +72,7 @@ function Row(props) {
         <TableCell component="th" scope="row"> {row.fullName} </TableCell>
         <TableCell align="right">{row.typeEmployee}</TableCell>
         <TableCell align="right">{row.typeWork}</TableCell>
-        <TableCell align="right">{row.payrollAmount.toFixed(2)} DH</TableCell>
+        <TableCell align="right">{row.payrollAmount} DH</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -94,7 +94,7 @@ function Row(props) {
                 <TableBody className="bg_table_body">
                   {row.depenses.map((depense) => (
                     <TableRow key={depense.date}>
-                      <TableCell component="th" scope="row"> {depense.created_at} </TableCell>
+                      <TableCell component="th" scope="row"> {moment(depense.created_at).format('yyyy-MM-DD / hh:mm')} </TableCell>
                       <TableCell>{depense.typePaiment}</TableCell>
                       <TableCell align="right">{depense.montantPaye.toFixed(2)} DH </TableCell>
                       <TableCell align="right">
@@ -208,14 +208,14 @@ function Depense() {
       if (employeeType === 'Tout') {
         setFiltredEmployees(employees)
       } else {
-        let newStud = employees.filter(student => student.employeeType === employeeType)
+        let newStud = employees.filter(student => student.typeEmployee === employeeType)
         setFiltredEmployees(newStud)
       }
     } else if (employeeType === '' && employeesId !== '') {
       if (employeesId === 'Tout') {
         setFiltredEmployees(employees)
       } else {
-        let newStud = employees.filter(student => student.selectedEmployeesId === employeesId)
+        let newStud = employees.filter(student => student.id === employeesId)
         setFiltredEmployees(newStud)
       }
     } else if (employeeType !== '' && employeesId !== '') {
@@ -223,56 +223,18 @@ function Depense() {
         setFiltredEmployees(employees)
       }
       else if (employeesId === 'Tout' && employeeType !== 'Tout') {
-        let newStud = employees.filter(student => student.employeeType === employeeType)
+        let newStud = employees.filter(student => student.typeEmployee === employeeType)
         setFiltredEmployees(newStud)
       }
       else if (employeesId !== 'Tout' && employeeType === 'Tout') {
-        let newStud = employees.filter(student => student.selectedEmployeesId === employeesId)
+        let newStud = employees.filter(student => student.id === employeesId)
         setFiltredEmployees(newStud)
       } else {
-        let newStud = employees.filter(student => student.selectedEmployeesId === employeesId && student.employeeType === employeeType)
+        let newStud = employees.filter(student => student.id === employeesId && student.typeEmployee === employeeType)
         setFiltredEmployees(newStud)
       }
     }
   }
-
-  // const filterTable = (studentId, year) => {
-  //   if (studentId !== '' && year === '') {
-  //     if (studentId === 'Tout') {
-  //       setFiltredEmployees(employees)
-  //     } else {
-  //       let newStud = employees.filter(student => student.id === studentId)
-  //       setFiltredEmployees(newStud)
-  //     }
-  //   } else if (studentId === '' && year !== '') {
-  //     if (year === 'Tout') {
-  //       setFiltredEmployees(employees)
-  //     } else {
-  //       let newStud = employees.map(student => {
-  //         student.depenses = student.depenses.filter(revenu => revenu.anneeScolaire === year)
-  //         return student;
-  //       })
-  //       setFiltredEmployees(newStud)
-  //     }
-  //   } else if (studentId !== '' && year !== '') {
-  //     if (year === 'Tout' && studentId === 'Tout') {
-  //       setFiltredEmployees(employees)
-  //     }
-  //     else if (year === 'Tout' && studentId !== 'Tout') {
-  //       let newStud = employees.filter(student => student.id === studentId)
-  //       setFiltredEmployees(newStud)
-  //     }
-  //     else if (year !== 'Tout' && studentId === 'Tout') {
-  //       let newStud = employees.filter(student => student.yearOfFormation === year)
-  //       setFiltredEmployees(newStud)
-  //     } else {
-  //       let newStud = employees.filter(student => student.yearOfFormation === year && student.id === studentId)
-  //       setFiltredEmployees(newStud)
-  //     }
-  //   }
-  // }
-  /* --------- end Filtrage ----------- */
-
 
   /* -------------------------------------------- return ------------------------------------------ */
   return (
@@ -316,7 +278,7 @@ function Depense() {
                   onChange={selectedTypeDeSalarie}
                 >
                   <MenuItem value='Tout'>Tout</MenuItem>
-                  <MenuItem value='Fourmateur'>Fourmateur</MenuItem>
+                  <MenuItem value='Formateur'>Formateur</MenuItem>
                   <MenuItem value='Secrétaire'>Secrétaire</MenuItem>
                   <MenuItem value='Autre'>Autre</MenuItem>
                 </Select>
@@ -381,7 +343,7 @@ function Depense() {
                 <TableCell rowSpan={2} />
                 <TableCell rowSpan={2} />
                 <TableCell colSpan={1}> Total :</TableCell>
-                <TableCell align="right">{invoiceTotal > 0 ? invoiceTotal.toFixed(2) : 0} DH</TableCell>
+                <TableCell align="right">{invoiceTotal > 0 ? invoiceTotal.toLocaleString('fr-FR', {minimumFractionDigits: 2}) : 0} DH</TableCell>
               </TableRow>
             </TableBody>
           </Table>

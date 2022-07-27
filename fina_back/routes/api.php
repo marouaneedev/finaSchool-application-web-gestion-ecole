@@ -6,6 +6,8 @@ use App\Http\Controllers\InscreptionController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RevenuController;
 use App\Http\Controllers\DepenseController;
+use App\Http\Controllers\AchatController;
+use App\Http\Controllers\DashBoardController;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -66,4 +68,17 @@ Route::controller(DepenseController::class)->group(function(){
     Route::get('/depense/{id}', 'show');
     Route::put('/depense/{id}', 'update');
     Route::delete('/depense/{id}', 'destroy');
+});
+
+
+Route::controller(AchatController::class)->group(function(){
+    Route::get('/achats', 'index');
+    Route::post('/achat', 'store');
+    Route::get('/achat/{id}', 'show');
+    Route::put('/achat/{id}', 'update');
+    Route::delete('/achat/{id}', 'destroy');
+});
+
+Route::controller(DashBoardController::class)->group(function(){
+    Route::get('/dashboard', 'index');
 });

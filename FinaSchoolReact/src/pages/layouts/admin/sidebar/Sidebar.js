@@ -75,7 +75,10 @@ function Sidebar() {
                 <span className="linkk">Revenu</span>
                 </NavLink>
                 <NavLink className="nav-link" to="depense">
-                <span className="linkk">Dépense</span>
+                <span className="linkk">Dépense Salariés</span>
+                </NavLink>
+                <NavLink className="nav-link" to="achat">
+                <span className="linkk">Dépense D'achats</span>
                 </NavLink>
               </nav>
             </div>

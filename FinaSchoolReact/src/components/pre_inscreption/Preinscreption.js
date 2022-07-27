@@ -14,7 +14,7 @@ export class Preinscreption extends Component {
     state = {
         email: '',
         firstName: '',
-        LastName: '',
+        lastName: '',
         city: '',
         phoneNumber: '',
     }
@@ -29,11 +29,10 @@ export class Preinscreption extends Component {
         e.preventDefault();
         await axios.post(endPoint, this.state).then((res) => {
             if (res.data.status === 200) {
-                console.log("good")
                 this.setState({
                     email: '',
                     firstName: '',
-                    LastName: '',
+                    lastName: '',
                     city: '',
                     phoneNumber: '',
                 });
@@ -118,10 +117,10 @@ export class Preinscreption extends Component {
                                             <Input
                                                 type="text"
                                                 className="inputtt"
-                                                name="LastName"
+                                                name="lastName"
                                                 placeholder="Last Name"
                                                 onChange={this.handleInput}
-                                                value={this.state.LastName}
+                                                value={this.state.lastName}
                                             />
                                         </Box>
                                     </div>
@@ -154,7 +153,7 @@ export class Preinscreption extends Component {
                                             autoComplete="off"
                                         >
                                             <Input
-                                                type="number"
+                                                type="text"
                                                 className="inputtt"
                                                 name="phoneNumber"
                                                 placeholder="Phone Number"

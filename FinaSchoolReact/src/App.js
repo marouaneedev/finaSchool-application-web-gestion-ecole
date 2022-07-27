@@ -12,6 +12,8 @@ import InsciptionPage from "./pages/layouts/pagesAdmin/insciptionPage/Insciption
 import Revenu from "./pages/layouts/pagesAdmin/revenu/Revenu";
 import Widget from "./pages/layouts/pagesAdmin/widget/Widget";
 import Depense from "./pages/layouts/pagesAdmin/depense/Depense";
+import Achats from "./pages/layouts/pagesAdmin/achats/Achats";
+
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -33,6 +35,8 @@ export class App extends Component {
               <Route path="inscription" element={<InsciptionPage />} />
               <Route path="revenu" element={<Revenu />} />
               <Route path="depense" element={<Depense />} />
+              <Route path="achat" element={<Achats />} />
+
             </Route>
           </Routes>
         </BrowserRouter>

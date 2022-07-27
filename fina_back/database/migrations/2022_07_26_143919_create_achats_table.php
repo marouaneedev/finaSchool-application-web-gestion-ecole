@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inscreptions', function (Blueprint $table) {
+        Schema::create('achats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email');
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('city');
-            $table->text('phoneNumber');
+            $table->text('idArticle');
+            $table->string('nomArticle');
+            $table->string('nomFrss');
+            $table->text('teleFrss');
+            $table->double('prixDachat');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inscreptions');
+        Schema::dropIfExists('achats');
     }
 };
