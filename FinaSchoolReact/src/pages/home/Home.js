@@ -9,24 +9,7 @@ import Preinscreption from "../../components/pre_inscreption/Preinscreption.js";
 
 import "./home.css";
 
-// import AppUrl from "../../AppUrl/AppUrl.js";
-// import ResetApi from "../../AppUrl/RestApi.js";
-
 function Home() {
-
-// constructor(){
-//   super();
-//   this.state={
-//     Title:"",
-//     Description:"",
-//     Button:""
-
-    
-//   }
-// }
-
-
-
   return (
     <div>
       {/* start header */}

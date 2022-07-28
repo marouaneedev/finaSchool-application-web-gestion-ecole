@@ -8,6 +8,9 @@ use App\Http\Controllers\RevenuController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\AchatController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\NavbarHomePageController;
+use App\Http\Controllers\HeaderHomePageController;
+
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -82,3 +85,14 @@ Route::controller(AchatController::class)->group(function(){
 Route::controller(DashBoardController::class)->group(function(){
     Route::get('/dashboard', 'index');
 });
+
+Route::controller(NavbarHomePageController::class)->group(function(){
+    Route::put('/navbarHomePage/{id}', 'update');
+    Route::get('/navbarHomePage/{id}', 'show');
+});
+
+Route::controller(HeaderHomePageController::class)->group(function(){
+    Route::put('/headerHomePage/{id}', 'update');
+    Route::get('/headerHomePage/{id}', 'show');
+});
+

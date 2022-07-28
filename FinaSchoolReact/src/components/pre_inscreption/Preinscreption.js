@@ -3,6 +3,8 @@ import './preInscreption.css'
 import axios from 'axios'
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
+// import Snackbar from '@mui/material/Snackbar';
+// import MuiAlert from '@mui/material/Alert';
 
 
 const endPoint = 'http://localhost:8000/api/inscreption'
@@ -36,6 +38,13 @@ export class Preinscreption extends Component {
                     city: '',
                     phoneNumber: '',
                 });
+                // <Snackbar
+                //     anchorOrigin={{ vertical, horizontal }}
+                //     open={open}
+                //     onClose={handleClose}
+                //     message="I love snacks"
+                //     key={vertical + horizontal}
+                // />
             }
         });
     }
@@ -163,16 +172,20 @@ export class Preinscreption extends Component {
                                         </Box>
                                     </div>
 
-                                    <button type="submit" className="bttn" >
+                                    <button type="submit" className="bttn" /* onClick={handleClick({
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    })} */>
                                         Send
                                     </button>
+
                                 </form>
                             </div>
                         </div>
 
                     </div>
-                </section>
-            </div>
+                </section >
+            </div >
         )
     }
 }

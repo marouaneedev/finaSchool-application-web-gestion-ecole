@@ -83,11 +83,11 @@ export default function StudentsList() {
   };
 
   const updatedStudent = (student) => {
-    // let updateStudent = [...students]
-    // const index = students.findIndex(data => data.id === student.id)
-    // updateStudent[index] = student;
-    // setFiltredStudents(updateStudent);
-    console.log(student)
+    let updateStudent = [...students]
+    const index = students.findIndex(data => data.id === student.id)
+    updateStudent[index] = student;
+    setFiltredStudents(updateStudent);
+    
   };
   /* --------- end Dialog --------- */
 

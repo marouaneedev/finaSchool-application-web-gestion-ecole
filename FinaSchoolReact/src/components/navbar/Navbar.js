@@ -1,14 +1,38 @@
 import React from "react";
 import "./navbar.css";
 import { Link } from "react-scroll";
+import axios from 'axios'
+import { useEffect, useState } from "react"
+
+
+const endPoint = 'http://localhost:8000/api'
+
 
 function Navbar() {
+
+
+  /* ----------get data---------- */
+  let [data, setData] = useState([])
+
+  useEffect(() => {
+    getAlldata()
+  }, [])
+
+  const getAlldata = async () => {
+    const response = await axios.get(`${endPoint}/navbarHomePage/1`)
+    setData(response.data)
+  }
+
+  console.log(data.imageNavbar)
+  /* ----------end get data---------- */
+
+
   return (
     <div className="navbarHome">
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container">
           <Link to="/" className="navbar-brand logo">
-            <img src="/images/logoPageAccu.png" className="logoIiimg" alt="img" />
+            <img src={data.imageNavbar} className="logoIiimg" alt="img" />
           </Link>
           <button
             className="navbar-toggler"

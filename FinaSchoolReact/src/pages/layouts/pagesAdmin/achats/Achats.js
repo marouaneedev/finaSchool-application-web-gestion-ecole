@@ -17,9 +17,9 @@ const endPoint = 'http://localhost:8000/api'
 
 export default function Achats() {
 
-    const [pageSize, setPageSize] = React.useState(5);
+    // const [pageSize, setPageSize] = React.useState(5);
     let [filtredAchats, setFiltredAchats] = useState([])
-    let [achats,] = useState([])
+    let [achats, setAchats] = useState([])
     const [total, setTotal] = React.useState(0);
 
 
@@ -50,6 +50,7 @@ export default function Achats() {
 
     const getAllPurchases = async () => {
         const response = await axios.get(`${endPoint}/achats`)
+        setAchats(response.data)
         setFiltredAchats(response.data)
     }
     /* ----------end get data---------- */
@@ -84,8 +85,10 @@ export default function Achats() {
     };
 
     const updatedPurchase = (purch) => {
+        
         let updatePurchase = [...achats]
         const index = achats.findIndex(data => data.id === purch.id)
+        console.log(achats)
         updatePurchase[index] = purch;
         setFiltredAchats(updatePurchase);
     };
@@ -109,13 +112,13 @@ export default function Achats() {
             {/* -------------start table-------------- */}
             <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
                 <DataGrid
-                    pageSize={pageSize}
-                    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-                    rowsPerPageOptions={[5, 10, 25]}
+                    // pageSize={pageSize}
+                    // onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                    // rowsPerPageOptions={[5, 10, 25]}
                     rows={filtredAchats}
                     columns={columns}
-                    pagination
-                    {...filtredAchats}
+                    // pagination
+                    // {...filtredAchats}
                     components={{
                         Toolbar: GridToolbar,
                         Footer: CustomFooterTotalComponent
@@ -131,12 +134,7 @@ export default function Achats() {
                             visibleItems.push(id);
                           }
                         }
-                        // console.log(visibleItems);
-                        const res = filtredAchats.filter((item) => visibleItems.includes(item.id));
-                        const total = res
-                          .map((item) => item.totalAmount)
-                          .reduce((a, b) => a + b, 0);
-                        console.log(total);
+                        const total = filtredAchats.map(({ prixDachat }) => prixDachat).reduce((sum, i) => sum + i, 0)
                         setTotal(total);
                       }}
 
