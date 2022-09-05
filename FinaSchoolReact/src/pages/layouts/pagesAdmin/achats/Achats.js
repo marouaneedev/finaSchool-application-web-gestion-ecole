@@ -17,7 +17,7 @@ const endPoint = 'http://localhost:8000/api'
 
 export default function Achats() {
 
-    // const [pageSize, setPageSize] = React.useState(5);
+    // const [pageSize, setPageSize] = React.useState(5);  {moment(created_at).format('yyyy-MM-DD / hh:mm')}
     let [filtredAchats, setFiltredAchats] = useState([])
     let [achats, setAchats] = useState([])
     const [total, setTotal] = React.useState(0);
@@ -25,6 +25,7 @@ export default function Achats() {
 
     /* ----------columns---------- */
     const columns = [
+        { field: 'created_at', headerName: 'date', width: 150 },
         { field: 'idArticle', headerName: 'ID Article', width: 120 },
         { field: 'nomArticle', headerName: 'Nom Article', width: 200 },
         { field: 'nomFrss', headerName: "Nom de Fournisseur", width: 200 },
@@ -85,7 +86,7 @@ export default function Achats() {
     };
 
     const updatedPurchase = (purch) => {
-        
+
         let updatePurchase = [...achats]
         const index = achats.findIndex(data => data.id === purch.id)
         console.log(achats)
@@ -112,13 +113,8 @@ export default function Achats() {
             {/* -------------start table-------------- */}
             <div style={{ height: 400, width: '100%', background: "#F2F2F2" }}>
                 <DataGrid
-                    // pageSize={pageSize}
-                    // onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-                    // rowsPerPageOptions={[5, 10, 25]}
                     rows={filtredAchats}
                     columns={columns}
-                    // pagination
-                    // {...filtredAchats}
                     components={{
                         Toolbar: GridToolbar,
                         Footer: CustomFooterTotalComponent
@@ -130,13 +126,16 @@ export default function Achats() {
                         const visibleRows = state.filter.visibleRowsLookup;
                         let visibleItems = [];
                         for (const [id, value] of Object.entries(visibleRows)) {
-                          if (value === true) {
-                            visibleItems.push(id);
-                          }
+                            if (value === true) {
+                                visibleItems.push(id);
+                            }
                         }
-                        const total = filtredAchats.map(({ prixDachat }) => prixDachat).reduce((sum, i) => sum + i, 0)
-                        setTotal(total);
-                      }}
+                        const total = filtredAchats.reduce((accumulator, object) => {
+                            return accumulator + object.prixDachat;
+                        }, 0);
+                        setTotal(Number(total));
+
+                    }}
 
                 />
 

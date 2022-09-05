@@ -36,10 +36,11 @@ class NavbarHomePageController extends Controller
      */
     public function store(Request $request)
     {
-        $navbarWdg = new NavbarHomePage();
-        $navbarWdg-> imageNavbar = $request-> imageNavbar;
 
-        $navbarWdg-> save();
+        $navbarWdg = new NavbarHomePage();
+        $navbarWdg->imageNavbar = $request->imageNavbar;
+
+        $navbarWdg->save();
         return $navbarWdg;
     }
 
@@ -54,6 +55,12 @@ class NavbarHomePageController extends Controller
         $navbarWdg = NavbarHomePage::find($id);
         return $navbarWdg;
     }
+
+
+    /**
+     * Display the specified resource.
+     *
+     */
 
     /**
      * Show the form for editing the specified resource.
@@ -73,13 +80,35 @@ class NavbarHomePageController extends Controller
      * @param  \App\Models\NavbarHomePage  $navbarHomePage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $navbarWdg = NavbarHomePage::findOrFail($request-> id);
-        $navbarWdg-> imageNavbar = $request-> imageNavbar;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
 
-        $navbarWdg-> save();
-        return $navbarWdg;
+            $imageNavbar = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('images/', $imageNavbar);
+            NavbarHomePage::create(['imageNavbar' => $imageNavbar]);
+            return response()->json(['succsess' => 'uploades successefly']);
+        }
+        return response()->json(['plz try again']);
+
+        // $request->validate([
+        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        // $imageName = time().'.'.$request->image->extension();
+
+        // $request->image->move(public_path('images'), $imageName);
+
+        // /*
+        //     Write Code Here for
+        //     Store $imageName name in DATABASE from HERE
+        // */
+
+        // return back()
+        //     ->with('success','You have successfully upload image.')
+        //     ->with('image',$imageName);
+
     }
 
     /**

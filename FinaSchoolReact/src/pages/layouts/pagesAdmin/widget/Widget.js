@@ -12,35 +12,49 @@ export class Widget extends Component {
   constructor() {
     super();
     this.state = {
-      imageNavbar: "",
+      imageNavbarr: "",
       imageHeader: "",
       titleHeader: "",
       textHeader: "",
       buttonHeader: "",
     };
   }
+
+  handleChange = (e) =>{
+    this.setState({
+      imageNavbarr: e.target.files
+    })
+  }
+
+  submitForm = (e) =>{
+    e.preventDefault();
+    const url = 'http://localhost:8000/api/navbarHomePage';
+    const data = new FormData();
+    data.append('imageNavbar', this.state.imageNavbar);
+    axios.post(url, data ).then(res => {
+      console.log("all its good", res.data)
+    })
+  }
   
 
 render() {
 
-  const endPointNavbarHomePage = 'http://localhost:8000/api/navbarHomePage'
+  const endPointNavbarHomePage = 'http://localhost:8000/api/logoImage'
   const endPointHeaderHomePage = 'http://localhost:8000/api/headerHomePage'
 
-  const clearForm = () => {
-    // this.imageNavbar = "",
-    // this.state.imageNavbar.value = "";
-  }
 
   const storeNavbar = async () => {
-    await axios.put(`${endPointNavbarHomePage}/1`, { imageNavbar: this.state.imageNavbar }).then((response) => {
+    await axios.put(`${endPointNavbarHomePage}/1`, { imageNavbar: this.state.imageNavbarr }).then((response) => {
       if (response.status === 200) {
         console.log("done")
+        console.log(this.state.imageNavbarr)
         clearForm();
       }
     })
   }
+  
 
-  const handleClick = () => {
+  const clearForm = () => {
     ReactDOM.findDOMNode(this.refs.form).value = "";
   }
 
@@ -68,12 +82,12 @@ render() {
           type="file"
           className="form-control"
           ref="form"
-          value={this.state.imageNavbar}
-          onChange={event => this.setState({ imageNavbar: event.target.value })}
+          // value={this.state.imageNavbar}
+          onChange={event => this.setState({ imageNavbarr: event.target.files[0] })}
         />
         <br />
         <br />
-        <Button variant="outlined" type="submit" /* onClick={storeNavbar} */ onClick={() => { storeNavbar(); handleClick();}} >
+        <Button variant="outlined" type="submit"  onClick={() => { storeNavbar(); clearForm();}} >
           Sauvegarder
         </Button>
       </div>
@@ -86,6 +100,7 @@ render() {
           <label >Image :</label>
           <input
             type="file"
+            ref="form"
             className="form-control"
             value={this.state.imageHeader}
             onChange={event => this.setState({ imageHeader: event.target.value })}
@@ -97,6 +112,7 @@ render() {
               required
               id="outlined-required"
               label="Titre :"
+              ref="form"
               value={this.state.titleHeader}
               onChange={event => this.setState({ titleHeader: event.target.value })}
             />
@@ -108,6 +124,7 @@ render() {
               required
               id="outlined-required"
               label="Text :"
+              ref="form"
               value={this.state.textHeader}
               onChange={event => this.setState({ textHeader: event.target.value })}
             />
@@ -119,6 +136,7 @@ render() {
               required
               id="outlined-required"
               label="Button :"
+              ref="form"
               value={this.state.buttonHeader}
               onChange={event => this.setState({ buttonHeader: event.target.value })}
             />
@@ -127,7 +145,7 @@ render() {
           <br />
           <br />
 
-          <Button variant="outlined" type="submit" onClick={storeHeader}>
+          <Button variant="outlined" type="submit"  onClick={() => { storeHeader(); clearForm();}}>
             Sauvegarder
           </Button>
         </div>

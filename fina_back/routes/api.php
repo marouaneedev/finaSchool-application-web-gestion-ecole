@@ -10,6 +10,8 @@ use App\Http\Controllers\AchatController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\NavbarHomePageController;
 use App\Http\Controllers\HeaderHomePageController;
+use App\Http\Controllers\LoginController;
+
 
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
@@ -87,12 +89,19 @@ Route::controller(DashBoardController::class)->group(function(){
 });
 
 Route::controller(NavbarHomePageController::class)->group(function(){
-    Route::put('/navbarHomePage/{id}', 'update');
+    Route::put('/logoImage/{id}', 'update')->name('image.store');
+    // Route::post('/navbarHomePage', 'store');
     Route::get('/navbarHomePage/{id}', 'show');
 });
 
 Route::controller(HeaderHomePageController::class)->group(function(){
-    Route::put('/headerHomePage/{id}', 'update');
+    Route::post('/headerHomePage/{id}', 'update');
     Route::get('/headerHomePage/{id}', 'show');
 });
 
+
+Route::controller(LoginController::class)->group(function(){
+    Route::get('/user/{id}', 'show');
+    Route::put('/user/{id}', 'update');
+
+});

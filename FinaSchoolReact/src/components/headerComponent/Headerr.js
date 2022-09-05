@@ -22,7 +22,6 @@ function Headerr() {
         setData(response.data)
     }
 
-    console.log(data.imageNavbar)
     /* ----------end get data---------- */
 
     return (

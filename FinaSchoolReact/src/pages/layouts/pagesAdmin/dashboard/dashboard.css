@@ -105,9 +105,9 @@
 
 /* .chart1{
     background-color: #e9e8e8;
-}
+}*/
 
 
 .chart2{
-    background-color: #de6c6c;
-} */
+    overflow: hidden !important;
+} 

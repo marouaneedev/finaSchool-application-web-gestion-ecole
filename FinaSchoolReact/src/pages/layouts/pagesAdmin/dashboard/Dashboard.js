@@ -140,6 +140,7 @@ export default function Dashboard() {
             {/* ----------start charts 1----------- */}
             <div className="col-lg-4 chart1">
               <div className="card">
+                
                 <div width="100%" height="100%">
                   <PieChart className="PieChart" width={300} height={300}>
                     <Pie
@@ -161,6 +162,9 @@ export default function Dashboard() {
                     </Pie>
                   </PieChart>
                   <div className="statiqueInfoChart d-flex justify-content-between">
+                  <div className="girls d-flex">
+                      <div className=""></div> <p>Étudiants :</p>
+                    </div>
                     <div className="girls d-flex">
                       <div className="femme mr-2"></div> <p>Homme</p>
                     </div>

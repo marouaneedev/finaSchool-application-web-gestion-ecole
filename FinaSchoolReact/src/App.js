@@ -16,6 +16,7 @@ import Achats from "./pages/layouts/pagesAdmin/achats/Achats";
 
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PageNotFound from "./pages/layouts/pagesAdmin/pageNotFound/PageNotFound";
 
 export class App extends Component {
   render() {
@@ -36,6 +37,8 @@ export class App extends Component {
               <Route path="revenu" element={<Revenu />} />
               <Route path="depense" element={<Depense />} />
               <Route path="achat" element={<Achats />} />
+              <Route path="*" element={<PageNotFound />} />
+
 
             </Route>
           </Routes>
