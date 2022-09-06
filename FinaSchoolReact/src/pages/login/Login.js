@@ -2,51 +2,51 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import HeadShake from "react-reveal/HeadShake";
-import axios from "axios";
 import { useSnackbar } from 'notistack'
 
 
 function Login() {
-  let navigate = useNavigate();
-  const [user, setUser] = useState({});
-  const [loginInput, setLogin] = useState({
-    userName: "",
-    password: "",
-  });
+
   const { enqueueSnackbar } = useSnackbar();
+  const [userName,setUserName]= useState("");
+  const [password,setPassword]= useState("");
+  let navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/user/1')
-      .then(response => {
-        setUser(response.data)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }, [])
-
-  const handelChange = (e) => {
-    e.persist();
-    setLogin({ ...loginInput, [e.target.name]: e.target.value })
-  }
-
-
-  const loginSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
-      userName: loginInput.userName,
-      password: loginInput.password,
-    }
-    if (data.userName === user.userName && data.password === user.password) {
-      enqueueSnackbar('You are successfully logged in', { variant: 'success' });
+    if (localStorage.getItem('user-info')){
       navigate("/dashboard");
-    } else {
-      enqueueSnackbar('Oops ! please try again', { variant: 'error' }); //Input is empty please type anything
-      setLogin({ userName: "", password: "" });
+    }
+  }, [navigate] )
+
+  async function login(e){
+    console.warn(userName,password)
+    e.preventDefault();
+    let item={userName,password};
+    let result= await fetch("http://localhost:8000/api/login",{
+      method: "POST",
+      headers:{
+        "Content-type":"application/json",
+        "Accept":"application/json"
+
+      },
+      body: JSON.stringify(item)
+    });
+    result= await result.json();
+    if (result.userName){
+
+      localStorage.setItem('user-info',JSON.stringify(result))
+      navigate("/dashboard")
+      enqueueSnackbar('You are successfully logged in', { variant: 'success' });
+
+      
+    }else{
+      navigate("/login")
+      setUserName('');
+      setPassword('');
+      enqueueSnackbar('Oops ! your username or password is wrong', { variant: 'error' });
     }
 
   }
-
 
   return (
       <div className="loginn">
@@ -55,12 +55,12 @@ function Login() {
             <img src="/images/login_logo.png" className="logoImg" alt="img" />
             <div className="form">
               <form className="login-form">
-                <input type="text" placeholder="username" name="userName" value={loginInput.userName} onChange={handelChange} />
-                <input type="password" placeholder="password" name="password" value={loginInput.password} onChange={handelChange} />
-                <button onClick={loginSubmit}>login</button>
-                <p className="message">
+                <input type="text" placeholder="username" id="userName" name="userName"  value={userName} onChange={(e)=>setUserName(e.target.value)} />
+                <input type="password" placeholder="password" id="password" name="password"  value={password} onChange={(e)=>setPassword(e.target.value)} />
+                <button onClick={login}>login</button>
+                {/* <p className="message">
                   <a href="/login">Forget My Password?</a>
-                </p>
+                </p> */}
               </form>
             </div>
           </HeadShake>
@@ -70,3 +70,5 @@ function Login() {
 }
 
 export default Login
+
+

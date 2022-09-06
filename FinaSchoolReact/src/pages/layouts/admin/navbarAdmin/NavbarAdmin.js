@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/aria-unsupported-elements */
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import "../../../../assets/admin/js/scripts";
@@ -6,7 +5,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import './NavbarAdmin.css'
 import Button from '@mui/material/Button';
-import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 
@@ -20,7 +18,6 @@ function NavbarAdmin() {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = useState({});
 
-  let navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,11 +25,6 @@ function NavbarAdmin() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const logout = () => {
-    navigate("/login");
-
-  }
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/user/1')
@@ -113,9 +105,9 @@ function NavbarAdmin() {
           </DialogContentText>
         </DialogContent>
         <DialogActions className="m-auto">
-          <Button onClick={logout} autoFocus variant="contained">
-            OK
-          </Button>
+          <Link onClick={()=> localStorage.removeItem('user-info')} autoFocus className="mx-3" to="/login">
+          <Button variant="contained"> OK </Button> 
+          </Link>
           <Button onClick={handleClose} variant="contained">Cancel</Button>
         </DialogActions>
       </Dialog>

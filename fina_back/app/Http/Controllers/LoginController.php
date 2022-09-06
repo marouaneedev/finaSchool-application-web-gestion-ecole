@@ -8,10 +8,7 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
 
-    public function login()
-    {
-        //
-    }
+
 
 
     /**
@@ -88,6 +85,18 @@ class LoginController extends Controller
         $user-> save();
         return $user;
     }
+
+
+    public function login(Request $req)
+    {
+        $user = Login::where('userName', $req -> userName)->first();
+        if($user && $req->password == $user->password)
+        {
+            return $user;
+        }
+        return ["error" => "userName is not matched"];
+    }
+
 
     /**
      * Remove the specified resource from storage.

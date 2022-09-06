@@ -103,5 +103,7 @@ Route::controller(HeaderHomePageController::class)->group(function(){
 Route::controller(LoginController::class)->group(function(){
     Route::get('/user/{id}', 'show');
     Route::put('/user/{id}', 'update');
+    Route::post('/login', 'login');
+
 
 });
