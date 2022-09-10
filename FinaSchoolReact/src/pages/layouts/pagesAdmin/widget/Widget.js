@@ -24,7 +24,7 @@ export default function Widget() {
 
 
   const clearForm = () => {
-    // setImageNavbar("");
+    // setImageNavbar("") ;
     setImageHeader("");
     setTitleHeader("");
     setTextHeader("");
