@@ -90,13 +90,11 @@ Route::controller(DashBoardController::class)->group(function(){
 
 Route::controller(NavbarHomePageController::class)->group(function(){
     // Route::put('/img/{id}', 'update');
-    Route::post('/file-upload', 'store');
+    Route::put('/img/{1}', 'update');
     // Route::get('/img/{id}', 'show');
     // Route::get('/test', 'update');
 
 });
-// Route::get('file-upload', [NavbarHomePageController::class, 'index'])->name('file.upload');
-// Route::post('file-upload', [NavbarHomePageController::class, 'store'])->name('file.upload.store');
 
 
 Route::controller(HeaderHomePageController::class)->group(function(){

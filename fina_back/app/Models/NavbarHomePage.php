@@ -12,15 +12,15 @@ class NavbarHomePage extends Model
 
     protected $fillable = ['imageNavbar'];
 
-    /**
-     * Get the user's first name.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => url('uploads/' . $value),
-        );
-    }
+    // /**
+    //  * Get the user's first name.
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Casts\Attribute
+    //  */
+    // protected function name(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => url('uploads/' . $value),
+    //     );
+    // }
 }

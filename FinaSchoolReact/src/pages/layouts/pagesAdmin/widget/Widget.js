@@ -8,14 +8,15 @@ import axios from 'axios'
 export default function Widget() {
   const refContainer = useRef(null);
 
-  const endPointNavbarHomePage = 'http://localhost:8000/api/file-upload'
+  const endPointNavbarHomePage = 'http://localhost:8000/api/img'
   const endPointHeaderHomePage = 'http://localhost:8000/api/img'
 
-  let [imageNavbar, setImageNavbar] = useState('');
+  // const [img, setImg] = useState('');
   const [imageHeader, setImageHeader] = useState('');
   const [titleHeader, setTitleHeader] = useState('');
   const [textHeader, setTextHeader] = useState('');
   const [buttonHeader, setButtonHeader] = useState('');
+  let base64 = "";
 
   useEffect(() => {
     // setImageNavbar("hahahah")
@@ -34,17 +35,15 @@ export default function Widget() {
 
   const handleChange = async (e) => {
     const file = e.target.files[0]
-
-    setImageNavbar(e.target.files[0])
-    console.log(imageNavbar)
-
-    const base64 = await convertBase64(file);
-    console.log(base64)
-    console.log(typeof(base64))
-
-    
+    base64 = await convertBase64(file);
+    // console.log(base64)
+    // setImg(base64)
+    // console.log(img)
+    // console.log(base64)
 
   }
+
+
 
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -62,10 +61,9 @@ export default function Widget() {
   };
 
   const storeNavbar = async () => {
-    await axios.put(`${endPointNavbarHomePage}`, { imageNavbar: "imageNavbar" }).then((response) => {
+    await axios.put(`${endPointNavbarHomePage}`, {imageNavbar: base64 }).then((response) => {
       if (response.status === 200) {
         console.log("navbar data send")
-        clearForm();
       }
     })
   }
