@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import HeadShake from "react-reveal/HeadShake";
 import { useSnackbar } from 'notistack'
 
 
+export const PetDataContext = createContext({});
+
 function Login() {
 
   const { enqueueSnackbar } = useSnackbar();
   const [userName,setUserName]= useState("");
   const [password,setPassword]= useState("");
+  const [hhhh,]= useState("hhh");
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -49,6 +52,7 @@ function Login() {
   }
 
   return (
+    <PetDataContext.Provider value={{hhhh}}>
       <div className="loginn">
         <div className="login-page text-center">
           <HeadShake>
@@ -66,9 +70,12 @@ function Login() {
           </HeadShake>
         </div>
       </div>
+      </PetDataContext.Provider>
   )
 }
 
+
 export default Login
+
 
 

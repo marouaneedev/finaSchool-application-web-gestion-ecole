@@ -89,10 +89,15 @@ Route::controller(DashBoardController::class)->group(function(){
 });
 
 Route::controller(NavbarHomePageController::class)->group(function(){
-    Route::put('/logoImage/{id}', 'update')->name('image.store');
-    // Route::post('/navbarHomePage', 'store');
-    Route::get('/navbarHomePage/{id}', 'show');
+    // Route::put('/img/{id}', 'update');
+    Route::post('/file-upload', 'store');
+    // Route::get('/img/{id}', 'show');
+    // Route::get('/test', 'update');
+
 });
+// Route::get('file-upload', [NavbarHomePageController::class, 'index'])->name('file.upload');
+// Route::post('file-upload', [NavbarHomePageController::class, 'store'])->name('file.upload.store');
+
 
 Route::controller(HeaderHomePageController::class)->group(function(){
     Route::post('/headerHomePage/{id}', 'update');
@@ -107,3 +112,6 @@ Route::controller(LoginController::class)->group(function(){
 
 
 });
+
+// Route::get('file-upload', [FileController::class, 'index'])->name('file.upload');
+// Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store');

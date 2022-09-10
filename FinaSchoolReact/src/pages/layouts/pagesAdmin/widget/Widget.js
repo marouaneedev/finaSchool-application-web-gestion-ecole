@@ -1,71 +1,82 @@
-import React, { Component } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './widget.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios'
-import * as ReactDOM from 'react-dom';
+
+export default function Widget() {
+  const refContainer = useRef(null);
+
+  const endPointNavbarHomePage = 'http://localhost:8000/api/file-upload'
+  const endPointHeaderHomePage = 'http://localhost:8000/api/img'
+
+  let [imageNavbar, setImageNavbar] = useState('');
+  const [imageHeader, setImageHeader] = useState('');
+  const [titleHeader, setTitleHeader] = useState('');
+  const [textHeader, setTextHeader] = useState('');
+  const [buttonHeader, setButtonHeader] = useState('');
+
+  useEffect(() => {
+    // setImageNavbar("hahahah")
+    // console.log(imageNavbar)
+  }, []);
 
 
+  const clearForm = () => {
+    // setImageNavbar("");
+    setImageHeader("");
+    setTitleHeader("");
+    setTextHeader("");
+    setButtonHeader("");
 
-export class Widget extends Component {
-  constructor() {
-    super();
-    this.state = {
-      imageNavbarr: "",
-      imageHeader: "",
-      titleHeader: "",
-      textHeader: "",
-      buttonHeader: "",
-    };
   }
 
-  handleChange = (e) =>{
-    this.setState({
-      imageNavbarr: e.target.files
-    })
+  const handleChange = async (e) => {
+    const file = e.target.files[0]
+
+    setImageNavbar(e.target.files[0])
+    console.log(imageNavbar)
+
+    const base64 = await convertBase64(file);
+    console.log(base64)
+    console.log(typeof(base64))
+
+    
+
   }
 
-  submitForm = (e) =>{
-    e.preventDefault();
-    const url = 'http://localhost:8000/api/navbarHomePage';
-    const data = new FormData();
-    data.append('imageNavbar', this.state.imageNavbar);
-    axios.post(url, data ).then(res => {
-      console.log("all its good", res.data)
-    })
-  }
-  
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
 
-render() {
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
 
-  const endPointNavbarHomePage = 'http://localhost:8000/api/logoImage'
-  const endPointHeaderHomePage = 'http://localhost:8000/api/headerHomePage'
-
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
 
   const storeNavbar = async () => {
-    await axios.put(`${endPointNavbarHomePage}/1`, { imageNavbar: this.state.imageNavbarr }).then((response) => {
+    await axios.put(`${endPointNavbarHomePage}`, { imageNavbar: "imageNavbar" }).then((response) => {
       if (response.status === 200) {
-        console.log("done")
-        console.log(this.state.imageNavbarr)
+        console.log("navbar data send")
         clearForm();
       }
     })
   }
-  
-
-  const clearForm = () => {
-    ReactDOM.findDOMNode(this.refs.form).value = "";
-  }
 
   const storeHeader = async () => {
-    await axios.put(`${endPointHeaderHomePage}/1`, { imageHeader: this.state.imageHeader, titleHeader: this.state.titleHeader, textHeader: this.state.textHeader, buttonHeader: this.state.buttonHeader }).then((response) => {
+    await axios.put(`${endPointHeaderHomePage}/1`, { imageHeader: imageHeader, titleHeader: titleHeader, textHeader: textHeader, buttonHeader: buttonHeader }).then((response) => {
       if (response.status === 200) {
-        console.log("done")
+        console.log("header data send")
       }
     })
   }
-
 
 
   return (
@@ -76,18 +87,23 @@ render() {
 
       {/* -------------start navbar-------------- */}
       <div className='navbar_wg wdg'>
-        <h4 className="mt-2 mb-3">Navbar :</h4>
-        <label >Logo :</label>
+        <h4 className="mt-2 mb-3">Navbar Logo :</h4>
         <input
           type="file"
+          ref={refContainer}
+          name="imageeee"
+          id="fileUpload"
           className="form-control"
-          ref="form"
-          // value={this.state.imageNavbar}
-          onChange={event => this.setState({ imageNavbarr: event.target.files[0] })}
+          // onChange={e => setImageNavbar(e.target.files[0])}
+          onChange={handleChange}
+
         />
+        <div className='selectdiv'>
+          <label htmlFor='fileUpload' className='selectlabel'>select Logo...</label>
+        </div>
         <br />
         <br />
-        <Button variant="outlined" type="submit"  onClick={() => { storeNavbar(); clearForm();}} >
+        <Button variant="outlined" type="submit" onClick={() => { storeNavbar(); clearForm(); }} >
           Sauvegarder
         </Button>
       </div>
@@ -100,10 +116,10 @@ render() {
           <label >Image :</label>
           <input
             type="file"
-            ref="form"
+            ref={refContainer}
+            name="image"
             className="form-control"
-            value={this.state.imageHeader}
-            onChange={event => this.setState({ imageHeader: event.target.value })}
+            onChange={event => setImageHeader(event.target.value)}
           />
         </div>
         <div className='inpuut'>
@@ -112,9 +128,9 @@ render() {
               required
               id="outlined-required"
               label="Titre :"
-              ref="form"
-              value={this.state.titleHeader}
-              onChange={event => this.setState({ titleHeader: event.target.value })}
+              ref={refContainer}
+              value={titleHeader}
+              onChange={event => this.setTitleHeader(event.target.value)}
             />
           </Box>
         </div>
@@ -124,9 +140,9 @@ render() {
               required
               id="outlined-required"
               label="Text :"
-              ref="form"
-              value={this.state.textHeader}
-              onChange={event => this.setState({ textHeader: event.target.value })}
+              ref={refContainer}
+              value={textHeader}
+              onChange={event => this.setTextHeader(event.target.value)}
             />
           </Box>
         </div>
@@ -136,16 +152,16 @@ render() {
               required
               id="outlined-required"
               label="Button :"
-              ref="form"
-              value={this.state.buttonHeader}
-              onChange={event => this.setState({ buttonHeader: event.target.value })}
+              ref={refContainer}
+              value={buttonHeader}
+              onChange={event => this.setButtonHeader(event.target.value)}
             />
           </Box>
 
           <br />
           <br />
 
-          <Button variant="outlined" type="submit"  onClick={() => { storeHeader(); clearForm();}}>
+          <Button variant="outlined" type="submit" onClick={() => { storeHeader(); clearForm(); }}>
             Sauvegarder
           </Button>
         </div>
@@ -155,6 +171,3 @@ render() {
     </div >
   )
 }
-}
-
-export default Widget

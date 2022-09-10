@@ -3,6 +3,7 @@ import { Link } from "react-scroll";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import ProtectedRoute from '../protectedRoute/ProtectedRoute';
 
 export class Footer extends Component {
     render() {
@@ -70,6 +71,7 @@ export class Footer extends Component {
                         <p>
                             Copyright © 2022 <span>FinaSchool</span> - Tout droits réservés.
                         </p>
+                        <ProtectedRoute/>
                     </div>
                 </div>
                 <Link to="sectionHeader" smooth={true} duration={200}>

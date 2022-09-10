@@ -4,122 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Models\NavbarHomePage;
 use Illuminate\Http\Request;
+// use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\Str;
 
 class NavbarHomePageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $navbarWdg = NavbarHomePage::all();
-        return $navbarWdg;
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        Validator::make($request->all(), [
+            // 'title' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ])->validate();
 
-        $navbarWdg = new NavbarHomePage();
-        $navbarWdg->imageNavbar = $request->imageNavbar;
+        $fileName = time() . '.' . $request->file->extension();
+        $request->file->move(public_path('uploads'), $fileName);
 
-        $navbarWdg->save();
-        return $navbarWdg;
-    }
+        NavbarHomePage::create([
+            // 'title' => $request->title,
+            'imageNavbar' => $fileName
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\NavbarHomePage  $navbarHomePage
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $navbarWdg = NavbarHomePage::find($id);
-        return $navbarWdg;
+        return redirect()->route('file.upload');
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\NavbarHomePage  $navbarHomePage
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(NavbarHomePage $NavbarHomePage)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NavbarHomePage  $navbarHomePage
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        // if ($request->has('image')) {
+        //     $file = $request->image;
+        //     $image_name = time() . '_' . $file->getClientOriginalName();
+        //     $file->move(public_path("uploads"), $image_name);
 
-            $imageNavbar = time() . '.' . $image->getClientOriginalExtension();
-            $image->move('images/', $imageNavbar);
-            NavbarHomePage::create(['imageNavbar' => $imageNavbar]);
-            return response()->json(['succsess' => 'uploades successefly']);
-        }
-        return response()->json(['plz try again']);
+        //     $img = new NavbarHomePage();
+        //     $img->$image_name = $request->$image_name;
+        //     $img->save();
 
-        // $request->validate([
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
+        //     return response()->json([
+        //         'status' => 200,
+        //         'message' => 'image uploaded',
+        //     ]);
 
-        // $imageName = time().'.'.$request->image->extension();
+        //     return $img;
+        // } else{
+        //     return "error";
+        // }
 
-        // $request->image->move(public_path('images'), $imageName);
 
-        // /*
-        //     Write Code Here for
-        //     Store $imageName name in DATABASE from HERE
-        // */
 
-        // return back()
-        //     ->with('success','You have successfully upload image.')
-        //     ->with('image',$imageName);
+        // $image = new NavbarHomePage;
+        // $image->title = $request->title;
 
-    }
+        // if ($request->hasFile('image')) {
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\NavbarHomePage  $navbarHomePage
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $navbarWdg = NavbarHomePage::destroy($id);
-        return $navbarWdg;
+        //     $path = $request->file('image')->store('images');
+        //     $image->url = $path;
+        // }
+        // $image->save();
+        // return new ImageResource($image);
+
+
+        $img = NavbarHomePage::findOrFail($request->id);
+        $img->imageNavbar = $request->imageNavbar;
+
+        $img->save();
+        return $img;
+
+
+        // if ($request->has('image')) {
+        //     $this . info("hello from controller!");
+        // } else {
+        //     return "frfr";
+        // }
+
+
+        // $this . info("hello from controller!");
     }
 }
