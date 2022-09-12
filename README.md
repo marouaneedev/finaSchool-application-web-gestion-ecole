@@ -3,4 +3,6 @@
 
 <img width="875" alt="scr3" src="https://user-images.githubusercontent.com/61878528/189750264-d2b5e636-d006-452b-9b81-8358b46f2154.png">
 
+![scr2](https://user-images.githubusercontent.com/61878528/189750982-0b444188-eef2-464e-b8b4-1effc2ca4020.png)
+
 ![scr](https://user-images.githubusercontent.com/61878528/189750673-ecb0d611-213a-4aed-9413-cfaa656b9eb4.png)
