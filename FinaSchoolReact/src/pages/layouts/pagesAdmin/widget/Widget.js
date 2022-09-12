@@ -24,13 +24,19 @@ export default function Widget() {
     setButtonHeader("");
 
   }
+  
 
   const storeHeader = async () => {
-    await axios.put(`${endPointHeaderHomePage}`, { titleHeader: titleHeader, textHeader: textHeader, buttonHeader: buttonHeader }).then((response) => {
-      if (response.status === 200) {
-        enqueueSnackbar('Updated successfully', { variant: 'success' });
-      }
-    })
+    if (titleHeader.length === 0 && textHeader.length === 0 && buttonHeader.length === 0) {
+      enqueueSnackbar('Oops ! Try Again', { variant: 'error' });
+    } else {
+      await axios.put(`${endPointHeaderHomePage}`, { titleHeader: titleHeader, textHeader: textHeader, buttonHeader: buttonHeader }).then((response) => {
+        if (response.status === 200) {
+          enqueueSnackbar('Updated successfully', { variant: 'success' });
+        }
+      })
+    }
+
   }
 
 
@@ -48,7 +54,7 @@ export default function Widget() {
             <div className='inpuut'>
               <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }}>
                 <TextField
-                  required
+
                   id="outlined-required"
                   label="Titre :"
                   // ref={refContainer}
@@ -60,7 +66,7 @@ export default function Widget() {
             <div className='inpuut'>
               <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }}>
                 <TextField
-                  required
+
                   id="outlined-required"
                   label="Text :"
                   ref={refContainer}
@@ -72,7 +78,7 @@ export default function Widget() {
             <div className='inpuut'>
               <Box sx={{ '& .MuiTextField-root': { m: 0, width: '100%' } }}>
                 <TextField
-                  required
+
                   id="outlined-required"
                   label="Button :"
                   ref={refContainer}
