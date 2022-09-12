@@ -8,7 +8,6 @@ use App\Http\Controllers\RevenuController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\AchatController;
 use App\Http\Controllers\DashBoardController;
-use App\Http\Controllers\NavbarHomePageController;
 use App\Http\Controllers\HeaderHomePageController;
 use App\Http\Controllers\LoginController;
 
@@ -88,18 +87,10 @@ Route::controller(DashBoardController::class)->group(function(){
     Route::get('/dashboard', 'index');
 });
 
-Route::controller(NavbarHomePageController::class)->group(function(){
-    // Route::put('/img/{id}', 'update');
-    Route::put('/img/{1}', 'update');
-    // Route::get('/img/{id}', 'show');
-    // Route::get('/test', 'update');
-
-});
-
 
 Route::controller(HeaderHomePageController::class)->group(function(){
-    Route::post('/headerHomePage/{id}', 'update');
-    Route::get('/headerHomePage/{id}', 'show');
+    Route::put('/headerWidejet/{id}', 'update');
+    Route::get('/headerWidejet/{id}', 'show');
 });
 
 
@@ -110,6 +101,3 @@ Route::controller(LoginController::class)->group(function(){
 
 
 });
-
-// Route::get('file-upload', [FileController::class, 'index'])->name('file.upload');
-// Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store');

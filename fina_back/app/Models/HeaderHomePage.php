@@ -9,6 +9,6 @@ class HeaderHomePage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['imageHeader', 'titleHeader', 'textHeader', 'buttonHeader'];
+    protected $fillable = ['titleHeader', 'textHeader', 'buttonHeader'];
 
 }

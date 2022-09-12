@@ -18,7 +18,7 @@ function Headerr() {
     }, [])
 
     const getAlldata = async () => {
-        const response = await axios.get(`${endPoint}/headerHomePage/1`)
+        const response = await axios.get(`${endPoint}/headerWidejet/1`)
         setData(response.data)
     }
 
@@ -38,13 +38,9 @@ function Headerr() {
                             <Bounce left>
                                 <div className="contentt">
                                     <h1>{data.titleHeader}</h1>
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Incidunt laboriosam consequuntur iusto corporis unde beatae
-                                        Incidunt laboriosam consequuntur iusto corporis unde beatae
-                                    </p>
+                                    <p>{data.textHeader}</p>
                                     <Link to="inscriptionSection" smooth={true} duration={300}>
-                                        <button className="bttn">Pre Inscription</button>
+                                        <button className="bttn"> {data.buttonHeader} </button>
                                     </Link>
                                 </div>
                             </Bounce>
@@ -71,3 +67,4 @@ function Headerr() {
 }
 
 export default Headerr
+

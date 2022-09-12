@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('header_home_pages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('imageHeader');
             $table->string('titleHeader');
             $table->text('textHeader');
             $table->string('buttonHeader');

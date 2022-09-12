@@ -72,7 +72,6 @@ class HeaderHomePageController extends Controller
     public function update(Request $request, $id)
     {
         $headerWdg = HeaderHomePage::findOrFail($request-> id);
-        $headerWdg-> imageHeader = $request-> imageHeader;
         $headerWdg-> titleHeader = $request-> titleHeader;
         $headerWdg-> textHeader = $request-> textHeader;
         $headerWdg-> buttonHeader = $request-> buttonHeader;
