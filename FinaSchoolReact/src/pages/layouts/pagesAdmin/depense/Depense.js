@@ -139,8 +139,8 @@ function Depense() {
 
   let [employees, setEmployees] = useState([])
   let [filtredEmployees, setFiltredEmployees] = useState([])
-  let [selectedEmployeeType,  setSelectedEmployeeType ] = useState('')
-  let [selectedEmployeesId, setSelectedEmployeesId ] = useState('')
+  let [selectedEmployeeType, setSelectedEmployeeType] = useState('')
+  let [selectedEmployeesId, setSelectedEmployeesId] = useState('')
   const invoiceTotal = getTotal(filtredEmployees)
 
   /* get employees list  */
@@ -245,9 +245,10 @@ function Depense() {
         {/* -------------end breadcrumb-------------- */}
 
         {/* -------------start barFiltrage-------------- */}
-        <div className="bare d-flex justify-content-between">
-          <div className="filter d-flex">
-            {/* select */}
+        <div className="grid">
+
+          <div className="filter_one d-flex  col-12 md:col-12 lg:col-4 sm:flex-nowrap">
+            {/* select Salaries */}
             <Box sx={{ minWidth: 200 }} className="mr-3">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Salaries :</InputLabel>
@@ -265,16 +266,17 @@ function Depense() {
                 </Select>
               </FormControl>
             </Box>
+            {/* end select Salaries */}
 
-            {/* select */}
-            <Box sx={{ minWidth: 180 }}>
+            {/* select Type De Salaries */}
+            <Box sx={{ minWidth: 150 }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Type De Salaries :</InputLabel>
+                <InputLabel id="demo-simple-select-label">Type Salaries :</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={selectedEmployeeType}
-                  label="Type De Salaries :"
+                  label="Type Salaries :"
                   onChange={selectedTypeDeSalarie}
                 >
                   <MenuItem value='Tout'>Tout</MenuItem>
@@ -284,13 +286,15 @@ function Depense() {
                 </Select>
               </FormControl>
             </Box>
+            {/* end select Type De Salaries */}
           </div>
+
           {/* date */}
-          <div className="datee">
+          <div className="hh filter_two  col-12 md:col-12 lg:col-4">
             <Stack spacing={3}>
               <LocalizationProvider
                 dateAdapter={AdapterDateFns}
-                localeText={{ start: 'Mobile start', end: 'Mobile end' }}
+                localeText={{ start: 'Date start', end: 'Date end' }}
               >
                 <MobileDateRangePicker
                   value={value}
@@ -313,11 +317,17 @@ function Depense() {
               </LocalizationProvider>
             </Stack>
           </div>
-          {/* button */}
-          <div className="add">
-            <Button variant="outlined" onClick={() => openAddDialog(null)} >ajouter une Dépense</Button>
+          {/*end date */}
+
+          {/* button ajouter une Dépense */}
+          <div className="filter_three col-12 md:col-12 lg:col-4 text-center">
+            <div className="add">
+              <Button variant="outlined" onClick={() => openAddDialog(null)} >ajouter une Dépense</Button>
+            </div>
           </div>
         </div>
+        {/* button ajouter une Dépense */}
+
         {/* -------------end barFiltrage-------------- */}
         <br />
         {/* -------------start table-------------- */}
@@ -343,7 +353,7 @@ function Depense() {
                 <TableCell rowSpan={2} />
                 <TableCell rowSpan={2} />
                 <TableCell colSpan={1}> Total :</TableCell>
-                <TableCell align="right">{invoiceTotal > 0 ? invoiceTotal.toLocaleString('fr-FR', {minimumFractionDigits: 2}) : 0} DH</TableCell>
+                <TableCell align="right">{invoiceTotal > 0 ? invoiceTotal.toLocaleString('fr-FR', { minimumFractionDigits: 2 }) : 0} DH</TableCell>
               </TableRow>
             </TableBody>
           </Table>

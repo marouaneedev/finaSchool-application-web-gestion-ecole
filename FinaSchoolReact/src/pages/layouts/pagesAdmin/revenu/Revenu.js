@@ -200,7 +200,7 @@ function Revenu() {
     return items.map(({ payrollAmount2 }) => payrollAmount2).reduce((sum, i) => sum + i, 0);
   }
 
-  
+
 
   /* --------- start Filtrage ----------- */
   const selectedStudent = (event) => {
@@ -261,9 +261,9 @@ function Revenu() {
         {/* -------------end breadcrumb-------------- */}
 
         {/* -------------start barFiltrage-------------- */}
-        <div className="bare d-flex justify-content-between">
-          <div className="filter d-flex">
-            {/* select */}
+        <div className="bare grid">
+          <div className="filter_one d-flex  col-12 md:col-12 lg:col-4 sm:flex-nowrap">
+            {/* select Etudiants*/}
             <Box sx={{ minWidth: 200 }} className="mr-3">
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Etudiants :</InputLabel>
@@ -281,8 +281,10 @@ function Revenu() {
                 </Select>
               </FormControl>
             </Box>
+            {/* end select Etudiants*/}
 
-            {/* select */}
+
+            {/* select Année*/}
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Année :</InputLabel>
@@ -299,39 +301,50 @@ function Revenu() {
                 </Select>
               </FormControl>
             </Box>
+            {/* end date Année */}
           </div>
-          {/* date */}
-          <div className="datee">
-            <Stack spacing={3}>
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                localeText={{ start: 'Mobile start', end: 'Mobile end' }}
-              >
-                <MobileDateRangePicker
-                  value={value}
-                  onChange={(newValue) => {
-                    setValue(newValue);
-                  }}
-                  renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} />
-                    </React.Fragment>
-                  )}
-                />
-              </LocalizationProvider>
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                localeText={{ start: 'Desktop start', end: 'Desktop end' }}
-              >
-              </LocalizationProvider>
-            </Stack>
+
+
+          <div className="filter_two  col-12 md:col-12 lg:col-4">
+            {/* select Année*/}
+            <div className="datee">
+              <Stack spacing={3}>
+                <LocalizationProvider
+                  dateAdapter={AdapterDateFns}
+                  localeText={{ start: 'Date start', end: 'Date end' }}
+                >
+                  <MobileDateRangePicker
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    renderInput={(startProps, endProps) => (
+                      <React.Fragment>
+                        <TextField {...startProps} />
+                        <Box sx={{ mx: 2 }}> to </Box>
+                        <TextField {...endProps} />
+                      </React.Fragment>
+                    )}
+                  />
+                </LocalizationProvider>
+                <LocalizationProvider
+                  dateAdapter={AdapterDateFns}
+                  localeText={{ start: 'Desktop start', end: 'Desktop end' }}
+                >
+                </LocalizationProvider>
+              </Stack>
+            </div>
+            {/* select Année*/}
           </div>
-          {/* button */}
-          <div className="add">
-            <Button variant="outlined" onClick={() => openAddDialog(null)} >ajouter un Revenu</Button>
+
+          <div className="filter_three col-12 md:col-12 lg:col-4 bgggg text-center">
+            {/* button ajouter un Revenu */}
+            <div className="add">
+              <Button variant="outlined" onClick={() => openAddDialog(null)} >ajouter un Revenu</Button>
+            </div>
+            {/* button ajouter un Revenu */}
           </div>
+
         </div>
         {/* -------------end barFiltrage-------------- */}
         <br />

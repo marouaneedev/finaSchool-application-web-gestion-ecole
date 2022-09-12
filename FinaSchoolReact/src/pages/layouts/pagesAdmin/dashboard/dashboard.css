@@ -88,25 +88,9 @@
     border-radius: 50%;
 }
 
-
-/* .charts{ 
-    margin-top: 20px; 
+.card-body{
+    position: relative;
 }
-
-.charts .PieChart{
-    background-color: #e9e8e8;
-    border-radius: 10px;
-}
-
-.charts .chart2 {
-    background-color: #e9e8e8;
-    border-radius: 10px;
-} */
-
-/* .chart1{
-    background-color: #e9e8e8;
-}*/
-
 
 .chart2{
     overflow: hidden !important;
