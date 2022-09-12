@@ -71,12 +71,19 @@ class HeaderHomePageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $headerWdg = HeaderHomePage::findOrFail($request-> id);
-        $headerWdg-> titleHeader = $request-> titleHeader;
-        $headerWdg-> textHeader = $request-> textHeader;
-        $headerWdg-> buttonHeader = $request-> buttonHeader;
+        $headerWdg = HeaderHomePage::findOrFail($request->id);
+        if ($request->titleHeader) {
+            $headerWdg->titleHeader = $request->titleHeader;
+        }
+        if ($request->textHeader) {
+            $headerWdg->textHeader = $request->textHeader;
+        }
+        if ($request->buttonHeader) {
+            $headerWdg->buttonHeader = $request->buttonHeader;
+        }
 
-        $headerWdg-> save();
+
+        $headerWdg->save();
         return $headerWdg;
     }
 
